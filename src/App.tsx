@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import Dashboard from "./pages/Dashboard";
 import Courses from "./pages/Courses";
+import CourseDetail from "./pages/CourseDetail";
 import Community from "./pages/Community";
 import AIChat from "./pages/AIChat";
 import Groups from "./pages/Groups";
@@ -30,6 +31,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/courses" element={<Courses />} />
+              <Route path="/course/:id" element={<CourseDetail />} />
               <Route path="/community" element={<Community />} />
               <Route path="/ai-chat" element={<AIChat />} />
               <Route path="/groups" element={<Groups />} />

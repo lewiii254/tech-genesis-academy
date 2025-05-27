@@ -1,11 +1,10 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Star, BookOpen, Clock, Users, Play, Award, CheckCircle, Target } from "lucide-react";
+import { Star, BookOpen, Clock, Users, Play, Award, CheckCircle, Target, Filter, Grid, List } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const allCourses = [
@@ -25,7 +24,10 @@ const allCourses = [
     modules: 24,
     projects: 6,
     instructor: "Sarah Johnson",
-    skills: ["React", "Node.js", "MongoDB", "Express", "JWT", "REST APIs"]
+    skills: ["React", "Node.js", "MongoDB", "Express", "JWT", "REST APIs"],
+    featured: true,
+    certificate: true,
+    difficulty: 7
   },
   {
     id: 2,
@@ -43,7 +45,10 @@ const allCourses = [
     modules: 20,
     projects: 8,
     instructor: "Dr. Michael Chen",
-    skills: ["Python", "Pandas", "NumPy", "Matplotlib", "Scikit-learn", "TensorFlow"]
+    skills: ["Python", "Pandas", "NumPy", "Matplotlib", "Scikit-learn", "TensorFlow"],
+    featured: true,
+    certificate: true,
+    difficulty: 5
   },
   {
     id: 3,
@@ -61,7 +66,10 @@ const allCourses = [
     modules: 16,
     projects: 5,
     instructor: "Alex Rivera",
-    skills: ["Figma", "Adobe XD", "User Research", "Prototyping", "Design Systems"]
+    skills: ["Figma", "Adobe XD", "User Research", "Prototyping", "Design Systems"],
+    featured: false,
+    certificate: true,
+    difficulty: 8
   },
   {
     id: 4,
@@ -79,7 +87,10 @@ const allCourses = [
     modules: 12,
     projects: 4,
     instructor: "Jennifer Lopez",
-    skills: ["SQL", "PostgreSQL", "MongoDB", "Database Design", "Performance Tuning"]
+    skills: ["SQL", "PostgreSQL", "MongoDB", "Database Design", "Performance Tuning"],
+    featured: false,
+    certificate: true,
+    difficulty: 6
   },
   {
     id: 5,
@@ -97,7 +108,10 @@ const allCourses = [
     modules: 18,
     projects: 6,
     instructor: "Mark Thompson",
-    skills: ["Jest", "Cypress", "Selenium", "Unit Testing", "Integration Testing"]
+    skills: ["Jest", "Cypress", "Selenium", "Unit Testing", "Integration Testing"],
+    featured: false,
+    certificate: true,
+    difficulty: 6
   },
   {
     id: 6,
@@ -115,7 +129,10 @@ const allCourses = [
     modules: 28,
     projects: 10,
     instructor: "Dr. Emily Watson",
-    skills: ["GitHub Copilot", "OpenAI API", "Prompt Engineering", "AI Automation"]
+    skills: ["GitHub Copilot", "OpenAI API", "Prompt Engineering", "AI Automation"],
+    featured: true,
+    certificate: true,
+    difficulty: 9
   },
   {
     id: 7,
@@ -133,7 +150,10 @@ const allCourses = [
     modules: 22,
     projects: 7,
     instructor: "Carlos Rodriguez",
-    skills: ["React Native", "Expo", "Redux", "Native Modules", "App Store Deployment"]
+    skills: ["React Native", "Expo", "Redux", "Native Modules", "App Store Deployment"],
+    featured: false,
+    certificate: true,
+    difficulty: 7
   },
   {
     id: 8,
@@ -151,7 +171,10 @@ const allCourses = [
     modules: 16,
     projects: 5,
     instructor: "David Kim",
-    skills: ["ES6+", "TypeScript", "Async/Await", "Design Patterns", "Performance"]
+    skills: ["ES6+", "TypeScript", "Async/Await", "Design Patterns", "Performance"],
+    featured: false,
+    certificate: true,
+    difficulty: 8
   },
   {
     id: 9,
@@ -169,7 +192,10 @@ const allCourses = [
     modules: 14,
     projects: 8,
     instructor: "Maria Santos",
-    skills: ["Photoshop", "Illustrator", "InDesign", "Color Theory", "Typography"]
+    skills: ["Photoshop", "Illustrator", "InDesign", "Color Theory", "Typography"],
+    featured: false,
+    certificate: true,
+    difficulty: 4
   },
   {
     id: 10,
@@ -187,7 +213,10 @@ const allCourses = [
     modules: 26,
     projects: 9,
     instructor: "James Wilson",
-    skills: ["AWS", "EC2", "S3", "Lambda", "CloudFormation", "DevOps"]
+    skills: ["AWS", "EC2", "S3", "Lambda", "CloudFormation", "DevOps"],
+    featured: true,
+    certificate: true,
+    difficulty: 9
   },
   {
     id: 11,
@@ -205,7 +234,10 @@ const allCourses = [
     modules: 20,
     projects: 6,
     instructor: "Lisa Anderson",
-    skills: ["Network Security", "Penetration Testing", "Cryptography", "Risk Assessment"]
+    skills: ["Network Security", "Penetration Testing", "Cryptography", "Risk Assessment"],
+    featured: false,
+    certificate: true,
+    difficulty: 7
   },
   {
     id: 12,
@@ -223,26 +255,48 @@ const allCourses = [
     modules: 24,
     projects: 8,
     instructor: "Robert Chen",
-    skills: ["Docker", "Kubernetes", "Jenkins", "Git", "AWS", "Monitoring"]
+    skills: ["Docker", "Kubernetes", "Jenkins", "Git", "AWS", "Monitoring"],
+    featured: false,
+    certificate: true,
+    difficulty: 9
   }
 ];
 
 const categories = ["All", "Web Development", "Programming", "Design", "Database", "Testing", "AI/ML", "Mobile Development", "Cloud Computing", "Cybersecurity", "DevOps"];
 const levels = ["All", "Beginner", "Intermediate", "Advanced"];
+const sortOptions = ["Popular", "Rating", "Newest", "Duration"];
 
 const Courses = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedLevel, setSelectedLevel] = useState("All");
+  const [sortBy, setSortBy] = useState("Popular");
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [showFeaturedOnly, setShowFeaturedOnly] = useState(false);
 
-  const filteredCourses = allCourses.filter(course => {
+  let filteredCourses = allCourses.filter(course => {
     const matchesSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          course.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          course.skills.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase()));
     const matchesCategory = selectedCategory === "All" || course.category === selectedCategory;
     const matchesLevel = selectedLevel === "All" || course.level === selectedLevel;
+    const matchesFeatured = !showFeaturedOnly || course.featured;
     
-    return matchesSearch && matchesCategory && matchesLevel;
+    return matchesSearch && matchesCategory && matchesLevel && matchesFeatured;
+  });
+
+  // Sort courses
+  filteredCourses = filteredCourses.sort((a, b) => {
+    switch (sortBy) {
+      case "Rating":
+        return b.rating - a.rating;
+      case "Duration":
+        return parseInt(a.duration) - parseInt(b.duration);
+      case "Newest":
+        return b.id - a.id;
+      default: // Popular
+        return b.students - a.students;
+    }
   });
 
   return (
@@ -260,11 +314,11 @@ const Courses = () => {
           <div className="flex justify-center gap-6 text-sm text-slate-300">
             <div className="flex items-center gap-2">
               <Target className="h-4 w-4 text-green-400" />
-              <span>12 Categories</span>
+              <span>{categories.length - 1} Categories</span>
             </div>
             <div className="flex items-center gap-2">
               <Users className="h-4 w-4 text-blue-400" />
-              <span>10,000+ Students</span>
+              <span>{allCourses.reduce((acc, course) => acc + course.students, 0).toLocaleString()}+ Students</span>
             </div>
             <div className="flex items-center gap-2">
               <Award className="h-4 w-4 text-yellow-400" />
@@ -276,7 +330,7 @@ const Courses = () => {
         {/* Enhanced Filters */}
         <Card className="bg-white/10 backdrop-blur-md border-white/20">
           <CardContent className="p-6">
-            <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex flex-col lg:flex-row gap-4">
               <Input
                 placeholder="Search courses, skills, or technologies..."
                 value={searchTerm}
@@ -284,45 +338,99 @@ const Courses = () => {
                 className="bg-white/10 border-white/20 text-white placeholder:text-slate-400 flex-1"
               />
               
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                <SelectTrigger className="bg-white/10 border-white/20 text-white w-full md:w-48">
-                  <SelectValue placeholder="Category" />
-                </SelectTrigger>
-                <SelectContent>
-                  {categories.map(category => (
-                    <SelectItem key={category} value={category}>{category}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              
-              <Select value={selectedLevel} onValueChange={setSelectedLevel}>
-                <SelectTrigger className="bg-white/10 border-white/20 text-white w-full md:w-48">
-                  <SelectValue placeholder="Level" />
-                </SelectTrigger>
-                <SelectContent>
-                  {levels.map(level => (
-                    <SelectItem key={level} value={level}>{level}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <div className="flex gap-2">
+                <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                  <SelectTrigger className="bg-white/10 border-white/20 text-white w-48">
+                    <SelectValue placeholder="Category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {categories.map(category => (
+                      <SelectItem key={category} value={category}>{category}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                
+                <Select value={selectedLevel} onValueChange={setSelectedLevel}>
+                  <SelectTrigger className="bg-white/10 border-white/20 text-white w-40">
+                    <SelectValue placeholder="Level" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {levels.map(level => (
+                      <SelectItem key={level} value={level}>{level}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Select value={sortBy} onValueChange={setSortBy}>
+                  <SelectTrigger className="bg-white/10 border-white/20 text-white w-32">
+                    <SelectValue placeholder="Sort by" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {sortOptions.map(option => (
+                      <SelectItem key={option} value={option}>{option}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Button
+                  variant={showFeaturedOnly ? "default" : "outline"}
+                  onClick={() => setShowFeaturedOnly(!showFeaturedOnly)}
+                  className="border-white/20"
+                >
+                  <Star className="h-4 w-4 mr-2" />
+                  Featured
+                </Button>
+
+                <div className="flex border border-white/20 rounded-md">
+                  <Button
+                    variant={viewMode === "grid" ? "default" : "ghost"}
+                    size="sm"
+                    onClick={() => setViewMode("grid")}
+                    className="rounded-r-none"
+                  >
+                    <Grid className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant={viewMode === "list" ? "default" : "ghost"}
+                    size="sm"
+                    onClick={() => setViewMode("list")}
+                    className="rounded-l-none"
+                  >
+                    <List className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex justify-between items-center mt-4 text-slate-300">
+              <span>{filteredCourses.length} courses found</span>
+              <div className="flex gap-4 text-sm">
+                <span>Free: {filteredCourses.filter(c => c.price === "Free").length}</span>
+                <span>With Certificate: {filteredCourses.filter(c => c.certificate).length}</span>
+              </div>
             </div>
           </CardContent>
         </Card>
 
-        {/* Course Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Course Grid/List */}
+        <div className={viewMode === "grid" ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" : "space-y-4"}>
           {filteredCourses.map((course) => (
-            <Card key={course.id} className="bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/15 transition-all duration-300 group overflow-hidden">
-              <div className="relative">
+            <Card key={course.id} className={`bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/15 transition-all duration-300 group overflow-hidden ${viewMode === "list" ? "flex" : ""}`}>
+              <div className={`relative ${viewMode === "list" ? "w-64 flex-shrink-0" : ""}`}>
                 <img 
                   src={`https://images.unsplash.com/${course.image}?w=400&h=200&fit=crop`}
                   alt={course.title}
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                  className={`object-cover group-hover:scale-105 transition-transform duration-300 ${viewMode === "list" ? "w-full h-full" : "w-full h-48"}`}
                 />
-                <div className="absolute top-4 left-4">
+                <div className="absolute top-4 left-4 flex flex-col gap-2">
                   <Badge className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
                     {course.category}
                   </Badge>
+                  {course.featured && (
+                    <Badge className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white">
+                      Featured
+                    </Badge>
+                  )}
                 </div>
                 <div className="absolute top-4 right-4 flex flex-col gap-2">
                   {course.enrolled && (
@@ -348,74 +456,82 @@ const Courses = () => {
                 )}
               </div>
               
-              <CardHeader className="text-white pb-2">
-                <CardTitle className="text-lg line-clamp-2 group-hover:text-blue-300 transition-colors">
-                  {course.title}
-                </CardTitle>
-                <CardDescription className="text-slate-300 line-clamp-2">
-                  {course.description}
-                </CardDescription>
-                <div className="text-sm text-slate-400">
-                  by {course.instructor}
-                </div>
-              </CardHeader>
-              
-              <CardContent className="space-y-4">
-                <div className="flex justify-between text-sm text-slate-300">
-                  <div className="flex items-center space-x-1">
-                    <BookOpen className="h-4 w-4" />
-                    <span>{course.modules} modules</span>
+              <div className="flex-1">
+                <CardHeader className="text-white pb-2">
+                  <CardTitle className="text-lg line-clamp-2 group-hover:text-blue-300 transition-colors">
+                    {course.title}
+                  </CardTitle>
+                  <CardDescription className="text-slate-300 line-clamp-2">
+                    {course.description}
+                  </CardDescription>
+                  <div className="text-sm text-slate-400">
+                    by {course.instructor}
                   </div>
-                  <div className="flex items-center space-x-1">
-                    <Clock className="h-4 w-4" />
-                    <span>{course.duration}</span>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <Target className="h-4 w-4" />
-                    <span>{course.projects} projects</span>
-                  </div>
-                </div>
+                </CardHeader>
                 
-                <div className="flex items-center justify-between text-sm text-slate-300">
-                  <div className="flex items-center space-x-2">
-                    <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                    <span>{course.rating}</span>
+                <CardContent className="space-y-4">
+                  <div className="flex justify-between text-sm text-slate-300">
+                    <div className="flex items-center space-x-1">
+                      <BookOpen className="h-4 w-4" />
+                      <span>{course.modules} modules</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <Clock className="h-4 w-4" />
+                      <span>{course.duration}</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <Target className="h-4 w-4" />
+                      <span>{course.projects} projects</span>
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-1">
-                    <Users className="h-4 w-4" />
-                    <span>{course.students.toLocaleString()}</span>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap gap-1">
-                  {course.skills.slice(0, 3).map((skill, index) => (
-                    <Badge key={index} variant="outline" className="border-white/20 text-slate-400 text-xs">
-                      {skill}
-                    </Badge>
-                  ))}
-                  {course.skills.length > 3 && (
-                    <Badge variant="outline" className="border-white/20 text-slate-400 text-xs">
-                      +{course.skills.length - 3} more
-                    </Badge>
-                  )}
-                </div>
-                
-                <Button asChild className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-                  <Link to={`/course/${course.id}`} className="flex items-center justify-center gap-2">
-                    {course.enrolled ? (
-                      <>
-                        <Play className="h-4 w-4" />
-                        Continue Learning
-                      </>
-                    ) : (
-                      <>
-                        <CheckCircle className="h-4 w-4" />
-                        Enroll Now
-                      </>
+                  
+                  <div className="flex items-center justify-between text-sm text-slate-300">
+                    <div className="flex items-center space-x-2">
+                      <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                      <span>{course.rating}</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <Users className="h-4 w-4" />
+                      <span>{course.students.toLocaleString()}</span>
+                    </div>
+                    {course.certificate && (
+                      <div className="flex items-center space-x-1">
+                        <Award className="h-4 w-4 text-yellow-400" />
+                        <span>Certificate</span>
+                      </div>
                     )}
-                  </Link>
-                </Button>
-              </CardContent>
+                  </div>
+
+                  <div className="flex flex-wrap gap-1">
+                    {course.skills.slice(0, 3).map((skill, index) => (
+                      <Badge key={index} variant="outline" className="border-white/20 text-slate-400 text-xs">
+                        {skill}
+                      </Badge>
+                    ))}
+                    {course.skills.length > 3 && (
+                      <Badge variant="outline" className="border-white/20 text-slate-400 text-xs">
+                        +{course.skills.length - 3} more
+                      </Badge>
+                    )}
+                  </div>
+                  
+                  <Button asChild className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                    <Link to={`/course/${course.id}`} className="flex items-center justify-center gap-2">
+                      {course.enrolled ? (
+                        <>
+                          <Play className="h-4 w-4" />
+                          Continue Learning
+                        </>
+                      ) : (
+                        <>
+                          <CheckCircle className="h-4 w-4" />
+                          Enroll Now
+                        </>
+                      )}
+                    </Link>
+                  </Button>
+                </CardContent>
+              </div>
             </Card>
           ))}
         </div>
