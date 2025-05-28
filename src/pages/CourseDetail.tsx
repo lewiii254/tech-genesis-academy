@@ -355,6 +355,11 @@ const allCourses = [
   }
 ];
 
+interface ModuleState {
+  completed: boolean;
+  started: boolean;
+}
+
 const CourseDetail = () => {
   const { id } = useParams();
   const courseId = parseInt(id || "1");
@@ -368,7 +373,7 @@ const CourseDetail = () => {
     return saved ? JSON.parse(saved) : course.progress;
   });
   
-  const [moduleStates, setModuleStates] = useState(() => {
+  const [moduleStates, setModuleStates] = useState<Record<number, ModuleState>>(() => {
     const saved = localStorage.getItem(`course-${courseId}-modules`);
     if (saved) {
       return JSON.parse(saved);
@@ -376,7 +381,7 @@ const CourseDetail = () => {
     return modules.reduce((acc, module) => {
       acc[module.id] = { completed: module.completed, started: module.completed };
       return acc;
-    }, {} as Record<number, { completed: boolean; started: boolean }>);
+    }, {} as Record<number, ModuleState>);
   });
 
   const [enrollment, setEnrollment] = useState(() => {
@@ -390,7 +395,7 @@ const CourseDetail = () => {
     localStorage.setItem(`course-${courseId}-enrolled`, JSON.stringify(enrollment));
   }, [courseProgress, moduleStates, enrollment, courseId]);
 
-  const completedModules = Object.values(moduleStates).filter(state => state.completed).length;
+  const completedModules = Object.values(moduleStates).filter((state: ModuleState) => state.completed).length;
   const totalModules = modules.length;
   const progressPercentage = totalModules > 0 ? (completedModules / totalModules) * 100 : 0;
 
