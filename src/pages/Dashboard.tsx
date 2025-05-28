@@ -1,10 +1,10 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { BookOpen, Award, Users, Calendar, Star } from "lucide-react";
 import { Link } from "react-router-dom";
+import StreakCard from "@/components/StreakCard";
 
 const courses = [
   {
@@ -99,7 +99,7 @@ const Dashboard = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
           {stats.map((stat, index) => (
             <Card key={index} className="bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white/15 transition-all duration-300">
               <CardContent className="p-6 flex items-center space-x-4">
@@ -113,6 +113,11 @@ const Dashboard = () => {
               </CardContent>
             </Card>
           ))}
+          
+          {/* Streak Card */}
+          <div className="md:col-span-1">
+            <StreakCard />
+          </div>
         </div>
 
         {/* Course Grid */}
