@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
+import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
 import Courses from "./pages/Courses";
 import CourseDetail from "./pages/CourseDetail";
@@ -25,24 +26,29 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-          <Navigation />
-          <div className="md:ml-64">
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/courses" element={<Courses />} />
-              <Route path="/course/:id" element={<CourseDetail />} />
-              <Route path="/community" element={<Community />} />
-              <Route path="/ai-chat" element={<AIChat />} />
-              <Route path="/groups" element={<Groups />} />
-              <Route path="/certificates" element={<Certificates />} />
-              <Route path="/leaderboard" element={<Leaderboard />} />
-              <Route path="/timetable" element={<Timetable />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </div>
-        </div>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/*" element={
+            <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+              <Navigation />
+              <div className="md:ml-64">
+                <Routes>
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/courses" element={<Courses />} />
+                  <Route path="/course/:id" element={<CourseDetail />} />
+                  <Route path="/community" element={<Community />} />
+                  <Route path="/ai-chat" element={<AIChat />} />
+                  <Route path="/groups" element={<Groups />} />
+                  <Route path="/certificates" element={<Certificates />} />
+                  <Route path="/leaderboard" element={<Leaderboard />} />
+                  <Route path="/timetable" element={<Timetable />} />
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </div>
+            </div>
+          } />
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
