@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -19,139 +18,252 @@ import {
   Download,
   Lock
 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const courseModules = {
   1: [ // Full Stack MERN Development
     {
       id: 1,
-      title: "Introduction to MERN Stack",
+      title: "Introduction to MERN Stack Architecture",
       duration: "45 mins",
       type: "video",
       completed: true,
       lessons: [
-        "What is MERN Stack?",
-        "Setting up Development Environment",
-        "Project Structure Overview"
-      ]
+        "Understanding the MERN Stack Ecosystem",
+        "Setting up Your Development Environment",
+        "Project Structure and Best Practices",
+        "Version Control with Git and GitHub"
+      ],
+      content: "Learn the fundamentals of MongoDB, Express.js, React, and Node.js. Understand how these technologies work together to create powerful full-stack applications."
     },
     {
       id: 2,
-      title: "MongoDB Fundamentals",
+      title: "MongoDB Database Design & Operations",
       duration: "2 hours",
       type: "video",
       completed: true,
       lessons: [
-        "NoSQL vs SQL Databases",
-        "MongoDB Atlas Setup",
-        "Collections and Documents",
-        "CRUD Operations"
-      ]
+        "NoSQL vs SQL: When to Use MongoDB",
+        "MongoDB Atlas Cloud Setup",
+        "Collections, Documents, and Schema Design",
+        "CRUD Operations and Aggregation Pipeline",
+        "Indexing for Performance Optimization"
+      ],
+      content: "Master MongoDB database design patterns, learn to create efficient schemas, and understand how to perform complex queries and aggregations."
     },
     {
       id: 3,
-      title: "Express.js Backend Development",
+      title: "Express.js Backend API Development",
       duration: "3 hours",
       type: "video",
       completed: true,
       lessons: [
-        "Setting up Express Server",
-        "Routing and Middleware",
-        "API Endpoints",
-        "Error Handling"
-      ]
+        "Express Server Setup and Configuration",
+        "Routing and Middleware Architecture",
+        "RESTful API Design Principles",
+        "Error Handling and Validation",
+        "Authentication Middleware"
+      ],
+      content: "Build robust backend APIs with Express.js. Learn to create secure, scalable server applications with proper error handling and middleware."
     },
     {
       id: 4,
-      title: "React Frontend Basics",
+      title: "React Frontend Development Fundamentals",
       duration: "4 hours",
       type: "video",
       completed: false,
       lessons: [
-        "Components and JSX",
-        "State Management",
-        "Props and Events",
-        "Hooks Introduction"
-      ]
+        "Components and JSX Syntax",
+        "State Management with useState",
+        "Props and Component Communication",
+        "Event Handling and Forms",
+        "React Hooks Deep Dive"
+      ],
+      content: "Build dynamic user interfaces with React. Learn component-based architecture, state management, and modern React patterns."
     },
     {
       id: 5,
-      title: "Advanced React Concepts",
+      title: "Advanced React Patterns & Performance",
       duration: "3.5 hours",
       type: "video",
       completed: false,
       lessons: [
-        "Custom Hooks",
-        "Context API",
-        "React Router",
-        "Performance Optimization"
-      ]
+        "Custom Hooks Development",
+        "Context API for Global State",
+        "React Router for Navigation",
+        "Performance Optimization Techniques",
+        "Testing React Components"
+      ],
+      content: "Master advanced React concepts including custom hooks, context patterns, and performance optimization strategies for production applications."
     },
     {
       id: 6,
-      title: "Node.js Backend Integration",
+      title: "Full-Stack Integration & Deployment",
       duration: "2.5 hours",
       type: "video",
       completed: false,
       lessons: [
-        "Connecting Frontend to Backend",
-        "Authentication with JWT",
-        "File Upload Handling",
-        "Security Best Practices"
-      ]
+        "Connecting Frontend to Backend APIs",
+        "JWT Authentication Implementation",
+        "File Upload and Image Handling",
+        "Security Best Practices",
+        "Production Deployment Strategies"
+      ],
+      content: "Integrate your frontend and backend into a complete application. Learn authentication, security, and deployment to production environments."
     }
   ],
   2: [ // Python for Data Science
     {
       id: 1,
-      title: "Python Fundamentals",
+      title: "Python Programming Foundations",
       duration: "2 hours",
       type: "video",
       completed: true,
       lessons: [
-        "Python Syntax and Variables",
-        "Data Types and Structures",
-        "Control Flow",
-        "Functions and Modules"
-      ]
+        "Python Syntax and PEP 8 Guidelines",
+        "Variables, Data Types, and Memory Management",
+        "Control Flow: Loops and Conditionals",
+        "Functions, Modules, and Packages",
+        "Error Handling and Debugging"
+      ],
+      content: "Master Python fundamentals with clean, readable code. Learn best practices and develop a solid foundation for data science applications."
     },
     {
       id: 2,
-      title: "NumPy for Numerical Computing",
+      title: "NumPy for Scientific Computing",
       duration: "1.5 hours",
       type: "video",
       completed: true,
       lessons: [
-        "Arrays and Matrices",
-        "Mathematical Operations",
-        "Broadcasting",
-        "Linear Algebra"
-      ]
+        "N-dimensional Arrays and Memory Layout",
+        "Mathematical Operations and Broadcasting",
+        "Linear Algebra Operations",
+        "Random Number Generation",
+        "Performance Optimization Techniques"
+      ],
+      content: "Harness the power of NumPy for numerical computing. Learn to work with large datasets efficiently using vectorized operations."
     },
     {
       id: 3,
-      title: "Pandas for Data Manipulation",
+      title: "Pandas for Data Manipulation & Analysis",
       duration: "3 hours",
       type: "video",
       completed: false,
       lessons: [
-        "DataFrames and Series",
-        "Data Cleaning",
-        "Grouping and Aggregation",
-        "Merging and Joining"
-      ]
+        "DataFrames and Series Fundamentals",
+        "Data Cleaning and Preprocessing",
+        "Grouping, Aggregation, and Pivot Tables",
+        "Merging, Joining, and Concatenating Data",
+        "Time Series Analysis"
+      ],
+      content: "Master data manipulation with Pandas. Learn to clean, transform, and analyze real-world datasets with powerful data structures."
     },
     {
       id: 4,
-      title: "Data Visualization with Matplotlib",
+      title: "Data Visualization with Matplotlib & Seaborn",
       duration: "2 hours",
       type: "video",
       completed: false,
       lessons: [
-        "Basic Plotting",
-        "Customizing Charts",
-        "Subplots and Layouts",
-        "Advanced Visualizations"
-      ]
+        "Matplotlib Fundamentals and Pyplot",
+        "Customizing Plots and Styling",
+        "Subplots and Complex Layouts",
+        "Seaborn for Statistical Visualizations",
+        "Interactive Visualizations"
+      ],
+      content: "Create compelling data visualizations. Learn to communicate insights effectively through various chart types and statistical plots."
+    },
+    {
+      id: 5,
+      title: "Machine Learning with Scikit-Learn",
+      duration: "3.5 hours",
+      type: "video",
+      completed: false,
+      lessons: [
+        "Supervised Learning Algorithms",
+        "Unsupervised Learning and Clustering",
+        "Model Selection and Cross-Validation",
+        "Feature Engineering and Selection",
+        "Model Evaluation Metrics"
+      ],
+      content: "Implement machine learning algorithms from scratch. Learn to build, evaluate, and deploy predictive models for real-world problems."
+    },
+    {
+      id: 6,
+      title: "Deep Learning with TensorFlow",
+      duration: "4 hours",
+      type: "video",
+      completed: false,
+      lessons: [
+        "Neural Networks Fundamentals",
+        "Building Models with Keras",
+        "Convolutional Neural Networks",
+        "Recurrent Neural Networks",
+        "Transfer Learning and Fine-tuning"
+      ],
+      content: "Dive into deep learning with TensorFlow. Build neural networks for image recognition, natural language processing, and more."
+    }
+  ],
+  3: [ // UI/UX Design Masterclass
+    {
+      id: 1,
+      title: "Design Thinking & User Research",
+      duration: "2 hours",
+      type: "video",
+      completed: true,
+      lessons: [
+        "Design Thinking Process and Methodology",
+        "User Research Techniques and Methods",
+        "Creating User Personas and Journey Maps",
+        "Conducting User Interviews",
+        "Analyzing User Feedback and Data"
+      ],
+      content: "Learn human-centered design principles. Understand your users through research and create solutions that solve real problems."
+    },
+    {
+      id: 2,
+      title: "Visual Design Principles",
+      duration: "2.5 hours",
+      type: "video",
+      completed: false,
+      lessons: [
+        "Typography and Readability",
+        "Color Theory and Psychology",
+        "Layout and Grid Systems",
+        "Visual Hierarchy and Composition",
+        "Brand Identity and Style Guides"
+      ],
+      content: "Master visual design fundamentals. Create aesthetically pleasing and functional designs that communicate effectively."
+    },
+    {
+      id: 3,
+      title: "Wireframing & Prototyping",
+      duration: "3 hours",
+      type: "video",
+      completed: false,
+      lessons: [
+        "Low-fidelity and High-fidelity Wireframes",
+        "Interactive Prototyping Techniques",
+        "Design Systems and Component Libraries",
+        "Responsive Design Considerations",
+        "Accessibility in Design"
+      ],
+      content: "Transform ideas into tangible designs. Learn to create wireframes and prototypes that guide development and validate concepts."
+    },
+    {
+      id: 4,
+      title: "User Interface Design",
+      duration: "3.5 hours",
+      type: "video",
+      completed: false,
+      lessons: [
+        "Interface Design Patterns",
+        "Mobile-First Design Approach",
+        "Interaction Design and Microinteractions",
+        "Design for Different Platforms",
+        "Usability Testing and Iteration"
+      ],
+      content: "Create intuitive user interfaces. Learn platform-specific design patterns and create seamless user experiences across devices."
     }
   ]
 };
@@ -170,7 +282,7 @@ const allCourses = [
     price: "Free",
     enrolled: true,
     progress: 45,
-    modules: 24,
+    modules: 6,
     projects: 6,
     instructor: "Sarah Johnson",
     skills: ["React", "Node.js", "MongoDB", "Express", "JWT", "REST APIs"],
@@ -198,7 +310,7 @@ const allCourses = [
     price: "Free",
     enrolled: true,
     progress: 60,
-    modules: 20,
+    modules: 6,
     projects: 8,
     instructor: "Dr. Michael Chen",
     skills: ["Python", "Pandas", "NumPy", "Matplotlib", "Scikit-learn", "TensorFlow"],
@@ -212,6 +324,34 @@ const allCourses = [
       "Deep learning with TensorFlow",
       "Real-world data science projects"
     ]
+  },
+  {
+    id: 3,
+    title: "UI/UX Design Masterclass",
+    description: "Master user interface and user experience design from research to final implementation",
+    image: "photo-1561070791-2526d30994b5",
+    level: "Beginner",
+    duration: "8 weeks",
+    rating: 4.7,
+    students: 987,
+    category: "Design",
+    price: "Free",
+    enrolled: false,
+    progress: 0,
+    modules: 4,
+    projects: 5,
+    instructor: "Emma Wilson",
+    skills: ["Figma", "User Research", "Prototyping", "Visual Design", "Usability Testing"],
+    overview: "Learn to create beautiful and functional user experiences. This course covers the complete design process from research to implementation.",
+    requirements: ["No prior design experience needed", "Computer with internet connection", "Creative mindset"],
+    whatYouLearn: [
+      "User research methodologies",
+      "Visual design principles",
+      "Wireframing and prototyping",
+      "Design systems creation",
+      "Usability testing techniques",
+      "Industry-standard design tools"
+    ]
   }
 ];
 
@@ -220,11 +360,84 @@ const CourseDetail = () => {
   const courseId = parseInt(id || "1");
   const course = allCourses.find(c => c.id === courseId) || allCourses[0];
   const modules = courseModules[courseId as keyof typeof courseModules] || [];
+  const { toast } = useToast();
   
   const [activeTab, setActiveTab] = useState("overview");
-  const completedModules = modules.filter(m => m.completed).length;
+  const [courseProgress, setCourseProgress] = useState(() => {
+    const saved = localStorage.getItem(`course-${courseId}-progress`);
+    return saved ? JSON.parse(saved) : course.progress;
+  });
+  
+  const [moduleStates, setModuleStates] = useState(() => {
+    const saved = localStorage.getItem(`course-${courseId}-modules`);
+    if (saved) {
+      return JSON.parse(saved);
+    }
+    return modules.reduce((acc, module) => {
+      acc[module.id] = { completed: module.completed, started: module.completed };
+      return acc;
+    }, {} as Record<number, { completed: boolean; started: boolean }>);
+  });
+
+  const [enrollment, setEnrollment] = useState(() => {
+    const saved = localStorage.getItem(`course-${courseId}-enrolled`);
+    return saved ? JSON.parse(saved) : course.enrolled;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(`course-${courseId}-progress`, JSON.stringify(courseProgress));
+    localStorage.setItem(`course-${courseId}-modules`, JSON.stringify(moduleStates));
+    localStorage.setItem(`course-${courseId}-enrolled`, JSON.stringify(enrollment));
+  }, [courseProgress, moduleStates, enrollment, courseId]);
+
+  const completedModules = Object.values(moduleStates).filter(state => state.completed).length;
   const totalModules = modules.length;
-  const progressPercentage = (completedModules / totalModules) * 100;
+  const progressPercentage = totalModules > 0 ? (completedModules / totalModules) * 100 : 0;
+
+  const handleEnroll = () => {
+    setEnrollment(true);
+    toast({
+      title: "Successfully Enrolled!",
+      description: `You're now enrolled in ${course.title}. Start learning today!`,
+    });
+  };
+
+  const handleStartModule = (moduleId: number) => {
+    setModuleStates(prev => ({
+      ...prev,
+      [moduleId]: { ...prev[moduleId], started: true }
+    }));
+    toast({
+      title: "Module Started!",
+      description: `You've started module ${moduleId}. Keep up the great work!`,
+    });
+  };
+
+  const handleCompleteModule = (moduleId: number) => {
+    setModuleStates(prev => ({
+      ...prev,
+      [moduleId]: { completed: true, started: true }
+    }));
+    
+    const newProgress = ((completedModules + 1) / totalModules) * 100;
+    setCourseProgress(Math.round(newProgress));
+    
+    toast({
+      title: "Module Completed!",
+      description: `Great job! You've completed module ${moduleId}.`,
+    });
+  };
+
+  const getNextAvailableModule = () => {
+    for (const module of modules) {
+      if (!moduleStates[module.id]?.completed) {
+        return module;
+      }
+    }
+    return null;
+  };
+
+  const nextModule = getNextAvailableModule();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
@@ -281,16 +494,19 @@ const CourseDetail = () => {
               <CardContent className="p-6">
                 <div className="text-center mb-6">
                   <div className="text-3xl font-bold text-white mb-2">{course.price}</div>
-                  {course.enrolled ? (
+                  {enrollment ? (
                     <Badge className="bg-green-500 text-white">Enrolled</Badge>
                   ) : (
-                    <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                    <Button 
+                      onClick={handleEnroll}
+                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                    >
                       Enroll Now
                     </Button>
                   )}
                 </div>
 
-                {course.enrolled && (
+                {enrollment && (
                   <div className="space-y-4">
                     <div>
                       <div className="flex justify-between text-sm text-slate-300 mb-2">
@@ -299,10 +515,21 @@ const CourseDetail = () => {
                       </div>
                       <Progress value={progressPercentage} className="h-2" />
                     </div>
-                    <Button className="w-full bg-gradient-to-r from-green-600 to-blue-600">
-                      <Play className="h-4 w-4 mr-2" />
-                      Continue Learning
-                    </Button>
+                    {nextModule && (
+                      <Button 
+                        onClick={() => handleStartModule(nextModule.id)}
+                        className="w-full bg-gradient-to-r from-green-600 to-blue-600"
+                      >
+                        <Play className="h-4 w-4 mr-2" />
+                        {moduleStates[nextModule.id]?.started ? 'Continue Learning' : 'Start Learning'}
+                      </Button>
+                    )}
+                    {progressPercentage === 100 && (
+                      <Button className="w-full bg-gradient-to-r from-yellow-600 to-orange-600">
+                        <Award className="h-4 w-4 mr-2" />
+                        Get Certificate
+                      </Button>
+                    )}
                   </div>
                 )}
 
@@ -393,62 +620,84 @@ const CourseDetail = () => {
           </TabsContent>
 
           <TabsContent value="curriculum" className="space-y-4">
-            {modules.map((module, index) => (
-              <Card key={module.id} className="bg-white/10 backdrop-blur-md border-white/20">
-                <CardHeader className="pb-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      {module.completed ? (
-                        <CheckCircle className="h-6 w-6 text-green-400" />
-                      ) : (
-                        <div className="h-6 w-6 border-2 border-slate-400 rounded-full flex items-center justify-center">
-                          {course.enrolled ? (
-                            <Lock className="h-3 w-3 text-slate-400" />
-                          ) : (
-                            <span className="text-xs text-slate-400">{index + 1}</span>
-                          )}
-                        </div>
-                      )}
-                      <div>
-                        <CardTitle className="text-lg text-white">Module {index + 1}: {module.title}</CardTitle>
-                        <div className="flex items-center gap-4 text-sm text-slate-300 mt-1">
-                          <div className="flex items-center gap-1">
-                            <Clock className="h-4 w-4" />
-                            <span>{module.duration}</span>
+            {modules.map((module, index) => {
+              const moduleState = moduleStates[module.id] || { completed: false, started: false };
+              const isAvailable = enrollment && (index === 0 || moduleStates[modules[index - 1]?.id]?.completed);
+              
+              return (
+                <Card key={module.id} className="bg-white/10 backdrop-blur-md border-white/20">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        {moduleState.completed ? (
+                          <CheckCircle className="h-6 w-6 text-green-400" />
+                        ) : (
+                          <div className="h-6 w-6 border-2 border-slate-400 rounded-full flex items-center justify-center">
+                            {!isAvailable ? (
+                              <Lock className="h-3 w-3 text-slate-400" />
+                            ) : (
+                              <span className="text-xs text-slate-400">{index + 1}</span>
+                            )}
                           </div>
-                          <div className="flex items-center gap-1">
-                            <Video className="h-4 w-4" />
-                            <span>{module.lessons.length} lessons</span>
+                        )}
+                        <div>
+                          <CardTitle className="text-lg text-white">Module {index + 1}: {module.title}</CardTitle>
+                          <div className="flex items-center gap-4 text-sm text-slate-300 mt-1">
+                            <div className="flex items-center gap-1">
+                              <Clock className="h-4 w-4" />
+                              <span>{module.duration}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Video className="h-4 w-4" />
+                              <span>{module.lessons.length} lessons</span>
+                            </div>
                           </div>
                         </div>
                       </div>
+                      <div className="flex gap-2">
+                        {enrollment && moduleState.completed && (
+                          <Button size="sm" variant="outline" className="border-white/20 text-slate-300">
+                            <Play className="h-4 w-4 mr-2" />
+                            Review
+                          </Button>
+                        )}
+                        {enrollment && !moduleState.completed && isAvailable && (
+                          <Button 
+                            size="sm" 
+                            onClick={() => handleStartModule(module.id)}
+                            className="bg-gradient-to-r from-blue-600 to-purple-600"
+                          >
+                            <Play className="h-4 w-4 mr-2" />
+                            {moduleState.started ? 'Continue' : 'Start'}
+                          </Button>
+                        )}
+                        {enrollment && moduleState.started && !moduleState.completed && (
+                          <Button 
+                            size="sm" 
+                            onClick={() => handleCompleteModule(module.id)}
+                            className="bg-gradient-to-r from-green-600 to-blue-600"
+                          >
+                            <CheckCircle className="h-4 w-4 mr-2" />
+                            Complete
+                          </Button>
+                        )}
+                      </div>
                     </div>
-                    {course.enrolled && module.completed && (
-                      <Button size="sm" variant="outline" className="border-white/20 text-slate-300">
-                        <Play className="h-4 w-4 mr-2" />
-                        Review
-                      </Button>
-                    )}
-                    {course.enrolled && !module.completed && index === completedModules && (
-                      <Button size="sm" className="bg-gradient-to-r from-blue-600 to-purple-600">
-                        <Play className="h-4 w-4 mr-2" />
-                        Start
-                      </Button>
-                    )}
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {module.lessons.map((lesson, lessonIndex) => (
-                      <li key={lessonIndex} className="flex items-center gap-3 text-slate-300">
-                        <FileText className="h-4 w-4" />
-                        <span>{lesson}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-slate-300 mb-4">{module.content}</p>
+                    <ul className="space-y-2">
+                      {module.lessons.map((lesson, lessonIndex) => (
+                        <li key={lessonIndex} className="flex items-center gap-3 text-slate-300">
+                          <FileText className="h-4 w-4" />
+                          <span>{lesson}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </TabsContent>
 
           <TabsContent value="instructor" className="space-y-6">
