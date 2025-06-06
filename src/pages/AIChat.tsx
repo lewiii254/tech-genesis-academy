@@ -1,11 +1,10 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Send, Bot, User, Lightbulb, Code, BookOpen } from "lucide-react";
+import { Send, Bot, User, Lightbulb, Code, BookOpen, Sparkles } from "lucide-react";
 
 const chatHistory = [
   {
@@ -90,9 +89,36 @@ const AIChat = () => {
               <Bot className="h-8 w-8 text-white" />
             </div>
             <h1 className="text-4xl font-bold text-white">AI Learning Assistant</h1>
+            <Badge className="bg-gradient-to-r from-green-500 to-blue-600 text-white px-3 py-1">
+              <Sparkles className="h-4 w-4 mr-1" />
+              Premium Feature
+            </Badge>
           </div>
-          <p className="text-xl text-slate-300">Get instant help with your coding questions</p>
+          <p className="text-xl text-slate-300">Get instant help with your coding questions and career guidance</p>
         </div>
+
+        {/* AI Features Banner */}
+        <Card className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 border-white/20">
+          <CardContent className="p-6">
+            <div className="grid md:grid-cols-3 gap-4 text-center">
+              <div className="space-y-2">
+                <Code className="h-8 w-8 text-blue-400 mx-auto" />
+                <h3 className="text-white font-medium">Code Review</h3>
+                <p className="text-slate-300 text-sm">Get feedback on your code quality and best practices</p>
+              </div>
+              <div className="space-y-2">
+                <BookOpen className="h-8 w-8 text-green-400 mx-auto" />
+                <h3 className="text-white font-medium">Learning Guidance</h3>
+                <p className="text-slate-300 text-sm">Personalized study plans and concept explanations</p>
+              </div>
+              <div className="space-y-2">
+                <Lightbulb className="h-8 w-8 text-yellow-400 mx-auto" />
+                <h3 className="text-white font-medium">Project Ideas</h3>
+                <p className="text-slate-300 text-sm">Creative project suggestions to build your portfolio</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Chat Container */}
         <Card className="bg-white/10 backdrop-blur-md border-white/20 h-[600px] flex flex-col">

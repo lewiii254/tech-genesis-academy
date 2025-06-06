@@ -1,15 +1,17 @@
-
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { BookOpen, Award, Users, Calendar, Star } from "lucide-react";
+import { BookOpen, Award, Users, Calendar, Star, Bot } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useProfile } from "@/hooks/useProfile";
 import { supabase } from "@/integrations/supabase/client";
 import StreakCard from "@/components/StreakCard";
+import MentorshipCard from "@/components/MentorshipCard";
+import JobPlacementCard from "@/components/JobPlacementCard";
+import CustomLearningPath from "@/components/CustomLearningPath";
 
 interface Course {
   id: string;
@@ -112,6 +114,26 @@ const Dashboard = () => {
           <p className="text-xl text-slate-300">Continue your learning journey</p>
         </div>
 
+        {/* AI Assistant Quick Access */}
+        <Card className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 border-white/20">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full">
+                  <Bot className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-white font-semibold">AI Learning Assistant</h3>
+                  <p className="text-slate-300">Get instant help with your coding questions</p>
+                </div>
+              </div>
+              <Button asChild className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                <Link to="/ai-chat">Ask AI</Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
           {stats.map((stat, index) => (
@@ -131,6 +153,44 @@ const Dashboard = () => {
           {/* Streak Card */}
           <div className="md:col-span-1">
             <StreakCard />
+          </div>
+        </div>
+
+        {/* Premium Features Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <CustomLearningPath />
+          <MentorshipCard />
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <JobPlacementCard />
+          <div className="space-y-6">
+            <Card className="bg-white/10 backdrop-blur-md border-white/20">
+              <CardHeader>
+                <CardTitle className="text-white flex items-center gap-2">
+                  <Award className="h-5 w-5 text-yellow-400" />
+                  Lifetime Access Benefits
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex items-center gap-2 text-slate-300">
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <span>Access to all 50+ courses forever</span>
+                </div>
+                <div className="flex items-center gap-2 text-slate-300">
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <span>New courses added monthly</span>
+                </div>
+                <div className="flex items-center gap-2 text-slate-300">
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <span>Downloadable resources & certificates</span>
+                </div>
+                <div className="flex items-center gap-2 text-slate-300">
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <span>Priority support & community access</span>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
 

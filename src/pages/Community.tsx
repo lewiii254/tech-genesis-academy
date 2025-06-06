@@ -1,195 +1,209 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
-import { Users, MessageCircle, Heart, Share, Plus, Search } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { MessageSquare, Heart, Share2, Calendar, Users, TrendingUp } from "lucide-react";
+import TeamCollaboration from "@/components/TeamCollaboration";
+import NetworkingEvents from "@/components/NetworkingEvents";
 
-const forumPosts = [
+interface Discussion {
+  id: string;
+  title: string;
+  author: string;
+  content: string;
+  replies: number;
+  likes: number;
+  date: string;
+  avatar: string;
+}
+
+const discussions: Discussion[] = [
   {
-    id: 1,
-    title: "Best practices for React state management?",
-    content: "I'm working on a large React application and struggling with state management. Should I use Redux, Zustand, or stick with React Context?",
-    author: "Sarah Chen",
-    avatar: "/placeholder.svg",
-    category: "Web Development",
-    likes: 24,
+    id: "1",
+    title: "Best Resources for Learning React in 2024?",
+    author: "Jane Doe",
+    content: "Hey everyone! I'm looking for the best and most up-to-date resources for learning React this year. Any recommendations for courses, tutorials, or documentation?",
+    replies: 15,
+    likes: 42,
+    date: "2 days ago",
+    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=64&h=64&fit=crop&crop=face"
+  },
+  {
+    id: "2",
+    title: "Tips for Optimizing Node.js Performance",
+    author: "John Smith",
+    content: "What are some proven strategies for optimizing the performance of Node.js applications? I'm working on a project that needs to handle a lot of concurrent requests.",
     replies: 8,
-    timeAgo: "2 hours ago",
-    tags: ["React", "State Management", "Redux"]
+    likes: 28,
+    date: "5 days ago",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=64&h=64&fit=crop&crop=face"
+  }
+];
+
+interface Review {
+  id: string;
+  author: string;
+  course: string;
+  rating: number;
+  comment: string;
+  date: string;
+  avatar: string;
+}
+
+const reviews: Review[] = [
+  {
+    id: "1",
+    author: "Alice Johnson",
+    course: "Python for Data Science",
+    rating: 5,
+    comment: "This course was amazing! The instructor was very knowledgeable and the content was well-structured. I learned a lot about data analysis and machine learning.",
+    date: "1 week ago",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00d5a4ee9aa5?w=64&h=64&fit=crop&crop=face"
   },
   {
-    id: 2,
-    title: "Python vs JavaScript for beginners",
-    content: "I'm new to programming and can't decide between Python and JavaScript as my first language. What are the pros and cons?",
-    author: "Mike Johnson",
-    avatar: "/placeholder.svg",
-    category: "Programming",
-    likes: 15,
-    replies: 12,
-    timeAgo: "4 hours ago",
-    tags: ["Python", "JavaScript", "Beginner"]
-  },
-  {
-    id: 3,
-    title: "UI Design trends for 2024",
-    content: "What design trends should we be following this year? I've been seeing a lot of glassmorphism and 3D elements lately.",
-    author: "Alex Rivera",
-    avatar: "/placeholder.svg",
-    category: "Design",
-    likes: 32,
-    replies: 6,
-    timeAgo: "6 hours ago",
-    tags: ["UI Design", "Trends", "2024"]
-  },
-  {
-    id: 4,
-    title: "Database optimization techniques",
-    content: "My queries are running slow on a large dataset. What are some effective optimization strategies for PostgreSQL?",
-    author: "David Kim",
-    avatar: "/placeholder.svg",
-    category: "Database",
-    likes: 18,
-    replies: 4,
-    timeAgo: "8 hours ago",
-    tags: ["PostgreSQL", "Optimization", "Performance"]
+    id: "2",
+    author: "Bob Williams",
+    course: "Full Stack Web Development",
+    rating: 4,
+    comment: "A comprehensive course that covers all the essential aspects of web development. The projects were challenging but rewarding.",
+    date: "2 weeks ago",
+    avatar: "https://images.unsplash.com/photo-1534528741702-a0cfae58b707?w=64&h=64&fit=crop&crop=face"
   }
 ];
 
 const Community = () => {
-  const [newPost, setNewPost] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [activeTab, setActiveTab] = useState("discussions");
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
-      <div className="max-w-6xl mx-auto space-y-8">
+      <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold text-white">Community Forum</h1>
-          <p className="text-xl text-slate-300">Connect, learn, and grow together</p>
+          <h1 className="text-4xl font-bold text-white">TechLearn Community</h1>
+          <p className="text-xl text-slate-300">Connect, collaborate, and grow with fellow developers</p>
         </div>
 
-        {/* Search and Create Post */}
-        <div className="flex flex-col md:flex-row gap-4">
-          <div className="flex-1 relative">
-            <Search className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-            <Input
-              placeholder="Search discussions..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 bg-white/10 border-white/20 text-white placeholder:text-slate-400"
-            />
-          </div>
-          <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-            <Plus className="h-4 w-4 mr-2" />
-            New Discussion
-          </Button>
-        </div>
-
-        {/* Forum Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
-            <CardContent className="p-6 text-center">
-              <Users className="h-8 w-8 mx-auto mb-2 text-blue-400" />
-              <p className="text-2xl font-bold">2,847</p>
-              <p className="text-slate-300">Active Members</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
-            <CardContent className="p-6 text-center">
-              <MessageCircle className="h-8 w-8 mx-auto mb-2 text-green-400" />
-              <p className="text-2xl font-bold">1,234</p>
-              <p className="text-slate-300">Discussions</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
-            <CardContent className="p-6 text-center">
-              <Heart className="h-8 w-8 mx-auto mb-2 text-red-400" />
-              <p className="text-2xl font-bold">8,976</p>
-              <p className="text-slate-300">Helpful Answers</p>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Forum Posts */}
-        <div className="space-y-6">
-          {forumPosts.map((post) => (
-            <Card key={post.id} className="bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/15 transition-all duration-300">
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center space-x-3">
-                    <Avatar>
-                      <AvatarImage src={post.avatar} />
-                      <AvatarFallback>{post.author.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="font-semibold text-white">{post.author}</p>
-                      <p className="text-sm text-slate-300">{post.timeAgo}</p>
-                    </div>
-                  </div>
-                  <Badge className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
-                    {post.category}
-                  </Badge>
-                </div>
-                <CardTitle className="text-white text-xl">{post.title}</CardTitle>
-                <CardDescription className="text-slate-300 text-base">
-                  {post.content}
-                </CardDescription>
-              </CardHeader>
-              
-              <CardContent className="space-y-4">
-                <div className="flex flex-wrap gap-2">
-                  {post.tags.map((tag) => (
-                    <Badge key={tag} variant="outline" className="border-white/20 text-slate-300">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-                
-                <div className="flex items-center justify-between pt-4 border-t border-white/20">
-                  <div className="flex items-center space-x-4">
-                    <Button variant="ghost" size="sm" className="text-slate-300 hover:text-white">
-                      <Heart className="h-4 w-4 mr-1" />
-                      {post.likes}
-                    </Button>
-                    <Button variant="ghost" size="sm" className="text-slate-300 hover:text-white">
-                      <MessageCircle className="h-4 w-4 mr-1" />
-                      {post.replies}
-                    </Button>
-                  </div>
-                  <Button variant="ghost" size="sm" className="text-slate-300 hover:text-white">
-                    <Share className="h-4 w-4 mr-1" />
-                    Share
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+        {/* Tabs */}
+        <div className="flex flex-wrap gap-2 bg-white/5 rounded-lg p-1">
+          {["discussions", "teams", "events", "reviews"].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`flex-1 min-w-[120px] py-3 px-4 rounded-md text-sm font-medium transition-all ${
+                activeTab === tab
+                  ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white"
+                  : "text-slate-300 hover:text-white hover:bg-white/10"
+              }`}
+            >
+              {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            </button>
           ))}
         </div>
 
-        {/* Quick Post */}
-        <Card className="bg-white/10 backdrop-blur-md border-white/20">
-          <CardHeader>
-            <CardTitle className="text-white">Start a Discussion</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <Textarea
-              placeholder="What's on your mind? Ask a question or share your knowledge..."
-              value={newPost}
-              onChange={(e) => setNewPost(e.target.value)}
-              className="bg-white/10 border-white/20 text-white placeholder:text-slate-400"
-              rows={3}
-            />
-            <div className="flex justify-end">
-              <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-                Post Discussion
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+        {/* Tab Content */}
+        {activeTab === "discussions" && (
+          <div className="grid lg:grid-cols-3 gap-8">
+            {discussions.map((discussion) => (
+              <Card key={discussion.id} className="bg-white/10 backdrop-blur-md border-white/20">
+                <CardHeader>
+                  <CardTitle className="text-white">{discussion.title}</CardTitle>
+                  <div className="flex items-center mt-2">
+                    <Avatar className="w-6 h-6">
+                      <AvatarFallback className="bg-green-500 text-white">
+                        {discussion.author.charAt(0)}
+                      </AvatarFallback>
+                    </Avatar>
+                    <span className="text-slate-300 ml-2 text-sm">
+                      {discussion.author} - {discussion.date}
+                    </span>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-slate-300">{discussion.content}</p>
+                  <div className="flex justify-between items-center mt-4">
+                    <div className="flex items-center text-slate-300">
+                      <MessageSquare className="h-4 w-4 mr-1" />
+                      <span>{discussion.replies} Replies</span>
+                    </div>
+                    <div className="flex items-center text-slate-300">
+                      <Heart className="h-4 w-4 mr-1" />
+                      <span>{discussion.likes} Likes</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
+
+        {activeTab === "teams" && (
+          <div className="grid lg:grid-cols-2 gap-8">
+            <TeamCollaboration />
+            <Card className="bg-white/10 backdrop-blur-md border-white/20">
+              <CardHeader>
+                <CardTitle className="text-white">Advanced Project Reviews</CardTitle>
+                <CardDescription className="text-slate-300">
+                  Get expert feedback on your projects
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="border border-white/10 rounded-lg p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <h4 className="text-white font-medium">E-commerce Dashboard</h4>
+                    <Badge className="bg-green-500/20 text-green-400">Reviewed</Badge>
+                  </div>
+                  <p className="text-slate-300 text-sm mb-3">React + Node.js project with payment integration</p>
+                  <div className="flex items-center gap-4 text-sm text-slate-300">
+                    <span>★★★★☆ 4.5/5</span>
+                    <span>Mentor: Sarah K.</span>
+                    <span>2 days ago</span>
+                  </div>
+                </div>
+                <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                  Submit Project for Review
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {activeTab === "events" && (
+          <div className="space-y-8">
+            <NetworkingEvents />
+          </div>
+        )}
+
+        {activeTab === "reviews" && (
+          <div className="grid lg:grid-cols-2 gap-8">
+            {reviews.map((review) => (
+              <Card key={review.id} className="bg-white/10 backdrop-blur-md border-white/20">
+                <CardHeader>
+                  <div className="flex items-center">
+                    <Avatar className="w-8 h-8">
+                      <AvatarFallback className="bg-blue-500 text-white">
+                        {review.author.charAt(0)}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="ml-3">
+                      <CardTitle className="text-white">{review.author}</CardTitle>
+                      <p className="text-slate-300 text-sm">Reviewed {review.course}</p>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center mb-3">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-slate-300">{review.comment}</p>
+                  <p className="text-slate-300 text-sm mt-3">Posted on {review.date}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
