@@ -58,6 +58,16 @@ const App = () => (
                   <Community />
                 </ProtectedRoute>
               } />
+              <Route path="/jobs" element={
+                <ProtectedRoute>
+                  <Jobs />
+                </ProtectedRoute>
+              } />
+              <Route path="/mentorship" element={
+                <ProtectedRoute>
+                  <Mentorship />
+                </ProtectedRoute>
+              } />
               <Route path="/groups" element={
                 <ProtectedRoute>
                   <Groups />
