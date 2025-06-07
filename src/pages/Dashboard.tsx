@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -17,62 +18,62 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
-        <div className="text-white text-xl">Loading...</div>
+      <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-emerald-100 to-emerald-200 flex items-center justify-center">
+        <div className="text-emerald-900 text-xl">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
-      <div className="max-w-7xl mx-auto space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-emerald-100 to-emerald-200 p-4 sm:p-6">
+      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold text-white">
+          <h1 className="text-3xl sm:text-4xl font-bold text-emerald-900">
             Welcome back, {profile?.full_name || profile?.username || 'Learner'}! 👋
           </h1>
-          <p className="text-xl text-slate-300">Continue your learning journey</p>
+          <p className="text-lg sm:text-xl text-emerald-700">Continue your learning journey</p>
         </div>
 
         {/* Stats Cards */}
-        <div className="grid md:grid-cols-3 gap-6">
-          <Card className="bg-white/10 backdrop-blur-md border-white/20">
-            <CardContent className="p-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <Card className="bg-white/80 backdrop-blur-md border-emerald-200 shadow-lg">
+            <CardContent className="p-4 sm:p-6">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center">
-                  <BookOpen className="h-6 w-6 text-white" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center shadow-md">
+                  <BookOpen className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                 </div>
                 <div>
-                  <p className="text-slate-300 text-sm">Courses Completed</p>
-                  <p className="text-white text-2xl font-bold">{profile?.total_points ? Math.floor(profile.total_points / 100) : 0}</p>
+                  <p className="text-emerald-700 text-sm">Courses Completed</p>
+                  <p className="text-emerald-900 text-xl sm:text-2xl font-bold">{profile?.total_points ? Math.floor(profile.total_points / 100) : 0}</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-white/10 backdrop-blur-md border-white/20">
-            <CardContent className="p-6">
+          <Card className="bg-white/80 backdrop-blur-md border-emerald-200 shadow-lg">
+            <CardContent className="p-4 sm:p-6">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                  <Star className="h-6 w-6 text-white" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-emerald-600 to-emerald-700 rounded-full flex items-center justify-center shadow-md">
+                  <Star className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                 </div>
                 <div>
-                  <p className="text-slate-300 text-sm">Total Points</p>
-                  <p className="text-white text-2xl font-bold">{profile?.total_points || 0}</p>
+                  <p className="text-emerald-700 text-sm">Total Points</p>
+                  <p className="text-emerald-900 text-xl sm:text-2xl font-bold">{profile?.total_points || 0}</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-white/10 backdrop-blur-md border-white/20">
-            <CardContent className="p-6">
+          <Card className="bg-white/80 backdrop-blur-md border-emerald-200 shadow-lg sm:col-span-2 lg:col-span-1">
+            <CardContent className="p-4 sm:p-6">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center">
-                  <Calendar className="h-6 w-6 text-white" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-emerald-700 to-emerald-800 rounded-full flex items-center justify-center shadow-md">
+                  <Calendar className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                 </div>
                 <div>
-                  <p className="text-slate-300 text-sm">Learning Streak</p>
-                  <p className="text-white text-2xl font-bold">{profile?.learning_streak || 0} days</p>
+                  <p className="text-emerald-700 text-sm">Learning Streak</p>
+                  <p className="text-emerald-900 text-xl sm:text-2xl font-bold">{profile?.learning_streak || 0} days</p>
                 </div>
               </div>
             </CardContent>
@@ -80,7 +81,7 @@ const Dashboard = () => {
         </div>
 
         {/* Premium Features Grid */}
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8">
           <MentorshipCard />
           <JobPlacementCard />
         </div>
@@ -93,12 +94,12 @@ const Dashboard = () => {
 
         {/* Additional Features */}
         <div className="text-center">
-          <p className="text-slate-300 mb-4">
+          <p className="text-emerald-700 mb-4">
             Unlock all premium features with TechLearn Pro
           </p>
           <Button 
             size="lg"
-            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+            className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 shadow-lg"
           >
             Upgrade to Pro
           </Button>

@@ -198,52 +198,52 @@ const Community = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
-      <div className="max-w-7xl mx-auto space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-emerald-100 to-emerald-200 p-4 sm:p-6">
+      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold text-white">TechLearn Community</h1>
-          <p className="text-xl text-slate-300">Connect, collaborate, and grow with fellow developers</p>
+          <h1 className="text-3xl sm:text-4xl font-bold text-emerald-900">TechLearn Community</h1>
+          <p className="text-lg sm:text-xl text-emerald-700">Connect, collaborate, and grow with fellow developers</p>
           
           {/* Partnership Information */}
-          <div className="bg-white/10 backdrop-blur-md border-white/20 rounded-lg p-6 mt-6">
-            <h2 className="text-2xl font-bold text-white mb-4">Our Partners</h2>
-            <div className="grid md:grid-cols-3 gap-6">
+          <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 rounded-lg p-4 sm:p-6 mt-6 shadow-lg">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">Our Partners</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
               <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-white font-bold text-lg">PLP</span>
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-blue-500 to-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="text-white font-bold text-sm sm:text-lg">PLP</span>
                 </div>
-                <h3 className="text-white font-semibold">Power Learn Project</h3>
-                <p className="text-slate-300 text-sm">Empowering African youth with tech skills</p>
+                <h3 className="text-white font-semibold text-sm sm:text-base">Power Learn Project</h3>
+                <p className="text-emerald-100 text-xs sm:text-sm">Empowering African youth with tech skills</p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-white font-bold text-lg">SF</span>
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-green-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="text-white font-bold text-sm sm:text-lg">SF</span>
                 </div>
-                <h3 className="text-white font-semibold">Safaricom</h3>
-                <p className="text-slate-300 text-sm">Leading telecommunications provider in Kenya</p>
+                <h3 className="text-white font-semibold text-sm sm:text-base">Safaricom</h3>
+                <p className="text-emerald-100 text-xs sm:text-sm">Leading telecommunications provider in Kenya</p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-white font-bold text-lg">SH</span>
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="text-white font-bold text-sm sm:text-lg">SH</span>
                 </div>
-                <h3 className="text-white font-semibold">S-Hook</h3>
-                <p className="text-slate-300 text-sm">Innovation and technology solutions</p>
+                <h3 className="text-white font-semibold text-sm sm:text-base">S-Hook</h3>
+                <p className="text-emerald-100 text-xs sm:text-sm">Innovation and technology solutions</p>
               </div>
             </div>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="flex flex-wrap gap-2 bg-white/5 rounded-lg p-1">
+        <div className="flex flex-wrap gap-2 bg-white/80 rounded-lg p-1 shadow-md">
           {["discussions", "teams", "events", "reviews"].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`flex-1 min-w-[120px] py-3 px-4 rounded-md text-sm font-medium transition-all ${
+              className={`flex-1 min-w-[100px] sm:min-w-[120px] py-2 sm:py-3 px-3 sm:px-4 rounded-md text-xs sm:text-sm font-medium transition-all ${
                 activeTab === tab
-                  ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white"
-                  : "text-slate-300 hover:text-white hover:bg-white/10"
+                  ? "bg-gradient-to-r from-emerald-600 to-emerald-700 text-white shadow-md"
+                  : "text-emerald-700 hover:text-emerald-900 hover:bg-emerald-100"
               }`}
             >
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -253,12 +253,12 @@ const Community = () => {
 
         {/* Tab Content */}
         {activeTab === "discussions" && (
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {/* Create Post Button */}
             <div className="text-center">
               <Button 
                 onClick={() => setShowNewPostForm(!showNewPostForm)}
-                className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
+                className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 shadow-md"
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Create New Post
@@ -267,29 +267,29 @@ const Community = () => {
 
             {/* New Post Form */}
             {showNewPostForm && (
-              <Card className="bg-white/10 backdrop-blur-md border-white/20">
+              <Card className="bg-white/90 backdrop-blur-md border-emerald-200 shadow-lg">
                 <CardHeader>
-                  <CardTitle className="text-white">Create New Discussion</CardTitle>
+                  <CardTitle className="text-emerald-900">Create New Discussion</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <Input
                     placeholder="Enter post title..."
                     value={newPostTitle}
                     onChange={(e) => setNewPostTitle(e.target.value)}
-                    className="bg-white/5 border-white/20 text-white placeholder:text-slate-400"
+                    className="bg-emerald-50 border-emerald-200 text-emerald-900 placeholder:text-emerald-600"
                   />
                   <Textarea
                     placeholder="What's on your mind?"
                     value={newPostContent}
                     onChange={(e) => setNewPostContent(e.target.value)}
-                    className="bg-white/5 border-white/20 text-white placeholder:text-slate-400 min-h-[120px]"
+                    className="bg-emerald-50 border-emerald-200 text-emerald-900 placeholder:text-emerald-600 min-h-[120px]"
                   />
-                  <div className="flex gap-3">
-                    <Button onClick={handleCreatePost} className="bg-gradient-to-r from-green-600 to-blue-600">
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Button onClick={handleCreatePost} className="bg-gradient-to-r from-emerald-600 to-emerald-700">
                       <Send className="h-4 w-4 mr-2" />
                       Post
                     </Button>
-                    <Button variant="outline" onClick={() => setShowNewPostForm(false)}>
+                    <Button variant="outline" onClick={() => setShowNewPostForm(false)} className="border-emerald-300 text-emerald-700 hover:bg-emerald-50">
                       Cancel
                     </Button>
                   </div>
@@ -298,70 +298,70 @@ const Community = () => {
             )}
 
             {/* Discussions List */}
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {discussions.map((discussion) => (
-                <Card key={discussion.id} className="bg-white/10 backdrop-blur-md border-white/20">
-                  <CardHeader>
-                    <CardTitle className="text-white">{discussion.title}</CardTitle>
+                <Card key={discussion.id} className="bg-white/90 backdrop-blur-md border-emerald-200 shadow-lg">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-emerald-900 text-lg sm:text-xl">{discussion.title}</CardTitle>
                     <div className="flex items-center mt-2">
                       <Avatar className="w-6 h-6">
-                        <AvatarFallback className="bg-green-500 text-white">
+                        <AvatarFallback className="bg-emerald-500 text-white">
                           {discussion.author.charAt(0)}
                         </AvatarFallback>
                       </Avatar>
-                      <span className="text-slate-300 ml-2 text-sm">
+                      <span className="text-emerald-700 ml-2 text-sm">
                         {discussion.author} - {discussion.date}
                       </span>
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <p className="text-slate-300">{discussion.content}</p>
+                    <p className="text-emerald-800">{discussion.content}</p>
                     
                     {/* Action Buttons */}
-                    <div className="flex items-center gap-4">
+                    <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => handleLikePost(discussion.id)}
-                        className={`text-slate-300 hover:text-white ${discussion.liked ? 'text-red-400' : ''}`}
+                        className={`text-emerald-700 hover:text-emerald-900 hover:bg-emerald-100 ${discussion.liked ? 'text-red-600 hover:text-red-700' : ''}`}
                       >
                         <Heart className={`h-4 w-4 mr-1 ${discussion.liked ? 'fill-current' : ''}`} />
-                        {discussion.likes}
+                        <span className="text-xs sm:text-sm">{discussion.likes}</span>
                       </Button>
                       
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => toggleComments(discussion.id)}
-                        className="text-slate-300 hover:text-white"
+                        className="text-emerald-700 hover:text-emerald-900 hover:bg-emerald-100"
                       >
                         <MessageSquare className="h-4 w-4 mr-1" />
-                        {discussion.replies} Comments
+                        <span className="text-xs sm:text-sm">{discussion.replies} Comments</span>
                       </Button>
                       
-                      <Button variant="ghost" size="sm" className="text-slate-300 hover:text-white">
+                      <Button variant="ghost" size="sm" className="text-emerald-700 hover:text-emerald-900 hover:bg-emerald-100">
                         <Share2 className="h-4 w-4 mr-1" />
-                        Share
+                        <span className="text-xs sm:text-sm">Share</span>
                       </Button>
                     </div>
 
                     {/* Comments Section */}
                     {showComments[discussion.id] && (
-                      <div className="space-y-3 border-t border-white/10 pt-4">
+                      <div className="space-y-3 border-t border-emerald-200 pt-4">
                         {discussion.comments.map((comment) => (
                           <div key={comment.id} className="flex space-x-3">
                             <Avatar className="w-6 h-6">
-                              <AvatarFallback className="bg-blue-500 text-white text-xs">
+                              <AvatarFallback className="bg-emerald-400 text-white text-xs">
                                 {comment.avatar}
                               </AvatarFallback>
                             </Avatar>
                             <div className="flex-1">
-                              <div className="bg-white/5 rounded-lg p-3">
-                                <div className="flex items-center gap-2 mb-1">
-                                  <span className="text-white text-sm font-medium">{comment.author}</span>
-                                  <span className="text-slate-400 text-xs">{comment.date}</span>
+                              <div className="bg-emerald-50 rounded-lg p-3">
+                                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
+                                  <span className="text-emerald-900 text-sm font-medium">{comment.author}</span>
+                                  <span className="text-emerald-600 text-xs">{comment.date}</span>
                                 </div>
-                                <p className="text-slate-300 text-sm">{comment.content}</p>
+                                <p className="text-emerald-800 text-sm">{comment.content}</p>
                               </div>
                             </div>
                           </div>
@@ -370,21 +370,21 @@ const Community = () => {
                         {/* Add Comment */}
                         <div className="flex space-x-3">
                           <Avatar className="w-6 h-6">
-                            <AvatarFallback className="bg-purple-500 text-white text-xs">
+                            <AvatarFallback className="bg-emerald-600 text-white text-xs">
                               CU
                             </AvatarFallback>
                           </Avatar>
-                          <div className="flex-1 flex gap-2">
+                          <div className="flex-1 flex flex-col sm:flex-row gap-2">
                             <Input
                               placeholder="Write a comment..."
                               value={commentContent[discussion.id] || ""}
                               onChange={(e) => setCommentContent({...commentContent, [discussion.id]: e.target.value})}
-                              className="bg-white/5 border-white/20 text-white placeholder:text-slate-400"
+                              className="bg-emerald-50 border-emerald-200 text-emerald-900 placeholder:text-emerald-600"
                             />
                             <Button 
                               size="sm" 
                               onClick={() => handleAddComment(discussion.id)}
-                              className="bg-gradient-to-r from-purple-600 to-blue-600"
+                              className="bg-gradient-to-r from-emerald-600 to-emerald-700 shrink-0"
                             >
                               <Send className="h-4 w-4" />
                             </Button>
@@ -400,29 +400,29 @@ const Community = () => {
         )}
 
         {activeTab === "teams" && (
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8">
             <TeamCollaboration />
-            <Card className="bg-white/10 backdrop-blur-md border-white/20">
+            <Card className="bg-white/90 backdrop-blur-md border-emerald-200 shadow-lg">
               <CardHeader>
-                <CardTitle className="text-white">Advanced Project Reviews</CardTitle>
-                <CardDescription className="text-slate-300">
+                <CardTitle className="text-emerald-900">Advanced Project Reviews</CardTitle>
+                <CardDescription className="text-emerald-700">
                   Get expert feedback on your projects
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="border border-white/10 rounded-lg p-4">
+                <div className="border border-emerald-200 rounded-lg p-4 bg-emerald-50">
                   <div className="flex items-center justify-between mb-3">
-                    <h4 className="text-white font-medium">E-commerce Dashboard</h4>
-                    <Badge className="bg-green-500/20 text-green-400">Reviewed</Badge>
+                    <h4 className="text-emerald-900 font-medium">E-commerce Dashboard</h4>
+                    <Badge className="bg-emerald-500/20 text-emerald-700">Reviewed</Badge>
                   </div>
-                  <p className="text-slate-300 text-sm mb-3">React + Node.js project with payment integration</p>
-                  <div className="flex items-center gap-4 text-sm text-slate-300">
+                  <p className="text-emerald-800 text-sm mb-3">React + Node.js project with payment integration</p>
+                  <div className="flex flex-wrap items-center gap-3 text-sm text-emerald-700">
                     <span>★★★★☆ 4.5/5</span>
                     <span>Mentor: Sarah K.</span>
                     <span>2 days ago</span>
                   </div>
                 </div>
-                <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                <Button className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800">
                   Submit Project for Review
                 </Button>
               </CardContent>
@@ -431,36 +431,36 @@ const Community = () => {
         )}
 
         {activeTab === "events" && (
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             <NetworkingEvents />
           </div>
         )}
 
         {activeTab === "reviews" && (
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8">
             {reviews.map((review) => (
-              <Card key={review.id} className="bg-white/10 backdrop-blur-md border-white/20">
+              <Card key={review.id} className="bg-white/90 backdrop-blur-md border-emerald-200 shadow-lg">
                 <CardHeader>
                   <div className="flex items-center">
                     <Avatar className="w-8 h-8">
-                      <AvatarFallback className="bg-blue-500 text-white">
+                      <AvatarFallback className="bg-emerald-500 text-white">
                         {review.author.charAt(0)}
                       </AvatarFallback>
                     </Avatar>
                     <div className="ml-3">
-                      <CardTitle className="text-white">{review.author}</CardTitle>
-                      <p className="text-slate-300 text-sm">Reviewed {review.course}</p>
+                      <CardTitle className="text-emerald-900 text-lg">{review.author}</CardTitle>
+                      <p className="text-emerald-700 text-sm">Reviewed {review.course}</p>
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center mb-3">
                     {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
+                      <Star key={i} className="h-4 w-4 text-yellow-500 fill-current" />
                     ))}
                   </div>
-                  <p className="text-slate-300">{review.comment}</p>
-                  <p className="text-slate-300 text-sm mt-3">Posted on {review.date}</p>
+                  <p className="text-emerald-800">{review.comment}</p>
+                  <p className="text-emerald-600 text-sm mt-3">Posted on {review.date}</p>
                 </CardContent>
               </Card>
             ))}
