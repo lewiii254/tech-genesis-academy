@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./hooks/useAuth";
 import { Navigation } from "./components/Navigation";
+import FloatingChatWidget from "./components/FloatingChatWidget";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Index from "./pages/Index";
 import Landing from "./pages/Landing";
@@ -103,6 +104,7 @@ const App = () => (
               <Route path="/pricing" element={<Pricing />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
+            <FloatingChatWidget />
           </div>
         </BrowserRouter>
       </AuthProvider>

@@ -82,32 +82,32 @@ const studyGroups = [
 
 const Groups = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-emerald-100 to-emerald-200 p-6">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold text-white">Study Groups</h1>
-          <p className="text-xl text-slate-300">Join collaborative learning communities</p>
+          <h1 className="text-4xl font-bold text-emerald-900">Study Groups</h1>
+          <p className="text-xl text-emerald-700">Join collaborative learning communities</p>
         </div>
 
         {/* Stats and Create Group */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex space-x-6">
             <div className="text-center">
-              <p className="text-3xl font-bold text-white">12</p>
-              <p className="text-slate-300">Active Groups</p>
+              <p className="text-3xl font-bold text-emerald-900">12</p>
+              <p className="text-emerald-700">Active Groups</p>
             </div>
             <div className="text-center">
-              <p className="text-3xl font-bold text-white">3</p>
-              <p className="text-slate-300">Joined Groups</p>
+              <p className="text-3xl font-bold text-emerald-900">3</p>
+              <p className="text-emerald-700">Joined Groups</p>
             </div>
             <div className="text-center">
-              <p className="text-3xl font-bold text-white">156</p>
-              <p className="text-slate-300">Total Members</p>
+              <p className="text-3xl font-bold text-emerald-900">156</p>
+              <p className="text-emerald-700">Total Members</p>
             </div>
           </div>
           
-          <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+          <Button className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white shadow-lg">
             <Plus className="h-4 w-4 mr-2" />
             Create Study Group
           </Button>
@@ -115,25 +115,25 @@ const Groups = () => {
 
         {/* My Groups */}
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-white">My Groups</h2>
+          <h2 className="text-2xl font-bold text-emerald-900">My Groups</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {studyGroups.filter(group => group.isJoined).map((group) => (
-              <Card key={group.id} className="bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/15 transition-all duration-300 relative overflow-hidden">
+              <Card key={group.id} className="bg-white/90 backdrop-blur-md border-emerald-200 hover:bg-white/95 transition-all duration-300 relative overflow-hidden shadow-lg">
                 <div className="absolute top-4 right-4">
-                  <Badge className="bg-green-500 text-white">Joined</Badge>
+                  <Badge className="bg-emerald-500 text-white">Joined</Badge>
                 </div>
                 
                 <CardHeader className="pb-4">
                   <div className="flex items-center space-x-3">
                     <Avatar className="h-12 w-12">
                       <AvatarImage src={group.avatar} />
-                      <AvatarFallback className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+                      <AvatarFallback className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white">
                         {group.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex-1">
-                      <CardTitle className="text-white text-lg">{group.name}</CardTitle>
-                      <Badge className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs">
+                      <CardTitle className="text-emerald-900 text-lg">{group.name}</CardTitle>
+                      <Badge className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-xs">
                         {group.category}
                       </Badge>
                     </div>
@@ -141,11 +141,11 @@ const Groups = () => {
                 </CardHeader>
                 
                 <CardContent className="space-y-4">
-                  <CardDescription className="text-slate-300">
+                  <CardDescription className="text-emerald-700">
                     {group.description}
                   </CardDescription>
                   
-                  <div className="flex items-center justify-between text-sm text-slate-300">
+                  <div className="flex items-center justify-between text-sm text-emerald-700">
                     <div className="flex items-center space-x-1">
                       <Users className="h-4 w-4" />
                       <span>{group.members} members</span>
@@ -158,20 +158,20 @@ const Groups = () => {
                   
                   <div className="flex flex-wrap gap-1">
                     {group.topics.map((topic, index) => (
-                      <Badge key={index} variant="outline" className="border-white/20 text-slate-300 text-xs">
+                      <Badge key={index} variant="outline" className="border-emerald-300 text-emerald-700 text-xs">
                         {topic}
                       </Badge>
                     ))}
                   </div>
                   
-                  <div className="p-3 bg-white/5 rounded-lg">
-                    <p className="text-sm text-slate-300">
+                  <div className="p-3 bg-emerald-50 rounded-lg">
+                    <p className="text-sm text-emerald-700">
                       <MessageCircle className="h-4 w-4 inline mr-1" />
                       {group.recentActivity}
                     </p>
                   </div>
                   
-                  <Button className="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700">
+                  <Button className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white shadow-lg">
                     <MessageCircle className="h-4 w-4 mr-2" />
                     Open Chat
                   </Button>
@@ -183,21 +183,21 @@ const Groups = () => {
 
         {/* Available Groups */}
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-white">Discover Groups</h2>
+          <h2 className="text-2xl font-bold text-emerald-900">Discover Groups</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {studyGroups.filter(group => !group.isJoined).map((group) => (
-              <Card key={group.id} className="bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/15 transition-all duration-300 overflow-hidden">
+              <Card key={group.id} className="bg-white/90 backdrop-blur-md border-emerald-200 hover:bg-white/95 transition-all duration-300 overflow-hidden shadow-lg">
                 <CardHeader className="pb-4">
                   <div className="flex items-center space-x-3">
                     <Avatar className="h-12 w-12">
                       <AvatarImage src={group.avatar} />
-                      <AvatarFallback className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+                      <AvatarFallback className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white">
                         {group.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex-1">
-                      <CardTitle className="text-white text-lg">{group.name}</CardTitle>
-                      <Badge className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs">
+                      <CardTitle className="text-emerald-900 text-lg">{group.name}</CardTitle>
+                      <Badge className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-xs">
                         {group.category}
                       </Badge>
                     </div>
@@ -205,11 +205,11 @@ const Groups = () => {
                 </CardHeader>
                 
                 <CardContent className="space-y-4">
-                  <CardDescription className="text-slate-300">
+                  <CardDescription className="text-emerald-700">
                     {group.description}
                   </CardDescription>
                   
-                  <div className="flex items-center justify-between text-sm text-slate-300">
+                  <div className="flex items-center justify-between text-sm text-emerald-700">
                     <div className="flex items-center space-x-1">
                       <Users className="h-4 w-4" />
                       <span>{group.members} members</span>
@@ -222,20 +222,20 @@ const Groups = () => {
                   
                   <div className="flex flex-wrap gap-1">
                     {group.topics.map((topic, index) => (
-                      <Badge key={index} variant="outline" className="border-white/20 text-slate-300 text-xs">
+                      <Badge key={index} variant="outline" className="border-emerald-300 text-emerald-700 text-xs">
                         {topic}
                       </Badge>
                     ))}
                   </div>
                   
-                  <div className="p-3 bg-white/5 rounded-lg">
-                    <p className="text-sm text-slate-300">
+                  <div className="p-3 bg-emerald-50 rounded-lg">
+                    <p className="text-sm text-emerald-700">
                       <BookOpen className="h-4 w-4 inline mr-1" />
                       {group.recentActivity}
                     </p>
                   </div>
                   
-                  <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                  <Button className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white shadow-lg">
                     Join Group
                   </Button>
                 </CardContent>
