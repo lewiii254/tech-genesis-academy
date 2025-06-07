@@ -6,13 +6,20 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
+interface Message {
+  id: number;
+  type: 'bot' | 'user';
+  message: string;
+  timestamp: Date;
+}
+
 const FloatingChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      type: 'bot' as const,
+      type: 'bot',
       message: 'Hello! I\'m here to help you learn about TechLearn Kenya. What would you like to know?',
       timestamp: new Date()
     }
@@ -28,9 +35,9 @@ const FloatingChatWidget = () => {
   const handleSendMessage = () => {
     if (!message.trim()) return;
 
-    const newMessage = {
+    const newMessage: Message = {
       id: messages.length + 1,
-      type: 'user' as const,
+      type: 'user',
       message: message,
       timestamp: new Date()
     };
@@ -40,9 +47,9 @@ const FloatingChatWidget = () => {
 
     // Simulate bot response
     setTimeout(() => {
-      const botResponse = {
+      const botResponse: Message = {
         id: messages.length + 2,
-        type: 'bot' as const,
+        type: 'bot',
         message: getBotResponse(message),
         timestamp: new Date()
       };
