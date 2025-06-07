@@ -39,7 +39,7 @@ const Navigation = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             {user ? (
               <>
                 <Link to="/dashboard" className="text-emerald-100 hover:text-white transition-colors">
@@ -48,8 +48,23 @@ const Navigation = () => {
                 <Link to="/courses" className="text-emerald-100 hover:text-white transition-colors">
                   Courses
                 </Link>
+                <Link to="/jobs" className="text-emerald-100 hover:text-white transition-colors">
+                  Jobs
+                </Link>
+                <Link to="/mentorship" className="text-emerald-100 hover:text-white transition-colors">
+                  Mentorship
+                </Link>
                 <Link to="/community" className="text-emerald-100 hover:text-white transition-colors">
                   Community
+                </Link>
+                <Link to="/timetable" className="text-emerald-100 hover:text-white transition-colors">
+                  Timetable
+                </Link>
+                <Link to="/ai-chat" className="text-emerald-100 hover:text-white transition-colors">
+                  AI Chat
+                </Link>
+                <Link to="/certificates" className="text-emerald-100 hover:text-white transition-colors">
+                  Certificates
                 </Link>
                 <Link to="/pricing" className="text-emerald-100 hover:text-white transition-colors">
                   Pricing
@@ -117,11 +132,46 @@ const Navigation = () => {
                   Courses
                 </Link>
                 <Link
+                  to="/jobs"
+                  className="block px-3 py-2 text-emerald-100 hover:text-white transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Jobs
+                </Link>
+                <Link
+                  to="/mentorship"
+                  className="block px-3 py-2 text-emerald-100 hover:text-white transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Mentorship
+                </Link>
+                <Link
                   to="/community"
                   className="block px-3 py-2 text-emerald-100 hover:text-white transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Community
+                </Link>
+                <Link
+                  to="/timetable"
+                  className="block px-3 py-2 text-emerald-100 hover:text-white transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Timetable
+                </Link>
+                <Link
+                  to="/ai-chat"
+                  className="block px-3 py-2 text-emerald-100 hover:text-white transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  AI Chat
+                </Link>
+                <Link
+                  to="/certificates"
+                  className="block px-3 py-2 text-emerald-100 hover:text-white transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Certificates
                 </Link>
                 <Link
                   to="/profile"

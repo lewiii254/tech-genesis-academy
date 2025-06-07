@@ -4,9 +4,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { MessageSquare, Heart, Share2, Calendar, Users, TrendingUp, Star } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
+import { MessageSquare, Heart, Share2, Calendar, Users, TrendingUp, Star, Send, Plus, ThumbsUp } from "lucide-react";
 import TeamCollaboration from "@/components/TeamCollaboration";
 import NetworkingEvents from "@/components/NetworkingEvents";
+import { useToast } from "@/hooks/use-toast";
 
 interface Discussion {
   id: string;
@@ -17,30 +20,17 @@ interface Discussion {
   likes: number;
   date: string;
   avatar: string;
+  liked: boolean;
+  comments: Comment[];
 }
 
-const discussions: Discussion[] = [
-  {
-    id: "1",
-    title: "Best Resources for Learning React in 2024?",
-    author: "Jane Doe",
-    content: "Hey everyone! I'm looking for the best and most up-to-date resources for learning React this year. Any recommendations for courses, tutorials, or documentation?",
-    replies: 15,
-    likes: 42,
-    date: "2 days ago",
-    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=64&h=64&fit=crop&crop=face"
-  },
-  {
-    id: "2",
-    title: "Tips for Optimizing Node.js Performance",
-    author: "John Smith",
-    content: "What are some proven strategies for optimizing the performance of Node.js applications? I'm working on a project that needs to handle a lot of concurrent requests.",
-    replies: 8,
-    likes: 28,
-    date: "5 days ago",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=64&h=64&fit=crop&crop=face"
-  }
-];
+interface Comment {
+  id: string;
+  author: string;
+  content: string;
+  date: string;
+  avatar: string;
+}
 
 interface Review {
   id: string;
@@ -51,6 +41,41 @@ interface Review {
   date: string;
   avatar: string;
 }
+
+const initialDiscussions: Discussion[] = [
+  {
+    id: "1",
+    title: "Best Resources for Learning React in 2024?",
+    author: "Jane Doe",
+    content: "Hey everyone! I'm looking for the best and most up-to-date resources for learning React this year. Any recommendations for courses, tutorials, or documentation?",
+    replies: 15,
+    likes: 42,
+    date: "2 days ago",
+    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=64&h=64&fit=crop&crop=face",
+    liked: false,
+    comments: [
+      {
+        id: "c1",
+        author: "John Smith",
+        content: "I highly recommend the official React documentation. It's been updated recently and has great examples!",
+        date: "1 day ago",
+        avatar: "JS"
+      }
+    ]
+  },
+  {
+    id: "2",
+    title: "Tips for Optimizing Node.js Performance",
+    author: "John Smith",
+    content: "What are some proven strategies for optimizing the performance of Node.js applications? I'm working on a project that needs to handle a lot of concurrent requests.",
+    replies: 8,
+    likes: 28,
+    date: "5 days ago",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=64&h=64&fit=crop&crop=face",
+    liked: false,
+    comments: []
+  }
+];
 
 const reviews: Review[] = [
   {
@@ -75,6 +100,102 @@ const reviews: Review[] = [
 
 const Community = () => {
   const [activeTab, setActiveTab] = useState("discussions");
+  const [discussions, setDiscussions] = useState<Discussion[]>(initialDiscussions);
+  const [newPostTitle, setNewPostTitle] = useState("");
+  const [newPostContent, setNewPostContent] = useState("");
+  const [showNewPostForm, setShowNewPostForm] = useState(false);
+  const [commentContent, setCommentContent] = useState<{[key: string]: string}>({});
+  const [showComments, setShowComments] = useState<{[key: string]: boolean}>({});
+  const { toast } = useToast();
+
+  const handleCreatePost = () => {
+    if (!newPostTitle.trim() || !newPostContent.trim()) {
+      toast({
+        title: "Error",
+        description: "Please fill in both title and content",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const newPost: Discussion = {
+      id: Date.now().toString(),
+      title: newPostTitle,
+      author: "Current User",
+      content: newPostContent,
+      replies: 0,
+      likes: 0,
+      date: "Just now",
+      avatar: "CU",
+      liked: false,
+      comments: []
+    };
+
+    setDiscussions([newPost, ...discussions]);
+    setNewPostTitle("");
+    setNewPostContent("");
+    setShowNewPostForm(false);
+    
+    toast({
+      title: "Success",
+      description: "Your post has been created!",
+    });
+  };
+
+  const handleLikePost = (postId: string) => {
+    setDiscussions(discussions.map(discussion => {
+      if (discussion.id === postId) {
+        return {
+          ...discussion,
+          liked: !discussion.liked,
+          likes: discussion.liked ? discussion.likes - 1 : discussion.likes + 1
+        };
+      }
+      return discussion;
+    }));
+  };
+
+  const handleAddComment = (postId: string) => {
+    const content = commentContent[postId];
+    if (!content?.trim()) {
+      toast({
+        title: "Error",
+        description: "Please enter a comment",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const newComment: Comment = {
+      id: Date.now().toString(),
+      author: "Current User",
+      content: content,
+      date: "Just now",
+      avatar: "CU"
+    };
+
+    setDiscussions(discussions.map(discussion => {
+      if (discussion.id === postId) {
+        return {
+          ...discussion,
+          comments: [...discussion.comments, newComment],
+          replies: discussion.replies + 1
+        };
+      }
+      return discussion;
+    }));
+
+    setCommentContent({...commentContent, [postId]: ""});
+    
+    toast({
+      title: "Success",
+      description: "Your comment has been added!",
+    });
+  };
+
+  const toggleComments = (postId: string) => {
+    setShowComments({...showComments, [postId]: !showComments[postId]});
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
@@ -83,6 +204,34 @@ const Community = () => {
         <div className="text-center space-y-4">
           <h1 className="text-4xl font-bold text-white">TechLearn Community</h1>
           <p className="text-xl text-slate-300">Connect, collaborate, and grow with fellow developers</p>
+          
+          {/* Partnership Information */}
+          <div className="bg-white/10 backdrop-blur-md border-white/20 rounded-lg p-6 mt-6">
+            <h2 className="text-2xl font-bold text-white mb-4">Our Partners</h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="text-white font-bold text-lg">PLP</span>
+                </div>
+                <h3 className="text-white font-semibold">Power Learn Project</h3>
+                <p className="text-slate-300 text-sm">Empowering African youth with tech skills</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="text-white font-bold text-lg">SF</span>
+                </div>
+                <h3 className="text-white font-semibold">Safaricom</h3>
+                <p className="text-slate-300 text-sm">Leading telecommunications provider in Kenya</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="text-white font-bold text-lg">SH</span>
+                </div>
+                <h3 className="text-white font-semibold">S-Hook</h3>
+                <p className="text-slate-300 text-sm">Innovation and technology solutions</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Tabs */}
@@ -104,37 +253,149 @@ const Community = () => {
 
         {/* Tab Content */}
         {activeTab === "discussions" && (
-          <div className="grid lg:grid-cols-3 gap-8">
-            {discussions.map((discussion) => (
-              <Card key={discussion.id} className="bg-white/10 backdrop-blur-md border-white/20">
+          <div className="space-y-8">
+            {/* Create Post Button */}
+            <div className="text-center">
+              <Button 
+                onClick={() => setShowNewPostForm(!showNewPostForm)}
+                className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
+              >
+                <Plus className="h-4 w-4 mr-2" />
+                Create New Post
+              </Button>
+            </div>
+
+            {/* New Post Form */}
+            {showNewPostForm && (
+              <Card className="bg-white/10 backdrop-blur-md border-white/20">
                 <CardHeader>
-                  <CardTitle className="text-white">{discussion.title}</CardTitle>
-                  <div className="flex items-center mt-2">
-                    <Avatar className="w-6 h-6">
-                      <AvatarFallback className="bg-green-500 text-white">
-                        {discussion.author.charAt(0)}
-                      </AvatarFallback>
-                    </Avatar>
-                    <span className="text-slate-300 ml-2 text-sm">
-                      {discussion.author} - {discussion.date}
-                    </span>
-                  </div>
+                  <CardTitle className="text-white">Create New Discussion</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-slate-300">{discussion.content}</p>
-                  <div className="flex justify-between items-center mt-4">
-                    <div className="flex items-center text-slate-300">
-                      <MessageSquare className="h-4 w-4 mr-1" />
-                      <span>{discussion.replies} Replies</span>
-                    </div>
-                    <div className="flex items-center text-slate-300">
-                      <Heart className="h-4 w-4 mr-1" />
-                      <span>{discussion.likes} Likes</span>
-                    </div>
+                <CardContent className="space-y-4">
+                  <Input
+                    placeholder="Enter post title..."
+                    value={newPostTitle}
+                    onChange={(e) => setNewPostTitle(e.target.value)}
+                    className="bg-white/5 border-white/20 text-white placeholder:text-slate-400"
+                  />
+                  <Textarea
+                    placeholder="What's on your mind?"
+                    value={newPostContent}
+                    onChange={(e) => setNewPostContent(e.target.value)}
+                    className="bg-white/5 border-white/20 text-white placeholder:text-slate-400 min-h-[120px]"
+                  />
+                  <div className="flex gap-3">
+                    <Button onClick={handleCreatePost} className="bg-gradient-to-r from-green-600 to-blue-600">
+                      <Send className="h-4 w-4 mr-2" />
+                      Post
+                    </Button>
+                    <Button variant="outline" onClick={() => setShowNewPostForm(false)}>
+                      Cancel
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
-            ))}
+            )}
+
+            {/* Discussions List */}
+            <div className="space-y-6">
+              {discussions.map((discussion) => (
+                <Card key={discussion.id} className="bg-white/10 backdrop-blur-md border-white/20">
+                  <CardHeader>
+                    <CardTitle className="text-white">{discussion.title}</CardTitle>
+                    <div className="flex items-center mt-2">
+                      <Avatar className="w-6 h-6">
+                        <AvatarFallback className="bg-green-500 text-white">
+                          {discussion.author.charAt(0)}
+                        </AvatarFallback>
+                      </Avatar>
+                      <span className="text-slate-300 ml-2 text-sm">
+                        {discussion.author} - {discussion.date}
+                      </span>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-slate-300">{discussion.content}</p>
+                    
+                    {/* Action Buttons */}
+                    <div className="flex items-center gap-4">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleLikePost(discussion.id)}
+                        className={`text-slate-300 hover:text-white ${discussion.liked ? 'text-red-400' : ''}`}
+                      >
+                        <Heart className={`h-4 w-4 mr-1 ${discussion.liked ? 'fill-current' : ''}`} />
+                        {discussion.likes}
+                      </Button>
+                      
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => toggleComments(discussion.id)}
+                        className="text-slate-300 hover:text-white"
+                      >
+                        <MessageSquare className="h-4 w-4 mr-1" />
+                        {discussion.replies} Comments
+                      </Button>
+                      
+                      <Button variant="ghost" size="sm" className="text-slate-300 hover:text-white">
+                        <Share2 className="h-4 w-4 mr-1" />
+                        Share
+                      </Button>
+                    </div>
+
+                    {/* Comments Section */}
+                    {showComments[discussion.id] && (
+                      <div className="space-y-3 border-t border-white/10 pt-4">
+                        {discussion.comments.map((comment) => (
+                          <div key={comment.id} className="flex space-x-3">
+                            <Avatar className="w-6 h-6">
+                              <AvatarFallback className="bg-blue-500 text-white text-xs">
+                                {comment.avatar}
+                              </AvatarFallback>
+                            </Avatar>
+                            <div className="flex-1">
+                              <div className="bg-white/5 rounded-lg p-3">
+                                <div className="flex items-center gap-2 mb-1">
+                                  <span className="text-white text-sm font-medium">{comment.author}</span>
+                                  <span className="text-slate-400 text-xs">{comment.date}</span>
+                                </div>
+                                <p className="text-slate-300 text-sm">{comment.content}</p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                        
+                        {/* Add Comment */}
+                        <div className="flex space-x-3">
+                          <Avatar className="w-6 h-6">
+                            <AvatarFallback className="bg-purple-500 text-white text-xs">
+                              CU
+                            </AvatarFallback>
+                          </Avatar>
+                          <div className="flex-1 flex gap-2">
+                            <Input
+                              placeholder="Write a comment..."
+                              value={commentContent[discussion.id] || ""}
+                              onChange={(e) => setCommentContent({...commentContent, [discussion.id]: e.target.value})}
+                              className="bg-white/5 border-white/20 text-white placeholder:text-slate-400"
+                            />
+                            <Button 
+                              size="sm" 
+                              onClick={() => handleAddComment(discussion.id)}
+                              className="bg-gradient-to-r from-purple-600 to-blue-600"
+                            >
+                              <Send className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         )}
 
