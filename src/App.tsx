@@ -21,6 +21,8 @@ import AIChat from "./pages/AIChat";
 import Certificates from "./pages/Certificates";
 import Timetable from "./pages/Timetable";
 import Pricing from "./pages/Pricing";
+import Jobs from "./pages/Jobs";
+import Mentorship from "./pages/Mentorship";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
