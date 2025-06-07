@@ -286,285 +286,290 @@ const Courses = () => {
   });
 
   // Sort courses
-  filteredCourses = filteredCourses.sort((a, b) => {
-    switch (sortBy) {
-      case "Rating":
-        return b.rating - a.rating;
-      case "Duration":
-        return parseInt(a.duration) - parseInt(b.duration);
-      case "Newest":
-        return b.id - a.id;
-      default: // Popular
-        return b.students - a.students;
-    }
-  });
+  switch (sortBy) {
+    case "Rating":
+      filteredCourses.sort((a, b) => b.rating - a.rating);
+      break;
+    case "Duration":
+      filteredCourses.sort((a, b) => parseInt(a.duration) - parseInt(b.duration));
+      break;
+    case "Newest":
+      filteredCourses.sort((a, b) => b.id - a.id);
+      break;
+    default: // Popular
+      filteredCourses.sort((a, b) => b.students - a.students);
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
-      <div className="max-w-7xl mx-auto space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 p-4 sm:p-6">
+      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">
-          <div className="flex items-center justify-center space-x-3">
-            <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full">
-              <BookOpen className="h-8 w-8 text-white" />
-            </div>
-            <h1 className="text-4xl font-bold text-white">Course Catalog</h1>
-          </div>
-          <p className="text-xl text-slate-300">Master in-demand tech skills with industry experts</p>
-          <div className="flex justify-center gap-6 text-sm text-slate-300">
-            <div className="flex items-center gap-2">
-              <Target className="h-4 w-4 text-green-400" />
-              <span>{categories.length - 1} Categories</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Users className="h-4 w-4 text-blue-400" />
-              <span>{allCourses.reduce((acc, course) => acc + course.students, 0).toLocaleString()}+ Students</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Award className="h-4 w-4 text-yellow-400" />
-              <span>Industry Certificates</span>
-            </div>
-          </div>
+          <h1 className="text-3xl sm:text-4xl font-bold text-blue-900">Discover Courses</h1>
+          <p className="text-lg sm:text-xl text-blue-700">Master new skills with our comprehensive learning programs</p>
         </div>
 
-        {/* Enhanced Filters */}
-        <Card className="bg-white/10 backdrop-blur-md border-white/20">
-          <CardContent className="p-6">
-            <div className="flex flex-col lg:flex-row gap-4">
-              <Input
-                placeholder="Search courses, skills, or technologies..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="bg-white/10 border-white/20 text-white placeholder:text-slate-400 flex-1"
-              />
+        {/* Filters */}
+        <Card className="bg-white/90 backdrop-blur-md border-blue-200 shadow-lg">
+          <CardContent className="p-4 sm:p-6">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+              <div className="lg:col-span-2">
+                <Input
+                  placeholder="Search courses, skills, or topics..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="bg-blue-50 border-blue-200 text-blue-900 placeholder:text-blue-600"
+                />
+              </div>
               
-              <div className="flex gap-2">
-                <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                  <SelectTrigger className="bg-white/10 border-white/20 text-white w-48">
-                    <SelectValue placeholder="Category" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {categories.map(category => (
-                      <SelectItem key={category} value={category}>{category}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                
-                <Select value={selectedLevel} onValueChange={setSelectedLevel}>
-                  <SelectTrigger className="bg-white/10 border-white/20 text-white w-40">
-                    <SelectValue placeholder="Level" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {levels.map(level => (
-                      <SelectItem key={level} value={level}>{level}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                <SelectTrigger className="bg-blue-50 border-blue-200 text-blue-900">
+                  <SelectValue placeholder="Category" />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map((category) => (
+                    <SelectItem key={category} value={category}>{category}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
 
-                <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger className="bg-white/10 border-white/20 text-white w-32">
-                    <SelectValue placeholder="Sort by" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {sortOptions.map(option => (
-                      <SelectItem key={option} value={option}>{option}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+              <Select value={selectedLevel} onValueChange={setSelectedLevel}>
+                <SelectTrigger className="bg-blue-50 border-blue-200 text-blue-900">
+                  <SelectValue placeholder="Level" />
+                </SelectTrigger>
+                <SelectContent>
+                  {levels.map((level) => (
+                    <SelectItem key={level} value={level}>{level}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
 
+              <Select value={sortBy} onValueChange={setSortBy}>
+                <SelectTrigger className="bg-blue-50 border-blue-200 text-blue-900">
+                  <SelectValue placeholder="Sort by" />
+                </SelectTrigger>
+                <SelectContent>
+                  {sortOptions.map((option) => (
+                    <SelectItem key={option} value={option}>{option}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-between gap-4 mt-4">
+              <div className="flex items-center gap-4">
                 <Button
                   variant={showFeaturedOnly ? "default" : "outline"}
+                  size="sm"
                   onClick={() => setShowFeaturedOnly(!showFeaturedOnly)}
-                  className="border-white/20"
+                  className={showFeaturedOnly 
+                    ? "bg-blue-600 hover:bg-blue-700" 
+                    : "border-blue-300 text-blue-700 hover:bg-blue-50"
+                  }
                 >
                   <Star className="h-4 w-4 mr-2" />
-                  Featured
+                  Featured Only
                 </Button>
-
-                <div className="flex border border-white/20 rounded-md">
+                
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm text-blue-700">View:</span>
                   <Button
-                    variant={viewMode === "grid" ? "default" : "ghost"}
+                    variant={viewMode === "grid" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setViewMode("grid")}
-                    className="rounded-r-none"
+                    className={viewMode === "grid" 
+                      ? "bg-blue-600 hover:bg-blue-700" 
+                      : "border-blue-300 text-blue-700 hover:bg-blue-50"
+                    }
                   >
                     <Grid className="h-4 w-4" />
                   </Button>
                   <Button
-                    variant={viewMode === "list" ? "default" : "ghost"}
+                    variant={viewMode === "list" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setViewMode("list")}
-                    className="rounded-l-none"
+                    className={viewMode === "list" 
+                      ? "bg-blue-600 hover:bg-blue-700" 
+                      : "border-blue-300 text-blue-700 hover:bg-blue-50"
+                    }
                   >
                     <List className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
-            </div>
-
-            <div className="flex justify-between items-center mt-4 text-slate-300">
-              <span>{filteredCourses.length} courses found</span>
-              <div className="flex gap-4 text-sm">
-                <span>Free: {filteredCourses.filter(c => c.price === "Free").length}</span>
-                <span>With Certificate: {filteredCourses.filter(c => c.certificate).length}</span>
-              </div>
+              
+              <p className="text-sm text-blue-700">
+                Showing {filteredCourses.length} of {allCourses.length} courses
+              </p>
             </div>
           </CardContent>
         </Card>
 
-        {/* Course Grid/List */}
-        <div className={viewMode === "grid" ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" : "space-y-4"}>
+        {/* Courses Grid/List */}
+        <div className={viewMode === "grid" 
+          ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" 
+          : "space-y-4"
+        }>
           {filteredCourses.map((course) => (
-            <Card key={course.id} className={`bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/15 transition-all duration-300 group overflow-hidden ${viewMode === "list" ? "flex" : ""}`}>
-              <div className={`relative ${viewMode === "list" ? "w-64 flex-shrink-0" : ""}`}>
-                <img 
-                  src={`https://images.unsplash.com/${course.image}?w=400&h=200&fit=crop`}
-                  alt={course.title}
-                  className={`object-cover group-hover:scale-105 transition-transform duration-300 ${viewMode === "list" ? "w-full h-full" : "w-full h-48"}`}
-                />
-                <div className="absolute top-4 left-4 flex flex-col gap-2">
-                  <Badge className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
-                    {course.category}
-                  </Badge>
-                  {course.featured && (
-                    <Badge className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white">
-                      Featured
-                    </Badge>
-                  )}
+            <Card key={course.id} className={`bg-white/90 backdrop-blur-md border-blue-200 shadow-lg hover:shadow-xl transition-all duration-300 group ${
+              viewMode === "list" ? "flex flex-col sm:flex-row" : ""
+            }`}>
+              {/* Course Image */}
+              <div className={`relative overflow-hidden ${
+                viewMode === "list" ? "sm:w-48 h-48 sm:h-auto" : "h-48"
+              } bg-gradient-to-br from-blue-500 to-blue-600 rounded-t-lg ${
+                viewMode === "list" ? "sm:rounded-l-lg sm:rounded-t-none" : ""
+              }`}>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <BookOpen className="h-12 w-12 text-white opacity-80" />
                 </div>
-                <div className="absolute top-4 right-4 flex flex-col gap-2">
-                  {course.enrolled && (
-                    <Badge className="bg-green-500 text-white">Enrolled</Badge>
-                  )}
-                  <Badge variant="outline" className="border-white bg-black/50 text-white text-xs">
-                    {course.level}
+                {course.featured && (
+                  <Badge className="absolute top-2 left-2 bg-yellow-500 text-yellow-900">
+                    <Star className="h-3 w-3 mr-1" />
+                    Featured
                   </Badge>
-                </div>
-                {course.enrolled && course.progress > 0 && (
-                  <div className="absolute bottom-0 left-0 right-0 bg-black/50 p-3">
-                    <div className="flex justify-between text-white text-sm mb-1">
-                      <span>Progress</span>
-                      <span>{course.progress}%</span>
-                    </div>
-                    <div className="w-full bg-gray-600 rounded-full h-2">
-                      <div 
-                        className="bg-gradient-to-r from-green-400 to-blue-500 h-2 rounded-full transition-all duration-300" 
-                        style={{ width: `${course.progress}%` }}
-                      />
-                    </div>
+                )}
+                {course.enrolled && (
+                  <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs">
+                    {course.progress}%
                   </div>
                 )}
               </div>
-              
-              <div className="flex-1">
-                <CardHeader className="text-white pb-2">
-                  <CardTitle className="text-lg line-clamp-2 group-hover:text-blue-300 transition-colors">
-                    {course.title}
-                  </CardTitle>
-                  <CardDescription className="text-slate-300 line-clamp-2">
+
+              <div className={`flex-1 ${viewMode === "list" ? "p-6" : ""}`}>
+                <CardHeader className={viewMode === "list" ? "p-0 pb-4" : ""}>
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <CardTitle className="text-blue-900 group-hover:text-blue-700 transition-colors">
+                        {course.title}
+                      </CardTitle>
+                      <p className="text-blue-700 text-sm mt-1">by {course.instructor}</p>
+                    </div>
+                    <Badge className="bg-blue-100 text-blue-700 ml-2">
+                      {course.level}
+                    </Badge>
+                  </div>
+                  <CardDescription className="text-blue-600 mt-2">
                     {course.description}
                   </CardDescription>
-                  <div className="text-sm text-slate-400">
-                    by {course.instructor}
-                  </div>
                 </CardHeader>
-                
-                <CardContent className="space-y-4">
-                  <div className="flex justify-between text-sm text-slate-300">
-                    <div className="flex items-center space-x-1">
-                      <BookOpen className="h-4 w-4" />
-                      <span>{course.modules} modules</span>
+
+                <CardContent className={`space-y-4 ${viewMode === "list" ? "p-0" : ""}`}>
+                  {/* Course Stats */}
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 text-sm">
+                    <div className="flex items-center text-blue-700">
+                      <Clock className="h-4 w-4 mr-1" />
+                      {course.duration}
                     </div>
-                    <div className="flex items-center space-x-1">
-                      <Clock className="h-4 w-4" />
-                      <span>{course.duration}</span>
+                    <div className="flex items-center text-blue-700">
+                      <Users className="h-4 w-4 mr-1" />
+                      {course.students.toLocaleString()}
                     </div>
-                    <div className="flex items-center space-x-1">
-                      <Target className="h-4 w-4" />
-                      <span>{course.projects} projects</span>
+                    <div className="flex items-center text-blue-700">
+                      <Star className="h-4 w-4 mr-1 text-yellow-500" />
+                      {course.rating}
+                    </div>
+                    <div className="flex items-center text-blue-700">
+                      <Target className="h-4 w-4 mr-1" />
+                      {course.difficulty}/10
                     </div>
                   </div>
-                  
-                  <div className="flex items-center justify-between text-sm text-slate-300">
-                    <div className="flex items-center space-x-2">
-                      <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                      <span>{course.rating}</span>
+
+                  {/* Course Progress (if enrolled) */}
+                  {course.enrolled && (
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="text-blue-700">Progress</span>
+                        <span className="text-blue-900 font-medium">{course.progress}%</span>
+                      </div>
+                      <div className="w-full bg-blue-200 rounded-full h-2">
+                        <div 
+                          className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full transition-all duration-300"
+                          style={{ width: `${course.progress}%` }}
+                        />
+                      </div>
                     </div>
-                    <div className="flex items-center space-x-1">
-                      <Users className="h-4 w-4" />
-                      <span>{course.students.toLocaleString()}</span>
+                  )}
+
+                  {/* Skills */}
+                  <div className="flex flex-wrap gap-1">
+                    {course.skills.slice(0, 4).map((skill, index) => (
+                      <Badge key={index} variant="outline" className="border-blue-300 text-blue-700 text-xs">
+                        {skill}
+                      </Badge>
+                    ))}
+                    {course.skills.length > 4 && (
+                      <Badge variant="outline" className="border-blue-300 text-blue-700 text-xs">
+                        +{course.skills.length - 4} more
+                      </Badge>
+                    )}
+                  </div>
+
+                  {/* Course Features */}
+                  <div className="flex items-center justify-between text-sm text-blue-700">
+                    <div className="flex items-center space-x-4">
+                      <span className="flex items-center">
+                        <BookOpen className="h-4 w-4 mr-1" />
+                        {course.modules} modules
+                      </span>
+                      <span className="flex items-center">
+                        <Play className="h-4 w-4 mr-1" />
+                        {course.projects} projects
+                      </span>
                     </div>
                     {course.certificate && (
-                      <div className="flex items-center space-x-1">
-                        <Award className="h-4 w-4 text-yellow-400" />
+                      <div className="flex items-center">
+                        <Award className="h-4 w-4 mr-1 text-yellow-500" />
                         <span>Certificate</span>
                       </div>
                     )}
                   </div>
 
-                  <div className="flex flex-wrap gap-1">
-                    {course.skills.slice(0, 3).map((skill, index) => (
-                      <Badge key={index} variant="outline" className="border-white/20 text-slate-400 text-xs">
-                        {skill}
-                      </Badge>
-                    ))}
-                    {course.skills.length > 3 && (
-                      <Badge variant="outline" className="border-white/20 text-slate-400 text-xs">
-                        +{course.skills.length - 3} more
-                      </Badge>
-                    )}
-                  </div>
-                  
-                  <Button asChild className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-                    <Link to={`/course/${course.id}`} className="flex items-center justify-center gap-2">
+                  {/* Action Button */}
+                  <Link to={`/course/${course.id}`}>
+                    <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 group-hover:shadow-lg transition-all">
                       {course.enrolled ? (
                         <>
-                          <Play className="h-4 w-4" />
+                          <Play className="h-4 w-4 mr-2" />
                           Continue Learning
                         </>
                       ) : (
                         <>
-                          <CheckCircle className="h-4 w-4" />
-                          Enroll Now
+                          <BookOpen className="h-4 w-4 mr-2" />
+                          Start Course
                         </>
                       )}
-                    </Link>
-                  </Button>
+                    </Button>
+                  </Link>
                 </CardContent>
               </div>
             </Card>
           ))}
         </div>
 
+        {/* No Results */}
         {filteredCourses.length === 0 && (
-          <Card className="bg-white/10 backdrop-blur-md border-white/20">
-            <CardContent className="text-center py-12">
-              <BookOpen className="h-16 w-16 mx-auto mb-4 text-slate-400" />
-              <h3 className="text-xl font-semibold text-white mb-2">No courses found</h3>
-              <p className="text-slate-300">Try adjusting your search criteria or browse all courses.</p>
+          <Card className="bg-white/90 backdrop-blur-md border-blue-200 shadow-lg">
+            <CardContent className="p-12 text-center">
+              <BookOpen className="h-16 w-16 text-blue-400 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-blue-900 mb-2">No courses found</h3>
+              <p className="text-blue-700 mb-4">
+                Try adjusting your search criteria or browse our featured courses.
+              </p>
+              <Button 
+                onClick={() => {
+                  setSearchTerm("");
+                  setSelectedCategory("All");
+                  setSelectedLevel("All");
+                  setShowFeaturedOnly(false);
+                }}
+                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
+              >
+                Reset Filters
+              </Button>
             </CardContent>
           </Card>
         )}
-
-        {/* Call to Action */}
-        <Card className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 border-white/20">
-          <CardContent className="p-8 text-center">
-            <Award className="h-16 w-16 mx-auto mb-4 text-yellow-400" />
-            <h3 className="text-2xl font-bold text-white mb-4">Ready to Start Your Tech Journey?</h3>
-            <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
-              Join thousands of students who have transformed their careers with our comprehensive tech courses. 
-              Earn industry-recognized certificates and build real-world projects.
-            </p>
-            <div className="flex gap-4 justify-center">
-              <Button className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700">
-                Start Free Trial
-              </Button>
-              <Button variant="outline" className="border-white/20 text-slate-300 hover:bg-white/10">
-                View All Certificates
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </div>
   );

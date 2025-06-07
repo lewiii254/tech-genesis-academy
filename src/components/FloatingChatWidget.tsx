@@ -87,7 +87,7 @@ const FloatingChatWidget = () => {
         {!isOpen && (
           <Button
             onClick={() => setIsOpen(true)}
-            className="w-14 h-14 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse"
+            className="w-14 h-14 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse"
           >
             <MessageCircle className="h-6 w-6 text-white" />
           </Button>
@@ -95,8 +95,8 @@ const FloatingChatWidget = () => {
 
         {/* Chat Widget */}
         {isOpen && (
-          <Card className="w-80 h-96 bg-white/95 backdrop-blur-md border-emerald-200 shadow-xl">
-            <CardHeader className="pb-3 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-t-lg">
+          <Card className="w-80 h-96 bg-white/95 backdrop-blur-md border-blue-200 shadow-xl">
+            <CardHeader className="pb-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-t-lg">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-sm flex items-center space-x-2">
                   <MessageCircle className="h-4 w-4" />
@@ -106,7 +106,7 @@ const FloatingChatWidget = () => {
                   variant="ghost"
                   size="sm"
                   onClick={() => setIsOpen(false)}
-                  className="text-white hover:bg-emerald-800 h-6 w-6 p-0"
+                  className="text-white hover:bg-blue-800 h-6 w-6 p-0"
                 >
                   <X className="h-4 w-4" />
                 </Button>
@@ -119,15 +119,15 @@ const FloatingChatWidget = () => {
                 {messages.map((msg) => (
                   <div key={msg.id} className={`flex items-start space-x-2 ${msg.type === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
                     <Avatar className="w-6 h-6 mt-1">
-                      <AvatarFallback className={msg.type === 'bot' ? 'bg-emerald-500 text-white text-xs' : 'bg-emerald-600 text-white text-xs'}>
+                      <AvatarFallback className={msg.type === 'bot' ? 'bg-blue-500 text-white text-xs' : 'bg-blue-600 text-white text-xs'}>
                         {msg.type === 'bot' ? 'AI' : 'U'}
                       </AvatarFallback>
                     </Avatar>
                     <div className={`max-w-[70%] ${msg.type === 'user' ? 'text-right' : ''}`}>
                       <div className={`p-2 rounded-lg text-xs ${
                         msg.type === 'bot' 
-                          ? 'bg-emerald-50 text-emerald-900 border border-emerald-200' 
-                          : 'bg-gradient-to-r from-emerald-600 to-emerald-700 text-white'
+                          ? 'bg-blue-50 text-blue-900 border border-blue-200' 
+                          : 'bg-gradient-to-r from-blue-600 to-blue-700 text-white'
                       }`}>
                         {msg.message}
                       </div>
@@ -137,7 +137,7 @@ const FloatingChatWidget = () => {
               </div>
 
               {/* Quick Questions */}
-              <div className="p-2 border-t border-emerald-200">
+              <div className="p-2 border-t border-blue-200">
                 <div className="flex flex-wrap gap-1 mb-2">
                   {predefinedQuestions.map((question, index) => (
                     <Button
@@ -145,7 +145,7 @@ const FloatingChatWidget = () => {
                       variant="outline"
                       size="sm"
                       onClick={() => handleQuestionClick(question)}
-                      className="text-xs h-6 px-2 border-emerald-200 text-emerald-700 hover:bg-emerald-100"
+                      className="text-xs h-6 px-2 border-blue-200 text-blue-700 hover:bg-blue-100"
                     >
                       {question}
                     </Button>
@@ -154,13 +154,13 @@ const FloatingChatWidget = () => {
               </div>
 
               {/* Input */}
-              <div className="p-2 border-t border-emerald-200">
+              <div className="p-2 border-t border-blue-200">
                 <div className="flex space-x-2">
                   <Textarea
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Ask about our courses..."
-                    className="flex-1 text-xs min-h-[32px] max-h-16 bg-emerald-50 border-emerald-200 text-emerald-900"
+                    className="flex-1 text-xs min-h-[32px] max-h-16 bg-blue-50 border-blue-200 text-blue-900"
                     rows={1}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' && !e.shiftKey) {
@@ -172,7 +172,7 @@ const FloatingChatWidget = () => {
                   <Button 
                     onClick={handleSendMessage}
                     size="sm"
-                    className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white h-8 w-8 p-0"
+                    className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white h-8 w-8 p-0"
                   >
                     <Send className="h-3 w-3" />
                   </Button>

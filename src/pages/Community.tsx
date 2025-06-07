@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -198,15 +197,15 @@ const Community = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-emerald-100 to-emerald-200 p-4 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 p-4 sm:p-6">
       <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-3xl sm:text-4xl font-bold text-emerald-900">TechLearn Community</h1>
-          <p className="text-lg sm:text-xl text-emerald-700">Connect, collaborate, and grow with fellow developers</p>
+          <h1 className="text-3xl sm:text-4xl font-bold text-blue-900">TechLearn Community</h1>
+          <p className="text-lg sm:text-xl text-blue-700">Connect, collaborate, and grow with fellow developers</p>
           
           {/* Partnership Information */}
-          <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 rounded-lg p-4 sm:p-6 mt-6 shadow-lg">
+          <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg p-4 sm:p-6 mt-6 shadow-lg">
             <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">Our Partners</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
               <div className="text-center">
@@ -214,21 +213,21 @@ const Community = () => {
                   <span className="text-white font-bold text-sm sm:text-lg">PLP</span>
                 </div>
                 <h3 className="text-white font-semibold text-sm sm:text-base">Power Learn Project</h3>
-                <p className="text-emerald-100 text-xs sm:text-sm">Empowering African youth with tech skills</p>
+                <p className="text-blue-100 text-xs sm:text-sm">Empowering African youth with tech skills</p>
               </div>
               <div className="text-center">
                 <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-green-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-3">
                   <span className="text-white font-bold text-sm sm:text-lg">SF</span>
                 </div>
                 <h3 className="text-white font-semibold text-sm sm:text-base">Safaricom</h3>
-                <p className="text-emerald-100 text-xs sm:text-sm">Leading telecommunications provider in Kenya</p>
+                <p className="text-blue-100 text-xs sm:text-sm">Leading telecommunications provider in Kenya</p>
               </div>
               <div className="text-center">
                 <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
                   <span className="text-white font-bold text-sm sm:text-lg">SH</span>
                 </div>
                 <h3 className="text-white font-semibold text-sm sm:text-base">S-Hook</h3>
-                <p className="text-emerald-100 text-xs sm:text-sm">Innovation and technology solutions</p>
+                <p className="text-blue-100 text-xs sm:text-sm">Innovation and technology solutions</p>
               </div>
             </div>
           </div>
@@ -242,8 +241,8 @@ const Community = () => {
               onClick={() => setActiveTab(tab)}
               className={`flex-1 min-w-[100px] sm:min-w-[120px] py-2 sm:py-3 px-3 sm:px-4 rounded-md text-xs sm:text-sm font-medium transition-all ${
                 activeTab === tab
-                  ? "bg-gradient-to-r from-emerald-600 to-emerald-700 text-white shadow-md"
-                  : "text-emerald-700 hover:text-emerald-900 hover:bg-emerald-100"
+                  ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md"
+                  : "text-blue-700 hover:text-blue-900 hover:bg-blue-100"
               }`}
             >
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -258,7 +257,7 @@ const Community = () => {
             <div className="text-center">
               <Button 
                 onClick={() => setShowNewPostForm(!showNewPostForm)}
-                className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 shadow-md"
+                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-md"
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Create New Post
@@ -267,29 +266,29 @@ const Community = () => {
 
             {/* New Post Form */}
             {showNewPostForm && (
-              <Card className="bg-white/90 backdrop-blur-md border-emerald-200 shadow-lg">
+              <Card className="bg-white/90 backdrop-blur-md border-blue-200 shadow-lg">
                 <CardHeader>
-                  <CardTitle className="text-emerald-900">Create New Discussion</CardTitle>
+                  <CardTitle className="text-blue-900">Create New Discussion</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <Input
                     placeholder="Enter post title..."
                     value={newPostTitle}
                     onChange={(e) => setNewPostTitle(e.target.value)}
-                    className="bg-emerald-50 border-emerald-200 text-emerald-900 placeholder:text-emerald-600"
+                    className="bg-blue-50 border-blue-200 text-blue-900 placeholder:text-blue-600"
                   />
                   <Textarea
                     placeholder="What's on your mind?"
                     value={newPostContent}
                     onChange={(e) => setNewPostContent(e.target.value)}
-                    className="bg-emerald-50 border-emerald-200 text-emerald-900 placeholder:text-emerald-600 min-h-[120px]"
+                    className="bg-blue-50 border-blue-200 text-blue-900 placeholder:text-blue-600 min-h-[120px]"
                   />
                   <div className="flex flex-col sm:flex-row gap-3">
-                    <Button onClick={handleCreatePost} className="bg-gradient-to-r from-emerald-600 to-emerald-700">
+                    <Button onClick={handleCreatePost} className="bg-gradient-to-r from-blue-600 to-blue-700">
                       <Send className="h-4 w-4 mr-2" />
                       Post
                     </Button>
-                    <Button variant="outline" onClick={() => setShowNewPostForm(false)} className="border-emerald-300 text-emerald-700 hover:bg-emerald-50">
+                    <Button variant="outline" onClick={() => setShowNewPostForm(false)} className="border-blue-300 text-blue-700 hover:bg-blue-50">
                       Cancel
                     </Button>
                   </div>
@@ -300,22 +299,22 @@ const Community = () => {
             {/* Discussions List */}
             <div className="space-y-4 sm:space-y-6">
               {discussions.map((discussion) => (
-                <Card key={discussion.id} className="bg-white/90 backdrop-blur-md border-emerald-200 shadow-lg">
+                <Card key={discussion.id} className="bg-white/90 backdrop-blur-md border-blue-200 shadow-lg">
                   <CardHeader className="pb-3">
-                    <CardTitle className="text-emerald-900 text-lg sm:text-xl">{discussion.title}</CardTitle>
+                    <CardTitle className="text-blue-900 text-lg sm:text-xl">{discussion.title}</CardTitle>
                     <div className="flex items-center mt-2">
                       <Avatar className="w-6 h-6">
-                        <AvatarFallback className="bg-emerald-500 text-white">
+                        <AvatarFallback className="bg-blue-500 text-white">
                           {discussion.author.charAt(0)}
                         </AvatarFallback>
                       </Avatar>
-                      <span className="text-emerald-700 ml-2 text-sm">
+                      <span className="text-blue-700 ml-2 text-sm">
                         {discussion.author} - {discussion.date}
                       </span>
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <p className="text-emerald-800">{discussion.content}</p>
+                    <p className="text-blue-800">{discussion.content}</p>
                     
                     {/* Action Buttons */}
                     <div className="flex flex-wrap items-center gap-3 sm:gap-4">
@@ -323,7 +322,7 @@ const Community = () => {
                         variant="ghost"
                         size="sm"
                         onClick={() => handleLikePost(discussion.id)}
-                        className={`text-emerald-700 hover:text-emerald-900 hover:bg-emerald-100 ${discussion.liked ? 'text-red-600 hover:text-red-700' : ''}`}
+                        className={`text-blue-700 hover:text-blue-900 hover:bg-blue-100 ${discussion.liked ? 'text-red-600 hover:text-red-700' : ''}`}
                       >
                         <Heart className={`h-4 w-4 mr-1 ${discussion.liked ? 'fill-current' : ''}`} />
                         <span className="text-xs sm:text-sm">{discussion.likes}</span>
@@ -333,13 +332,13 @@ const Community = () => {
                         variant="ghost"
                         size="sm"
                         onClick={() => toggleComments(discussion.id)}
-                        className="text-emerald-700 hover:text-emerald-900 hover:bg-emerald-100"
+                        className="text-blue-700 hover:text-blue-900 hover:bg-blue-100"
                       >
                         <MessageSquare className="h-4 w-4 mr-1" />
                         <span className="text-xs sm:text-sm">{discussion.replies} Comments</span>
                       </Button>
                       
-                      <Button variant="ghost" size="sm" className="text-emerald-700 hover:text-emerald-900 hover:bg-emerald-100">
+                      <Button variant="ghost" size="sm" className="text-blue-700 hover:text-blue-900 hover:bg-blue-100">
                         <Share2 className="h-4 w-4 mr-1" />
                         <span className="text-xs sm:text-sm">Share</span>
                       </Button>
@@ -347,21 +346,21 @@ const Community = () => {
 
                     {/* Comments Section */}
                     {showComments[discussion.id] && (
-                      <div className="space-y-3 border-t border-emerald-200 pt-4">
+                      <div className="space-y-3 border-t border-blue-200 pt-4">
                         {discussion.comments.map((comment) => (
                           <div key={comment.id} className="flex space-x-3">
                             <Avatar className="w-6 h-6">
-                              <AvatarFallback className="bg-emerald-400 text-white text-xs">
+                              <AvatarFallback className="bg-blue-400 text-white text-xs">
                                 {comment.avatar}
                               </AvatarFallback>
                             </Avatar>
                             <div className="flex-1">
-                              <div className="bg-emerald-50 rounded-lg p-3">
+                              <div className="bg-blue-50 rounded-lg p-3">
                                 <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
-                                  <span className="text-emerald-900 text-sm font-medium">{comment.author}</span>
-                                  <span className="text-emerald-600 text-xs">{comment.date}</span>
+                                  <span className="text-blue-900 text-sm font-medium">{comment.author}</span>
+                                  <span className="text-blue-600 text-xs">{comment.date}</span>
                                 </div>
-                                <p className="text-emerald-800 text-sm">{comment.content}</p>
+                                <p className="text-blue-800 text-sm">{comment.content}</p>
                               </div>
                             </div>
                           </div>
@@ -370,7 +369,7 @@ const Community = () => {
                         {/* Add Comment */}
                         <div className="flex space-x-3">
                           <Avatar className="w-6 h-6">
-                            <AvatarFallback className="bg-emerald-600 text-white text-xs">
+                            <AvatarFallback className="bg-blue-600 text-white text-xs">
                               CU
                             </AvatarFallback>
                           </Avatar>
@@ -379,12 +378,12 @@ const Community = () => {
                               placeholder="Write a comment..."
                               value={commentContent[discussion.id] || ""}
                               onChange={(e) => setCommentContent({...commentContent, [discussion.id]: e.target.value})}
-                              className="bg-emerald-50 border-emerald-200 text-emerald-900 placeholder:text-emerald-600"
+                              className="bg-blue-50 border-blue-200 text-blue-900 placeholder:text-blue-600"
                             />
                             <Button 
                               size="sm" 
                               onClick={() => handleAddComment(discussion.id)}
-                              className="bg-gradient-to-r from-emerald-600 to-emerald-700 shrink-0"
+                              className="bg-gradient-to-r from-blue-600 to-blue-700 shrink-0"
                             >
                               <Send className="h-4 w-4" />
                             </Button>
@@ -402,27 +401,27 @@ const Community = () => {
         {activeTab === "teams" && (
           <div className="grid lg:grid-cols-2 gap-6 sm:gap-8">
             <TeamCollaboration />
-            <Card className="bg-white/90 backdrop-blur-md border-emerald-200 shadow-lg">
+            <Card className="bg-white/90 backdrop-blur-md border-blue-200 shadow-lg">
               <CardHeader>
-                <CardTitle className="text-emerald-900">Advanced Project Reviews</CardTitle>
-                <CardDescription className="text-emerald-700">
+                <CardTitle className="text-blue-900">Advanced Project Reviews</CardTitle>
+                <CardDescription className="text-blue-700">
                   Get expert feedback on your projects
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="border border-emerald-200 rounded-lg p-4 bg-emerald-50">
+                <div className="border border-blue-200 rounded-lg p-4 bg-blue-50">
                   <div className="flex items-center justify-between mb-3">
-                    <h4 className="text-emerald-900 font-medium">E-commerce Dashboard</h4>
-                    <Badge className="bg-emerald-500/20 text-emerald-700">Reviewed</Badge>
+                    <h4 className="text-blue-900 font-medium">E-commerce Dashboard</h4>
+                    <Badge className="bg-blue-500/20 text-blue-700">Reviewed</Badge>
                   </div>
-                  <p className="text-emerald-800 text-sm mb-3">React + Node.js project with payment integration</p>
-                  <div className="flex flex-wrap items-center gap-3 text-sm text-emerald-700">
+                  <p className="text-blue-800 text-sm mb-3">React + Node.js project with payment integration</p>
+                  <div className="flex flex-wrap items-center gap-3 text-sm text-blue-700">
                     <span>★★★★☆ 4.5/5</span>
                     <span>Mentor: Sarah K.</span>
                     <span>2 days ago</span>
                   </div>
                 </div>
-                <Button className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800">
+                <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800">
                   Submit Project for Review
                 </Button>
               </CardContent>
@@ -439,17 +438,17 @@ const Community = () => {
         {activeTab === "reviews" && (
           <div className="grid lg:grid-cols-2 gap-6 sm:gap-8">
             {reviews.map((review) => (
-              <Card key={review.id} className="bg-white/90 backdrop-blur-md border-emerald-200 shadow-lg">
+              <Card key={review.id} className="bg-white/90 backdrop-blur-md border-blue-200 shadow-lg">
                 <CardHeader>
                   <div className="flex items-center">
                     <Avatar className="w-8 h-8">
-                      <AvatarFallback className="bg-emerald-500 text-white">
+                      <AvatarFallback className="bg-blue-500 text-white">
                         {review.author.charAt(0)}
                       </AvatarFallback>
                     </Avatar>
                     <div className="ml-3">
-                      <CardTitle className="text-emerald-900 text-lg">{review.author}</CardTitle>
-                      <p className="text-emerald-700 text-sm">Reviewed {review.course}</p>
+                      <CardTitle className="text-blue-900 text-lg">{review.author}</CardTitle>
+                      <p className="text-blue-700 text-sm">Reviewed {review.course}</p>
                     </div>
                   </div>
                 </CardHeader>
@@ -459,8 +458,8 @@ const Community = () => {
                       <Star key={i} className="h-4 w-4 text-yellow-500 fill-current" />
                     ))}
                   </div>
-                  <p className="text-emerald-800">{review.comment}</p>
-                  <p className="text-emerald-600 text-sm mt-3">Posted on {review.date}</p>
+                  <p className="text-blue-800">{review.comment}</p>
+                  <p className="text-blue-600 text-sm mt-3">Posted on {review.date}</p>
                 </CardContent>
               </Card>
             ))}
