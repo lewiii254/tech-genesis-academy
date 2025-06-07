@@ -1,9 +1,10 @@
+
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { MessageSquare, Heart, Share2, Calendar, Users, TrendingUp } from "lucide-react";
+import { MessageSquare, Heart, Share2, Calendar, Users, TrendingUp, Star } from "lucide-react";
 import TeamCollaboration from "@/components/TeamCollaboration";
 import NetworkingEvents from "@/components/NetworkingEvents";
 
