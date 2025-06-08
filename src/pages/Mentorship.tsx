@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -189,23 +188,23 @@ const Mentorship = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold text-white">1-on-1 Mentorship</h1>
-          <p className="text-xl text-slate-300">Get personalized guidance from industry experts</p>
-          <div className="flex justify-center gap-8 text-slate-300">
+          <h1 className="text-4xl font-bold text-slate-800">1-on-1 Mentorship</h1>
+          <p className="text-xl text-slate-600">Get personalized guidance from industry experts</p>
+          <div className="flex justify-center gap-8 text-slate-600">
             <div className="flex items-center gap-2">
-              <Video className="h-5 w-5 text-blue-400" />
+              <Video className="h-5 w-5 text-blue-600" />
               <span>Video Sessions</span>
             </div>
             <div className="flex items-center gap-2">
-              <Users className="h-5 w-5 text-green-400" />
+              <Users className="h-5 w-5 text-green-600" />
               <span>{mentors.length} Expert Mentors</span>
             </div>
             <div className="flex items-center gap-2">
-              <Smartphone className="h-5 w-5 text-orange-400" />
+              <Smartphone className="h-5 w-5 text-orange-600" />
               <span>Pay via M-PESA</span>
             </div>
           </div>
@@ -214,7 +213,7 @@ const Mentorship = () => {
         {/* Mentor Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {mentors.map((mentor) => (
-            <Card key={mentor.id} className="bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/15 transition-all">
+            <Card key={mentor.id} className="bg-white border-slate-200 hover:border-blue-300 transition-all shadow-md">
               <CardHeader>
                 <div className="flex items-start gap-4">
                   <img 
@@ -223,13 +222,13 @@ const Mentorship = () => {
                     className="w-16 h-16 rounded-full object-cover"
                   />
                   <div className="flex-1">
-                    <CardTitle className="text-white text-lg">{mentor.name}</CardTitle>
-                    <p className="text-slate-300 text-sm">{mentor.title}</p>
-                    <p className="text-slate-400 text-xs">{mentor.company}</p>
+                    <CardTitle className="text-slate-800 text-lg">{mentor.name}</CardTitle>
+                    <p className="text-slate-600 text-sm">{mentor.title}</p>
+                    <p className="text-slate-500 text-xs">{mentor.company}</p>
                   </div>
                   <div className="flex items-center gap-1">
-                    <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                    <span className="text-slate-300 text-sm">{mentor.rating}</span>
+                    <Star className="h-4 w-4 text-yellow-500 fill-current" />
+                    <span className="text-slate-600 text-sm">{mentor.rating}</span>
                   </div>
                 </div>
               </CardHeader>
@@ -238,13 +237,13 @@ const Mentorship = () => {
                 <div className="space-y-2">
                   <div className="flex flex-wrap gap-1">
                     {mentor.expertise.slice(0, 3).map((skill, index) => (
-                      <Badge key={index} className="bg-blue-500/20 text-blue-400 text-xs">
+                      <Badge key={index} className="bg-blue-100 text-blue-700 text-xs border-blue-200">
                         {skill}
                       </Badge>
                     ))}
                   </div>
                   
-                  <div className="text-sm text-slate-300">
+                  <div className="text-sm text-slate-600">
                     <div className="flex items-center gap-2 mb-1">
                       <Clock className="h-4 w-4" />
                       <span>{mentor.experience} experience</span>
@@ -256,14 +255,14 @@ const Mentorship = () => {
                   </div>
                 </div>
                 
-                <p className="text-slate-300 text-sm line-clamp-2">{mentor.bio}</p>
+                <p className="text-slate-600 text-sm line-clamp-2">{mentor.bio}</p>
                 
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="text-green-400 font-bold">
+                    <span className="text-green-600 font-bold">
                       KES {mentor.hourlyRate.toLocaleString()}
                     </span>
-                    <span className="text-slate-400 text-sm">/hour</span>
+                    <span className="text-slate-500 text-sm">/hour</span>
                   </div>
                 </div>
 
@@ -271,15 +270,15 @@ const Mentorship = () => {
                   <DialogTrigger asChild>
                     <Button 
                       onClick={() => setSelectedMentor(mentor)}
-                      className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                      className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
                     >
                       <Video className="mr-2 h-4 w-4" />
                       Book Session
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-slate-900 border-slate-700">
+                  <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-white border-slate-200">
                     <DialogHeader>
-                      <DialogTitle className="text-white flex items-center gap-3">
+                      <DialogTitle className="text-slate-800 flex items-center gap-3">
                         <img 
                           src={mentor.avatar} 
                           alt={mentor.name}
@@ -287,22 +286,22 @@ const Mentorship = () => {
                         />
                         Book Session with {mentor.name}
                       </DialogTitle>
-                      <DialogDescription className="text-slate-300">
+                      <DialogDescription className="text-slate-600">
                         {mentor.title} at {mentor.company}
                       </DialogDescription>
                     </DialogHeader>
                     
-                    <div className="space-y-6 text-slate-300">
+                    <div className="space-y-6 text-slate-600">
                       <div>
-                        <h4 className="font-semibold text-white mb-2">About {mentor.name}</h4>
+                        <h4 className="font-semibold text-slate-800 mb-2">About {mentor.name}</h4>
                         <p className="mb-3">{mentor.bio}</p>
                         
                         <div className="space-y-2">
                           <div>
-                            <strong className="text-white">Expertise:</strong>
+                            <strong className="text-slate-800">Expertise:</strong>
                             <div className="flex flex-wrap gap-1 mt-1">
                               {mentor.expertise.map((skill, index) => (
-                                <Badge key={index} className="bg-blue-500/20 text-blue-400 text-xs">
+                                <Badge key={index} className="bg-blue-100 text-blue-700 text-xs border-blue-200">
                                   {skill}
                                 </Badge>
                               ))}
@@ -310,11 +309,11 @@ const Mentorship = () => {
                           </div>
                           
                           <div>
-                            <strong className="text-white">Languages:</strong> {mentor.languages.join(", ")}
+                            <strong className="text-slate-800">Languages:</strong> {mentor.languages.join(", ")}
                           </div>
                           
                           <div>
-                            <strong className="text-white">Achievements:</strong>
+                            <strong className="text-slate-800">Achievements:</strong>
                             <ul className="list-disc list-inside mt-1">
                               {mentor.achievements.map((achievement, index) => (
                                 <li key={index} className="text-sm">{achievement}</li>
@@ -325,14 +324,14 @@ const Mentorship = () => {
                       </div>
                       
                       <div>
-                        <h4 className="font-semibold text-white mb-3">Book Your Session</h4>
+                        <h4 className="font-semibold text-slate-800 mb-3">Book Your Session</h4>
                         <div className="space-y-4">
                           <div>
-                            <label className="block text-sm font-medium text-white mb-2">Session Duration</label>
+                            <label className="block text-sm font-medium text-slate-800 mb-2">Session Duration</label>
                             <select
                               value={bookingData.sessionType}
                               onChange={(e) => setBookingData({...bookingData, sessionType: e.target.value})}
-                              className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-md text-white"
+                              className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-slate-800"
                             >
                               <option value="30-min">30 minutes - KES {getSessionPrice(mentor.hourlyRate, "30-min").toLocaleString()}</option>
                               <option value="1-hour">1 hour - KES {getSessionPrice(mentor.hourlyRate, "1-hour").toLocaleString()}</option>
@@ -342,42 +341,42 @@ const Mentorship = () => {
                           
                           <div className="grid md:grid-cols-2 gap-4">
                             <div>
-                              <label className="block text-sm font-medium text-white mb-2">Preferred Date</label>
+                              <label className="block text-sm font-medium text-slate-800 mb-2">Preferred Date</label>
                               <Input
                                 type="date"
                                 value={bookingData.date}
                                 onChange={(e) => setBookingData({...bookingData, date: e.target.value})}
-                                className="bg-slate-800 border-slate-600 text-white"
+                                className="bg-white border-slate-300 text-slate-800"
                               />
                             </div>
                             <div>
-                              <label className="block text-sm font-medium text-white mb-2">Preferred Time</label>
+                              <label className="block text-sm font-medium text-slate-800 mb-2">Preferred Time</label>
                               <Input
                                 type="time"
                                 value={bookingData.time}
                                 onChange={(e) => setBookingData({...bookingData, time: e.target.value})}
-                                className="bg-slate-800 border-slate-600 text-white"
+                                className="bg-white border-slate-300 text-slate-800"
                               />
                             </div>
                           </div>
                           
                           <div>
-                            <label className="block text-sm font-medium text-white mb-2">M-PESA Phone Number</label>
+                            <label className="block text-sm font-medium text-slate-800 mb-2">M-PESA Phone Number</label>
                             <Input
                               type="tel"
                               placeholder="0712345678"
                               value={bookingData.phoneNumber}
                               onChange={(e) => setBookingData({...bookingData, phoneNumber: e.target.value})}
-                              className="bg-slate-800 border-slate-600 text-white"
+                              className="bg-white border-slate-300 text-slate-800"
                             />
                           </div>
                           
                           <div>
-                            <label className="block text-sm font-medium text-white mb-2">Your Experience Level</label>
+                            <label className="block text-sm font-medium text-slate-800 mb-2">Your Experience Level</label>
                             <select
                               value={bookingData.experience}
                               onChange={(e) => setBookingData({...bookingData, experience: e.target.value})}
-                              className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded-md text-white"
+                              className="w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-slate-800"
                             >
                               <option value="">Select your level</option>
                               <option value="beginner">Beginner</option>
@@ -387,33 +386,33 @@ const Mentorship = () => {
                           </div>
                           
                           <div>
-                            <label className="block text-sm font-medium text-white mb-2">What would you like to discuss?</label>
+                            <label className="block text-sm font-medium text-slate-800 mb-2">What would you like to discuss?</label>
                             <Textarea
                               placeholder="Describe your goals and what you'd like to achieve from this session..."
                               value={bookingData.goals}
                               onChange={(e) => setBookingData({...bookingData, goals: e.target.value})}
-                              className="bg-slate-800 border-slate-600 text-white"
+                              className="bg-white border-slate-300 text-slate-800"
                               rows={3}
                             />
                           </div>
                           
-                          <div className="border-t border-slate-700 pt-4">
+                          <div className="border-t border-slate-200 pt-4">
                             <div className="flex items-center justify-between mb-4">
-                              <span className="text-white font-medium">Total Amount:</span>
-                              <span className="text-green-400 font-bold text-lg">
+                              <span className="text-slate-800 font-medium">Total Amount:</span>
+                              <span className="text-green-600 font-bold text-lg">
                                 KES {getSessionPrice(mentor.hourlyRate, bookingData.sessionType).toLocaleString()}
                               </span>
                             </div>
                             
                             <Button 
                               onClick={handleBooking}
-                              className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
+                              className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white"
                             >
                               <Smartphone className="mr-2 h-4 w-4" />
                               Pay & Book Session
                             </Button>
                             
-                            <p className="text-xs text-slate-400 text-center mt-2">
+                            <p className="text-xs text-slate-500 text-center mt-2">
                               Secure payment via M-PESA • Session link will be sent via SMS
                             </p>
                           </div>
@@ -421,11 +420,11 @@ const Mentorship = () => {
                       </div>
                       
                       <div>
-                        <h4 className="font-semibold text-white mb-2">Availability</h4>
+                        <h4 className="font-semibold text-slate-800 mb-2">Availability</h4>
                         <div className="space-y-1">
                           {mentor.availability.map((slot, index) => (
                             <div key={index} className="flex items-center gap-2">
-                              <Calendar className="h-4 w-4 text-green-400" />
+                              <Calendar className="h-4 w-4 text-green-600" />
                               <span className="text-sm">{slot}</span>
                             </div>
                           ))}
