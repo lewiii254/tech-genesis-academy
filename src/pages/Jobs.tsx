@@ -232,23 +232,23 @@ const Jobs = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 p-6">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold text-white">Tech Jobs in Kenya</h1>
-          <p className="text-xl text-slate-300">Find your dream tech job with top companies in Kenya</p>
-          <div className="flex justify-center gap-8 text-slate-300">
+          <h1 className="text-4xl font-bold text-blue-900">Tech Jobs in Kenya</h1>
+          <p className="text-xl text-blue-700">Find your dream tech job with top companies in Kenya</p>
+          <div className="flex justify-center gap-8 text-blue-700">
             <div className="flex items-center gap-2">
-              <Briefcase className="h-5 w-5 text-green-400" />
+              <Briefcase className="h-5 w-5 text-blue-600" />
               <span>{jobs.length} Active Positions</span>
             </div>
             <div className="flex items-center gap-2">
-              <Building className="h-5 w-5 text-blue-400" />
+              <Building className="h-5 w-5 text-blue-600" />
               <span>Top Companies</span>
             </div>
             <div className="flex items-center gap-2">
-              <Phone className="h-5 w-5 text-orange-400" />
+              <Phone className="h-5 w-5 text-blue-600" />
               <span>USSD Applications</span>
             </div>
           </div>
@@ -257,7 +257,7 @@ const Jobs = () => {
         {/* Job Listings */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {jobs.map((job) => (
-            <Card key={job.id} className="bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/15 transition-all">
+            <Card key={job.id} className="bg-white/90 backdrop-blur-md border-blue-200 hover:bg-white/95 transition-all shadow-lg">
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
@@ -267,18 +267,18 @@ const Jobs = () => {
                       className="w-12 h-12 rounded-lg"
                     />
                     <div>
-                      <CardTitle className="text-white text-lg">{job.title}</CardTitle>
-                      <p className="text-slate-300">{job.company}</p>
+                      <CardTitle className="text-blue-900 text-lg">{job.title}</CardTitle>
+                      <p className="text-blue-700">{job.company}</p>
                     </div>
                   </div>
-                  <Badge className="bg-blue-500/20 text-blue-400">
+                  <Badge className="bg-blue-500/20 text-blue-700 border-blue-300">
                     {job.type}
                   </Badge>
                 </div>
               </CardHeader>
               
               <CardContent className="space-y-4">
-                <div className="space-y-2 text-sm text-slate-300">
+                <div className="space-y-2 text-sm text-blue-700">
                   <div className="flex items-center gap-2">
                     <MapPin className="h-4 w-4" />
                     <span>{job.location}</span>
@@ -297,7 +297,7 @@ const Jobs = () => {
                   </div>
                 </div>
                 
-                <p className="text-slate-300 text-sm line-clamp-2">{job.description}</p>
+                <p className="text-blue-700 text-sm line-clamp-2">{job.description}</p>
                 
                 <div className="flex gap-2">
                   <Dialog>
@@ -305,14 +305,14 @@ const Jobs = () => {
                       <Button 
                         size="sm"
                         onClick={() => setSelectedJob(job)}
-                        className="flex-1 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
+                        className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
                       >
                         View Details
                       </Button>
                     </DialogTrigger>
-                    <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-slate-900 border-slate-700">
+                    <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-white border-blue-200 shadow-xl">
                       <DialogHeader>
-                        <DialogTitle className="text-white flex items-center gap-3">
+                        <DialogTitle className="text-blue-900 flex items-center gap-3">
                           <img 
                             src={job.logo} 
                             alt={job.company}
@@ -320,19 +320,19 @@ const Jobs = () => {
                           />
                           {job.title} at {job.company}
                         </DialogTitle>
-                        <DialogDescription className="text-slate-300">
+                        <DialogDescription className="text-blue-700">
                           {job.location} • {job.type} • {job.experience}
                         </DialogDescription>
                       </DialogHeader>
                       
-                      <div className="space-y-6 text-slate-300">
+                      <div className="space-y-6 text-blue-700">
                         <div>
-                          <h4 className="font-semibold text-white mb-2">Job Description</h4>
+                          <h4 className="font-semibold text-blue-900 mb-2">Job Description</h4>
                           <p>{job.description}</p>
                         </div>
                         
                         <div>
-                          <h4 className="font-semibold text-white mb-2">Requirements</h4>
+                          <h4 className="font-semibold text-blue-900 mb-2">Requirements</h4>
                           <ul className="list-disc list-inside space-y-1">
                             {job.requirements.map((req, index) => (
                               <li key={index}>{req}</li>
@@ -341,7 +341,7 @@ const Jobs = () => {
                         </div>
                         
                         <div>
-                          <h4 className="font-semibold text-white mb-2">Benefits</h4>
+                          <h4 className="font-semibold text-blue-900 mb-2">Benefits</h4>
                           <ul className="list-disc list-inside space-y-1">
                             {job.benefits.map((benefit, index) => (
                               <li key={index}>{benefit}</li>
@@ -350,49 +350,49 @@ const Jobs = () => {
                         </div>
                         
                         <div className="space-y-4">
-                          <h4 className="font-semibold text-white">Apply for this position:</h4>
+                          <h4 className="font-semibold text-blue-900">Apply for this position:</h4>
                           
                           {/* Online Application Form */}
                           <div className="space-y-4">
-                            <h5 className="text-white">Online Application</h5>
+                            <h5 className="text-blue-900">Online Application</h5>
                             <div className="grid md:grid-cols-2 gap-4">
                               <Input
                                 placeholder="Full Name *"
                                 value={applicationData.fullName}
                                 onChange={(e) => setApplicationData({...applicationData, fullName: e.target.value})}
-                                className="bg-slate-800 border-slate-600 text-white"
+                                className="bg-blue-50 border-blue-200 text-blue-900"
                               />
                               <Input
                                 type="email"
                                 placeholder="Email Address *"
                                 value={applicationData.email}
                                 onChange={(e) => setApplicationData({...applicationData, email: e.target.value})}
-                                className="bg-slate-800 border-slate-600 text-white"
+                                className="bg-blue-50 border-blue-200 text-blue-900"
                               />
                               <Input
                                 type="tel"
                                 placeholder="Phone Number *"
                                 value={applicationData.phone}
                                 onChange={(e) => setApplicationData({...applicationData, phone: e.target.value})}
-                                className="bg-slate-800 border-slate-600 text-white"
+                                className="bg-blue-50 border-blue-200 text-blue-900"
                               />
                               <Input
                                 placeholder="Years of Experience"
                                 value={applicationData.experience}
                                 onChange={(e) => setApplicationData({...applicationData, experience: e.target.value})}
-                                className="bg-slate-800 border-slate-600 text-white"
+                                className="bg-blue-50 border-blue-200 text-blue-900"
                               />
                             </div>
                             <Textarea
                               placeholder="Cover Letter (Optional)"
                               value={applicationData.coverLetter}
                               onChange={(e) => setApplicationData({...applicationData, coverLetter: e.target.value})}
-                              className="bg-slate-800 border-slate-600 text-white"
+                              className="bg-blue-50 border-blue-200 text-blue-900"
                               rows={4}
                             />
                             <Button 
                               onClick={() => handleApply("online")}
-                              className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
+                              className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
                             >
                               <Mail className="mr-2 h-4 w-4" />
                               Submit Application
@@ -401,19 +401,19 @@ const Jobs = () => {
                           
                           {/* USSD Application */}
                           {job.ussdCode && (
-                            <div className="border-t border-slate-700 pt-4">
-                              <h5 className="text-white mb-2">Quick USSD Application</h5>
-                              <p className="text-sm text-slate-400 mb-3">
+                            <div className="border-t border-blue-200 pt-4">
+                              <h5 className="text-blue-900 mb-2">Quick USSD Application</h5>
+                              <p className="text-sm text-blue-600 mb-3">
                                 Apply instantly using your mobile phone without internet
                               </p>
                               <div className="flex items-center gap-4">
-                                <code className="bg-slate-800 px-3 py-2 rounded text-green-400 font-mono">
+                                <code className="bg-blue-100 px-3 py-2 rounded text-blue-700 font-mono border border-blue-200">
                                   {job.ussdCode}
                                 </code>
                                 <Button 
                                   onClick={() => handleApply("ussd")}
                                   variant="outline"
-                                  className="border-orange-500 text-orange-400 hover:bg-orange-500/10"
+                                  className="border-blue-500 text-blue-600 hover:bg-blue-100"
                                 >
                                   <Phone className="mr-2 h-4 w-4" />
                                   Apply via USSD
@@ -434,7 +434,7 @@ const Jobs = () => {
                         handleApply("ussd");
                       }}
                       variant="outline"
-                      className="border-orange-500 text-orange-400 hover:bg-orange-500/10"
+                      className="border-blue-500 text-blue-600 hover:bg-blue-100"
                     >
                       <Phone className="h-4 w-4" />
                     </Button>

@@ -26,13 +26,13 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-emerald-600 via-emerald-700 to-emerald-800 border-b border-emerald-500/20 sticky top-0 z-50 backdrop-blur-md shadow-lg">
+    <nav className="bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 border-b border-blue-500/20 sticky top-0 z-50 backdrop-blur-md shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-md">
-                <BookOpen className="h-6 w-6 text-emerald-600" />
+                <BookOpen className="h-6 w-6 text-blue-600" />
               </div>
               <span className="text-xl font-bold text-white">TechLearn Kenya</span>
             </Link>
@@ -42,52 +42,52 @@ const Navigation = () => {
           <div className="hidden lg:flex items-center space-x-4 xl:space-x-6">
             {user ? (
               <>
-                <Link to="/dashboard" className="text-emerald-100 hover:text-white transition-colors px-3 py-2 rounded-md hover:bg-emerald-600/50">
+                <Link to="/dashboard" className="text-blue-100 hover:text-white transition-colors px-3 py-2 rounded-md hover:bg-blue-600/50">
                   Dashboard
                 </Link>
-                <Link to="/courses" className="text-emerald-100 hover:text-white transition-colors px-3 py-2 rounded-md hover:bg-emerald-600/50">
+                <Link to="/courses" className="text-blue-100 hover:text-white transition-colors px-3 py-2 rounded-md hover:bg-blue-600/50">
                   Courses
                 </Link>
-                <Link to="/jobs" className="text-emerald-100 hover:text-white transition-colors px-3 py-2 rounded-md hover:bg-emerald-600/50">
+                <Link to="/jobs" className="text-blue-100 hover:text-white transition-colors px-3 py-2 rounded-md hover:bg-blue-600/50">
                   Jobs
                 </Link>
-                <Link to="/mentorship" className="text-emerald-100 hover:text-white transition-colors px-3 py-2 rounded-md hover:bg-emerald-600/50">
+                <Link to="/mentorship" className="text-blue-100 hover:text-white transition-colors px-3 py-2 rounded-md hover:bg-blue-600/50">
                   Mentorship
                 </Link>
-                <Link to="/community" className="text-emerald-100 hover:text-white transition-colors px-3 py-2 rounded-md hover:bg-emerald-600/50">
+                <Link to="/community" className="text-blue-100 hover:text-white transition-colors px-3 py-2 rounded-md hover:bg-blue-600/50">
                   Community
                 </Link>
-                <Link to="/timetable" className="text-emerald-100 hover:text-white transition-colors px-3 py-2 rounded-md hover:bg-emerald-600/50">
+                <Link to="/timetable" className="text-blue-100 hover:text-white transition-colors px-3 py-2 rounded-md hover:bg-blue-600/50">
                   Timetable
                 </Link>
-                <Link to="/ai-chat" className="text-emerald-100 hover:text-white transition-colors px-3 py-2 rounded-md hover:bg-emerald-600/50">
+                <Link to="/ai-chat" className="text-blue-100 hover:text-white transition-colors px-3 py-2 rounded-md hover:bg-blue-600/50">
                   AI Chat
                 </Link>
-                <Link to="/certificates" className="text-emerald-100 hover:text-white transition-colors px-3 py-2 rounded-md hover:bg-emerald-600/50">
+                <Link to="/certificates" className="text-blue-100 hover:text-white transition-colors px-3 py-2 rounded-md hover:bg-blue-600/50">
                   Certificates
                 </Link>
-                <Link to="/pricing" className="text-emerald-100 hover:text-white transition-colors px-3 py-2 rounded-md hover:bg-emerald-600/50">
+                <Link to="/pricing" className="text-blue-100 hover:text-white transition-colors px-3 py-2 rounded-md hover:bg-blue-600/50">
                   Pricing
                 </Link>
                 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="h-8 w-8 rounded-full hover:bg-emerald-600/50">
+                    <Button variant="ghost" className="h-8 w-8 rounded-full hover:bg-blue-600/50">
                       <Avatar className="h-8 w-8">
                         <AvatarImage src={profile?.avatar_url || ''} />
-                        <AvatarFallback className="bg-emerald-500 text-white">
+                        <AvatarFallback className="bg-blue-500 text-white">
                           {profile?.full_name?.charAt(0) || user.email?.charAt(0) || 'U'}
                         </AvatarFallback>
                       </Avatar>
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="bg-white border border-emerald-200 shadow-lg">
-                    <DropdownMenuItem onClick={() => navigate('/profile')} className="hover:bg-emerald-50">
+                  <DropdownMenuContent align="end" className="bg-white border border-blue-200 shadow-lg">
+                    <DropdownMenuItem onClick={() => navigate('/profile')} className="hover:bg-blue-50">
                       <User className="mr-2 h-4 w-4" />
                       Profile
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={handleSignOut} className="hover:bg-emerald-50">
+                    <DropdownMenuItem onClick={handleSignOut} className="hover:bg-blue-50">
                       <LogOut className="mr-2 h-4 w-4" />
                       Sign out
                     </DropdownMenuItem>
@@ -95,7 +95,7 @@ const Navigation = () => {
                 </DropdownMenu>
               </>
             ) : (
-              <Button asChild className="bg-white text-emerald-600 hover:bg-emerald-50 shadow-md">
+              <Button asChild className="bg-white text-blue-600 hover:bg-blue-50 shadow-md">
                 <Link to="/auth">Get Started</Link>
               </Button>
             )}
@@ -105,7 +105,7 @@ const Navigation = () => {
           <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-emerald-100 hover:text-white p-2 rounded-md hover:bg-emerald-600/50"
+              className="text-blue-100 hover:text-white p-2 rounded-md hover:bg-blue-600/50"
             >
               <Menu className="h-6 w-6" />
             </button>
@@ -114,68 +114,68 @@ const Navigation = () => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden py-4 space-y-1 border-t border-emerald-500/20">
+          <div className="lg:hidden py-4 space-y-1 border-t border-blue-500/20">
             {user ? (
               <>
                 <Link
                   to="/dashboard"
-                  className="block px-3 py-2 text-emerald-100 hover:text-white transition-colors rounded-md hover:bg-emerald-600/50"
+                  className="block px-3 py-2 text-blue-100 hover:text-white transition-colors rounded-md hover:bg-blue-600/50"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Dashboard
                 </Link>
                 <Link
                   to="/courses"
-                  className="block px-3 py-2 text-emerald-100 hover:text-white transition-colors rounded-md hover:bg-emerald-600/50"
+                  className="block px-3 py-2 text-blue-100 hover:text-white transition-colors rounded-md hover:bg-blue-600/50"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Courses
                 </Link>
                 <Link
                   to="/jobs"
-                  className="block px-3 py-2 text-emerald-100 hover:text-white transition-colors rounded-md hover:bg-emerald-600/50"
+                  className="block px-3 py-2 text-blue-100 hover:text-white transition-colors rounded-md hover:bg-blue-600/50"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Jobs
                 </Link>
                 <Link
                   to="/mentorship"
-                  className="block px-3 py-2 text-emerald-100 hover:text-white transition-colors rounded-md hover:bg-emerald-600/50"
+                  className="block px-3 py-2 text-blue-100 hover:text-white transition-colors rounded-md hover:bg-blue-600/50"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Mentorship
                 </Link>
                 <Link
                   to="/community"
-                  className="block px-3 py-2 text-emerald-100 hover:text-white transition-colors rounded-md hover:bg-emerald-600/50"
+                  className="block px-3 py-2 text-blue-100 hover:text-white transition-colors rounded-md hover:bg-blue-600/50"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Community
                 </Link>
                 <Link
                   to="/timetable"
-                  className="block px-3 py-2 text-emerald-100 hover:text-white transition-colors rounded-md hover:bg-emerald-600/50"
+                  className="block px-3 py-2 text-blue-100 hover:text-white transition-colors rounded-md hover:bg-blue-600/50"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Timetable
                 </Link>
                 <Link
                   to="/ai-chat"
-                  className="block px-3 py-2 text-emerald-100 hover:text-white transition-colors rounded-md hover:bg-emerald-600/50"
+                  className="block px-3 py-2 text-blue-100 hover:text-white transition-colors rounded-md hover:bg-blue-600/50"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   AI Chat
                 </Link>
                 <Link
                   to="/certificates"
-                  className="block px-3 py-2 text-emerald-100 hover:text-white transition-colors rounded-md hover:bg-emerald-600/50"
+                  className="block px-3 py-2 text-blue-100 hover:text-white transition-colors rounded-md hover:bg-blue-600/50"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Certificates
                 </Link>
                 <Link
                   to="/profile"
-                  className="block px-3 py-2 text-emerald-100 hover:text-white transition-colors rounded-md hover:bg-emerald-600/50"
+                  className="block px-3 py-2 text-blue-100 hover:text-white transition-colors rounded-md hover:bg-blue-600/50"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Profile
@@ -185,7 +185,7 @@ const Navigation = () => {
                     handleSignOut();
                     setIsMobileMenuOpen(false);
                   }}
-                  className="block w-full text-left px-3 py-2 text-emerald-100 hover:text-white transition-colors rounded-md hover:bg-emerald-600/50"
+                  className="block w-full text-left px-3 py-2 text-blue-100 hover:text-white transition-colors rounded-md hover:bg-blue-600/50"
                 >
                   Sign Out
                 </button>
@@ -193,7 +193,7 @@ const Navigation = () => {
             ) : (
               <Link
                 to="/auth"
-                className="block px-3 py-2 text-emerald-100 hover:text-white transition-colors rounded-md hover:bg-emerald-600/50"
+                className="block px-3 py-2 text-blue-100 hover:text-white transition-colors rounded-md hover:bg-blue-600/50"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Get Started
