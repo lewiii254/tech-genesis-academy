@@ -1,8 +1,9 @@
 
 import { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Star, Calendar } from "lucide-react";
+import { BookOpen, Star, Calendar, UsersRound } from "lucide-react";
 import { useProfile, Profile } from "@/hooks/useProfile";
 import MentorshipCard from "@/components/MentorshipCard";
 import JobPlacementCard from "@/components/JobPlacementCard";
@@ -85,7 +86,7 @@ const Dashboard = () => {
           <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200 shadow-md hover:shadow-lg transition-shadow">
             <CardContent className="p-6 text-center">
               <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="h-6 w-6 text-white" />
+                <UsersRound className="h-6 w-6 text-white" />
               </div>
               <h3 className="text-lg font-semibold text-slate-800 mb-2">Study Groups</h3>
               <p className="text-slate-600 text-sm mb-4">Join collaborative learning groups</p>

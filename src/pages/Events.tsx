@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -297,10 +296,10 @@ const Events = () => {
                 <div className="flex justify-between items-start gap-2">
                   <CardTitle className="text-slate-800 text-lg leading-tight">{event.title}</CardTitle>
                   <div className="flex flex-col gap-1">
-                    <Badge className={getTypeColor(event.type)} size="sm">
+                    <Badge className={getTypeColor(event.type)}>
                       {event.type}
                     </Badge>
-                    <Badge className={getLevelColor(event.level)} size="sm">
+                    <Badge className={getLevelColor(event.level)}>
                       {event.level}
                     </Badge>
                   </div>
