@@ -142,10 +142,10 @@ const StudyGroups = () => {
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case "Beginner": return "bg-green-100 text-green-700 border-green-200";
-      case "Intermediate": return "bg-yellow-100 text-yellow-700 border-yellow-200";
-      case "Advanced": return "bg-red-100 text-red-700 border-red-200";
-      default: return "bg-slate-100 text-slate-700 border-slate-200";
+      case "Beginner": return "bg-green-100 text-green-800 border-green-200";
+      case "Intermediate": return "bg-yellow-100 text-yellow-800 border-yellow-200";
+      case "Advanced": return "bg-red-100 text-red-800 border-red-200";
+      default: return "bg-slate-100 text-slate-800 border-slate-200";
     }
   };
 
@@ -154,19 +154,19 @@ const StudyGroups = () => {
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold text-slate-800">Study Groups</h1>
-          <p className="text-xl text-slate-600">Join collaborative learning groups and accelerate your tech journey</p>
+          <h1 className="text-4xl font-bold text-slate-900">Study Groups</h1>
+          <p className="text-xl text-slate-700">Join collaborative learning groups and accelerate your tech journey</p>
         </div>
 
         {/* Search and Filters */}
         <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
           <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-500 h-4 w-4" />
             <Input
               placeholder="Search groups, subjects, or tags..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 bg-white border-slate-200"
+              className="pl-10 bg-white border-slate-300 text-slate-900 placeholder:text-slate-500"
             />
           </div>
           
@@ -174,7 +174,7 @@ const StudyGroups = () => {
             <select
               value={selectedDifficulty}
               onChange={(e) => setSelectedDifficulty(e.target.value)}
-              className="bg-white border border-slate-200 rounded-md px-3 py-2 text-slate-600"
+              className="bg-white border border-slate-300 rounded-md px-3 py-2 text-slate-900"
             >
               <option value="All">All Levels</option>
               <option value="Beginner">Beginner</option>
@@ -184,14 +184,14 @@ const StudyGroups = () => {
 
             <Dialog>
               <DialogTrigger asChild>
-                <Button className="bg-blue-600 hover:bg-blue-700">
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white">
                   <Plus className="mr-2 h-4 w-4" />
                   Create Group
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-2xl bg-white">
                 <DialogHeader>
-                  <DialogTitle className="text-slate-800">Create New Study Group</DialogTitle>
+                  <DialogTitle className="text-slate-900">Create New Study Group</DialogTitle>
                 </DialogHeader>
                 
                 <div className="space-y-4">
@@ -200,25 +200,25 @@ const StudyGroups = () => {
                       placeholder="Group Name *"
                       value={newGroup.name}
                       onChange={(e) => setNewGroup({...newGroup, name: e.target.value})}
-                      className="bg-slate-50 border-slate-200"
+                      className="bg-slate-50 border-slate-300 text-slate-900 placeholder:text-slate-600"
                     />
                     <Input
                       placeholder="Subject/Topic *"
                       value={newGroup.subject}
                       onChange={(e) => setNewGroup({...newGroup, subject: e.target.value})}
-                      className="bg-slate-50 border-slate-200"
+                      className="bg-slate-50 border-slate-300 text-slate-900 placeholder:text-slate-600"
                     />
                     <Input
                       placeholder="Max Members"
                       type="number"
                       value={newGroup.maxMembers}
                       onChange={(e) => setNewGroup({...newGroup, maxMembers: e.target.value})}
-                      className="bg-slate-50 border-slate-200"
+                      className="bg-slate-50 border-slate-300 text-slate-900 placeholder:text-slate-600"
                     />
                     <select
                       value={newGroup.difficulty}
                       onChange={(e) => setNewGroup({...newGroup, difficulty: e.target.value})}
-                      className="bg-slate-50 border border-slate-200 rounded-md px-3 py-2"
+                      className="bg-slate-50 border border-slate-300 rounded-md px-3 py-2 text-slate-900"
                     >
                       <option value="Beginner">Beginner</option>
                       <option value="Intermediate">Intermediate</option>
@@ -228,13 +228,13 @@ const StudyGroups = () => {
                       placeholder="Meeting Time"
                       value={newGroup.meetingTime}
                       onChange={(e) => setNewGroup({...newGroup, meetingTime: e.target.value})}
-                      className="bg-slate-50 border-slate-200"
+                      className="bg-slate-50 border-slate-300 text-slate-900 placeholder:text-slate-600"
                     />
                     <Input
                       placeholder="Location/Online"
                       value={newGroup.location}
                       onChange={(e) => setNewGroup({...newGroup, location: e.target.value})}
-                      className="bg-slate-50 border-slate-200"
+                      className="bg-slate-50 border-slate-300 text-slate-900 placeholder:text-slate-600"
                     />
                   </div>
                   
@@ -242,7 +242,7 @@ const StudyGroups = () => {
                     placeholder="Group Description *"
                     value={newGroup.description}
                     onChange={(e) => setNewGroup({...newGroup, description: e.target.value})}
-                    className="bg-slate-50 border-slate-200"
+                    className="bg-slate-50 border-slate-300 text-slate-900 placeholder:text-slate-600"
                     rows={3}
                   />
                   
@@ -250,10 +250,10 @@ const StudyGroups = () => {
                     placeholder="Tags (comma separated)"
                     value={newGroup.tags}
                     onChange={(e) => setNewGroup({...newGroup, tags: e.target.value})}
-                    className="bg-slate-50 border-slate-200"
+                    className="bg-slate-50 border-slate-300 text-slate-900 placeholder:text-slate-600"
                   />
                   
-                  <Button onClick={handleCreateGroup} className="w-full bg-blue-600 hover:bg-blue-700">
+                  <Button onClick={handleCreateGroup} className="w-full bg-blue-600 hover:bg-blue-700 text-white">
                     Create Study Group
                   </Button>
                 </div>
@@ -265,12 +265,12 @@ const StudyGroups = () => {
         {/* Study Groups Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredGroups.map((group) => (
-            <Card key={group.id} className="bg-white border-slate-200 hover:shadow-lg transition-shadow">
+            <Card key={group.id} className="bg-white border-slate-300 hover:shadow-lg transition-shadow">
               <CardHeader>
                 <div className="flex justify-between items-start">
                   <div>
-                    <CardTitle className="text-slate-800">{group.name}</CardTitle>
-                    <p className="text-blue-600 font-medium">{group.subject}</p>
+                    <CardTitle className="text-slate-900">{group.name}</CardTitle>
+                    <p className="text-blue-700 font-medium">{group.subject}</p>
                   </div>
                   <Badge className={getDifficultyColor(group.difficulty)}>
                     {group.difficulty}
@@ -279,41 +279,41 @@ const StudyGroups = () => {
               </CardHeader>
               
               <CardContent className="space-y-4">
-                <p className="text-slate-600 text-sm">{group.description}</p>
+                <p className="text-slate-700 text-sm">{group.description}</p>
                 
-                <div className="space-y-2 text-sm text-slate-600">
+                <div className="space-y-2 text-sm text-slate-700">
                   <div className="flex items-center gap-2">
-                    <Users className="h-4 w-4" />
-                    <span>{group.members}/{group.maxMembers} members</span>
+                    <Users className="h-4 w-4 text-slate-600" />
+                    <span className="text-slate-800">{group.members}/{group.maxMembers} members</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Clock className="h-4 w-4" />
-                    <span>{group.meetingTime}</span>
+                    <Clock className="h-4 w-4 text-slate-600" />
+                    <span className="text-slate-800">{group.meetingTime}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <MapPin className="h-4 w-4" />
-                    <span>{group.location}</span>
+                    <MapPin className="h-4 w-4 text-slate-600" />
+                    <span className="text-slate-800">{group.location}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4" />
-                    <span>Next: {group.nextMeeting}</span>
+                    <Calendar className="h-4 w-4 text-slate-600" />
+                    <span className="text-slate-800">Next: {group.nextMeeting}</span>
                   </div>
                 </div>
                 
                 <div className="flex flex-wrap gap-1">
                   {group.tags.map((tag, index) => (
-                    <Badge key={index} variant="outline" className="text-xs">
+                    <Badge key={index} variant="outline" className="text-xs border-slate-400 text-slate-800">
                       {tag}
                     </Badge>
                   ))}
                 </div>
                 
                 <div className="flex justify-between items-center pt-2">
-                  <span className="text-sm text-slate-500">by {group.organizer}</span>
+                  <span className="text-sm text-slate-600">by {group.organizer}</span>
                   <Button 
                     size="sm"
                     onClick={() => handleJoinGroup(group.name)}
-                    className="bg-blue-600 hover:bg-blue-700"
+                    className="bg-blue-600 hover:bg-blue-700 text-white"
                     disabled={group.members >= group.maxMembers}
                   >
                     {group.members >= group.maxMembers ? "Full" : "Join Group"}
@@ -326,9 +326,9 @@ const StudyGroups = () => {
 
         {filteredGroups.length === 0 && (
           <div className="text-center py-12">
-            <BookOpen className="h-16 w-16 text-slate-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-slate-600 mb-2">No study groups found</h3>
-            <p className="text-slate-500">Try adjusting your search or create a new group</p>
+            <BookOpen className="h-16 w-16 text-slate-500 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-slate-800 mb-2">No study groups found</h3>
+            <p className="text-slate-600">Try adjusting your search or create a new group</p>
           </div>
         )}
       </div>

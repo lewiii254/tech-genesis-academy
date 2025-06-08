@@ -180,20 +180,20 @@ const Events = () => {
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case "Workshop": return "bg-blue-100 text-blue-700 border-blue-200";
-      case "Webinar": return "bg-green-100 text-green-700 border-green-200";
-      case "Bootcamp": return "bg-purple-100 text-purple-700 border-purple-200";
-      case "Networking": return "bg-orange-100 text-orange-700 border-orange-200";
-      default: return "bg-slate-100 text-slate-700 border-slate-200";
+      case "Workshop": return "bg-blue-100 text-blue-800 border-blue-200";
+      case "Webinar": return "bg-green-100 text-green-800 border-green-200";
+      case "Bootcamp": return "bg-purple-100 text-purple-800 border-purple-200";
+      case "Networking": return "bg-orange-100 text-orange-800 border-orange-200";
+      default: return "bg-slate-100 text-slate-800 border-slate-200";
     }
   };
 
   const getLevelColor = (level: string) => {
     switch (level) {
-      case "Beginner": return "bg-green-100 text-green-700 border-green-200";
-      case "Intermediate": return "bg-yellow-100 text-yellow-700 border-yellow-200";
-      case "Advanced": return "bg-red-100 text-red-700 border-red-200";
-      default: return "bg-slate-100 text-slate-700 border-slate-200";
+      case "Beginner": return "bg-green-100 text-green-800 border-green-200";
+      case "Intermediate": return "bg-yellow-100 text-yellow-800 border-yellow-200";
+      case "Advanced": return "bg-red-100 text-red-800 border-red-200";
+      default: return "bg-slate-100 text-slate-800 border-slate-200";
     }
   };
 
@@ -202,16 +202,16 @@ const Events = () => {
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold text-slate-800">Live Events & Workshops</h1>
-          <p className="text-xl text-slate-600">Join live learning sessions with industry experts</p>
+          <h1 className="text-4xl font-bold text-slate-900">Live Events & Workshops</h1>
+          <p className="text-xl text-slate-700">Join live learning sessions with industry experts</p>
           
           {/* Live Events Alert */}
           <div className="bg-red-50 border border-red-200 rounded-lg p-4 max-w-2xl mx-auto">
-            <div className="flex items-center gap-2 text-red-700">
+            <div className="flex items-center gap-2 text-red-800">
               <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
               <span className="font-medium">Live Now:</span>
               <span>Mobile App Monetization Strategies</span>
-              <Button size="sm" className="ml-auto bg-red-600 hover:bg-red-700">
+              <Button size="sm" className="ml-auto bg-red-600 hover:bg-red-700 text-white">
                 Join Live
               </Button>
             </div>
@@ -222,16 +222,16 @@ const Events = () => {
         <div className="space-y-4">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-500 h-4 w-4" />
               <Input
                 placeholder="Search events, topics, or instructors..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-white border-slate-200"
+                className="pl-10 bg-white border-slate-300 text-slate-900 placeholder:text-slate-500"
               />
             </div>
             
-            <Button className="bg-blue-600 hover:bg-blue-700">
+            <Button className="bg-blue-600 hover:bg-blue-700 text-white">
               <Bell className="mr-2 h-4 w-4" />
               Set Alerts
             </Button>
@@ -241,7 +241,7 @@ const Events = () => {
             <select
               value={selectedType}
               onChange={(e) => setSelectedType(e.target.value)}
-              className="bg-white border border-slate-200 rounded-md px-3 py-2 text-slate-600"
+              className="bg-white border border-slate-300 rounded-md px-3 py-2 text-slate-900"
             >
               <option value="All">All Types</option>
               <option value="Workshop">Workshop</option>
@@ -253,7 +253,7 @@ const Events = () => {
             <select
               value={selectedLevel}
               onChange={(e) => setSelectedLevel(e.target.value)}
-              className="bg-white border border-slate-200 rounded-md px-3 py-2 text-slate-600"
+              className="bg-white border border-slate-300 rounded-md px-3 py-2 text-slate-900"
             >
               <option value="All">All Levels</option>
               <option value="Beginner">Beginner</option>
@@ -261,12 +261,12 @@ const Events = () => {
               <option value="Advanced">Advanced</option>
             </select>
 
-            <label className="flex items-center gap-2 text-slate-600">
+            <label className="flex items-center gap-2 text-slate-800">
               <input
                 type="checkbox"
                 checked={showOnlyFree}
                 onChange={(e) => setShowOnlyFree(e.target.checked)}
-                className="rounded border-slate-300"
+                className="rounded border-slate-400"
               />
               Free events only
             </label>
@@ -276,7 +276,7 @@ const Events = () => {
         {/* Events Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredEvents.map((event) => (
-            <Card key={event.id} className="bg-white border-slate-200 overflow-hidden hover:shadow-lg transition-shadow">
+            <Card key={event.id} className="bg-white border-slate-300 overflow-hidden hover:shadow-lg transition-shadow">
               <div className="relative">
                 <img src={event.image} alt={event.title} className="w-full h-48 object-cover" />
                 {event.isLive && (
@@ -294,7 +294,7 @@ const Events = () => {
               
               <CardHeader>
                 <div className="flex justify-between items-start gap-2">
-                  <CardTitle className="text-slate-800 text-lg leading-tight">{event.title}</CardTitle>
+                  <CardTitle className="text-slate-900 text-lg leading-tight">{event.title}</CardTitle>
                   <div className="flex flex-col gap-1">
                     <Badge className={getTypeColor(event.type)}>
                       {event.type}
@@ -307,39 +307,39 @@ const Events = () => {
               </CardHeader>
               
               <CardContent className="space-y-4">
-                <p className="text-slate-600 text-sm line-clamp-2">{event.description}</p>
+                <p className="text-slate-700 text-sm line-clamp-2">{event.description}</p>
                 
-                <div className="space-y-2 text-sm text-slate-600">
+                <div className="space-y-2 text-sm text-slate-700">
                   <div className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4" />
-                    <span>{new Date(event.date).toLocaleDateString()} at {event.time}</span>
+                    <Calendar className="h-4 w-4 text-slate-600" />
+                    <span className="text-slate-800">{new Date(event.date).toLocaleDateString()} at {event.time}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Clock className="h-4 w-4" />
-                    <span>{event.duration}</span>
+                    <Clock className="h-4 w-4 text-slate-600" />
+                    <span className="text-slate-800">{event.duration}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <MapPin className="h-4 w-4" />
-                    <span>{event.location}</span>
+                    <MapPin className="h-4 w-4 text-slate-600" />
+                    <span className="text-slate-800">{event.location}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Users className="h-4 w-4" />
-                    <span>{event.registered}/{event.capacity} registered</span>
+                    <Users className="h-4 w-4 text-slate-600" />
+                    <span className="text-slate-800">{event.registered}/{event.capacity} registered</span>
                   </div>
                 </div>
                 
                 <div className="flex flex-wrap gap-1">
                   {event.tags.slice(0, 3).map((tag, index) => (
-                    <Badge key={index} variant="outline" className="text-xs">
+                    <Badge key={index} variant="outline" className="text-xs border-slate-400 text-slate-800">
                       {tag}
                     </Badge>
                   ))}
                 </div>
                 
-                <div className="flex justify-between items-center pt-2 border-t border-slate-100">
+                <div className="flex justify-between items-center pt-2 border-t border-slate-200">
                   <div>
-                    <p className="text-slate-500 text-sm">by {event.instructor}</p>
-                    <p className="text-slate-800 font-bold">
+                    <p className="text-slate-600 text-sm">by {event.instructor}</p>
+                    <p className="text-slate-900 font-bold">
                       {event.price === 0 ? "FREE" : `KES ${event.price.toLocaleString()}`}
                     </p>
                   </div>
@@ -348,7 +348,7 @@ const Events = () => {
                     <Button 
                       size="sm"
                       onClick={() => handleJoinLive(event.title)}
-                      className="bg-red-600 hover:bg-red-700"
+                      className="bg-red-600 hover:bg-red-700 text-white"
                     >
                       <Video className="mr-1 h-3 w-3" />
                       Join Live
@@ -357,7 +357,7 @@ const Events = () => {
                     <Button 
                       size="sm"
                       onClick={() => handleRegister(event.title, event.price)}
-                      className="bg-blue-600 hover:bg-blue-700"
+                      className="bg-blue-600 hover:bg-blue-700 text-white"
                       disabled={event.registered >= event.capacity}
                     >
                       {event.registered >= event.capacity ? "Full" : "Register"}
@@ -371,9 +371,9 @@ const Events = () => {
 
         {filteredEvents.length === 0 && (
           <div className="text-center py-12">
-            <Calendar className="h-16 w-16 text-slate-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-slate-600 mb-2">No events found</h3>
-            <p className="text-slate-500">Try adjusting your filters or check back later for new events</p>
+            <Calendar className="h-16 w-16 text-slate-500 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-slate-800 mb-2">No events found</h3>
+            <p className="text-slate-600">Try adjusting your filters or check back later for new events</p>
           </div>
         )}
       </div>

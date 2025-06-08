@@ -50,16 +50,16 @@ const JobPlacementCard = () => {
   };
 
   return (
-    <Card className="bg-white/10 backdrop-blur-md border-white/20">
+    <Card className="bg-white border-slate-200 shadow-md">
       <CardHeader>
-        <CardTitle className="text-white flex items-center gap-2">
-          <Briefcase className="h-5 w-5 text-green-400" />
+        <CardTitle className="text-slate-900 flex items-center gap-2">
+          <Briefcase className="h-5 w-5 text-green-600" />
           Job Placement Assistance
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         {jobOpportunities.map((job) => (
-          <div key={job.id} className="border border-white/10 rounded-lg p-4 space-y-3">
+          <div key={job.id} className="border border-slate-200 rounded-lg p-4 space-y-3 bg-slate-50">
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-3">
                 <img 
@@ -68,34 +68,34 @@ const JobPlacementCard = () => {
                   className="w-10 h-10 rounded-lg"
                 />
                 <div>
-                  <h4 className="text-white font-medium">{job.title}</h4>
-                  <p className="text-slate-300 text-sm">{job.company}</p>
+                  <h4 className="text-slate-900 font-medium">{job.title}</h4>
+                  <p className="text-slate-700 text-sm">{job.company}</p>
                 </div>
               </div>
-              <Badge className="bg-blue-500/20 text-blue-400">
+              <Badge className="bg-blue-100 text-blue-800 border-blue-200">
                 {job.type}
               </Badge>
             </div>
             
-            <div className="space-y-2 text-sm text-slate-300">
+            <div className="space-y-2 text-sm text-slate-700">
               <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4" />
-                <span>{job.location}</span>
+                <MapPin className="h-4 w-4 text-slate-600" />
+                <span className="text-slate-800">{job.location}</span>
               </div>
               <div className="flex items-center gap-2">
-                <DollarSign className="h-4 w-4" />
-                <span>{job.salary}</span>
+                <DollarSign className="h-4 w-4 text-slate-600" />
+                <span className="text-slate-800">{job.salary}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4" />
-                <span>Posted {job.postedAt}</span>
+                <Clock className="h-4 w-4 text-slate-600" />
+                <span className="text-slate-800">Posted {job.postedAt}</span>
               </div>
             </div>
             
             <Button 
               size="sm"
               onClick={() => handleApply(job.title, job.company)}
-              className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
+              className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white"
             >
               Apply with TechLearn
             </Button>
