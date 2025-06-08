@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -25,6 +24,9 @@ import Pricing from "./pages/Pricing";
 import Jobs from "./pages/Jobs";
 import Mentorship from "./pages/Mentorship";
 import NotFound from "./pages/NotFound";
+import StudyGroups from "./pages/StudyGroups";
+import Analytics from "./pages/Analytics";
+import Events from "./pages/Events";
 
 const queryClient = new QueryClient();
 
@@ -59,6 +61,21 @@ const App = () => (
               <Route path="/community" element={
                 <ProtectedRoute>
                   <Community />
+                </ProtectedRoute>
+              } />
+              <Route path="/study-groups" element={
+                <ProtectedRoute>
+                  <StudyGroups />
+                </ProtectedRoute>
+              } />
+              <Route path="/analytics" element={
+                <ProtectedRoute>
+                  <Analytics />
+                </ProtectedRoute>
+              } />
+              <Route path="/events" element={
+                <ProtectedRoute>
+                  <Events />
                 </ProtectedRoute>
               } />
               <Route path="/jobs" element={
