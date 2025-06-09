@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -81,12 +80,12 @@ const ContentModeration = () => {
   };
 
   const getStatusBadge = (status: string) => {
-    const variants = {
+    const variants: Record<string, "default" | "destructive" | "outline" | "secondary"> = {
       "pending": "secondary",
       "approved": "default",
       "rejected": "destructive"
     };
-    return <Badge variant={variants[status as keyof typeof variants] || "secondary"}>{status}</Badge>;
+    return <Badge variant={variants[status] || "secondary"}>{status}</Badge>;
   };
 
   const getPriorityColor = (reason: string) => {

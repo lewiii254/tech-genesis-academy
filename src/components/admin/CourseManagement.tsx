@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -109,13 +108,13 @@ const CourseManagement = () => {
   };
 
   const getStatusBadge = (status: string) => {
-    const variants = {
+    const variants: Record<string, "default" | "destructive" | "secondary" | "outline"> = {
       "Published": "default",
       "Draft": "secondary",
       "Pending": "outline",
       "Archived": "destructive"
     };
-    return <Badge variant={variants[status as keyof typeof variants] || "default"}>{status}</Badge>;
+    return <Badge variant={variants[status] || "default"}>{status}</Badge>;
   };
 
   const getDifficultyColor = (difficulty: string) => {

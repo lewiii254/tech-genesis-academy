@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -77,12 +76,12 @@ const UserManagement = () => {
   };
 
   const getStatusBadge = (status: string) => {
-    const variants = {
+    const variants: Record<string, "default" | "destructive" | "secondary"> = {
       "Active": "default",
       "Suspended": "destructive",
       "Pending": "secondary"
     };
-    return <Badge variant={variants[status as keyof typeof variants] || "default"}>{status}</Badge>;
+    return <Badge variant={variants[status] || "default"}>{status}</Badge>;
   };
 
   const getRoleBadge = (role: string) => {
