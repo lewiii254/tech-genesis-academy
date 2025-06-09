@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -86,13 +87,13 @@ const UserManagement = () => {
 
   const getRoleBadge = (role: string) => {
     const colors = {
-      "Student": "bg-blue-100 text-blue-800",
-      "Instructor": "bg-green-100 text-green-800",
-      "Moderator": "bg-purple-100 text-purple-800",
-      "Admin": "bg-red-100 text-red-800"
+      "Student": "bg-blue-100 text-blue-800 border-blue-200",
+      "Instructor": "bg-green-100 text-green-800 border-green-200",
+      "Moderator": "bg-purple-100 text-purple-800 border-purple-200",
+      "Admin": "bg-red-100 text-red-800 border-red-200"
     };
     return (
-      <Badge className={colors[role as keyof typeof colors] || "bg-gray-100 text-gray-800"}>
+      <Badge className={`${colors[role as keyof typeof colors] || "bg-gray-100 text-gray-800 border-gray-200"} font-medium`}>
         {role}
       </Badge>
     );
@@ -104,7 +105,7 @@ const UserManagement = () => {
       <div className="flex flex-col sm:flex-row gap-4 justify-between">
         <div className="flex gap-4">
           <div className="relative flex-1 max-w-sm">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
             <Input
               placeholder="Search users..."
               value={searchTerm}
@@ -113,7 +114,7 @@ const UserManagement = () => {
             />
           </div>
           <select 
-            className="px-3 py-2 border rounded-md"
+            className="px-3 py-2 border rounded-md bg-background text-foreground"
             value={selectedFilter}
             onChange={(e) => setSelectedFilter(e.target.value)}
           >
@@ -136,8 +137,8 @@ const UserManagement = () => {
             <div className="flex items-center gap-3">
               <UserCheck className="h-8 w-8 text-green-600" />
               <div>
-                <p className="text-sm text-gray-600">Total Users</p>
-                <p className="text-2xl font-bold">2,847</p>
+                <p className="text-sm text-muted-foreground">Total Users</p>
+                <p className="text-2xl font-bold text-foreground">2,847</p>
               </div>
             </div>
           </CardContent>
@@ -147,8 +148,8 @@ const UserManagement = () => {
             <div className="flex items-center gap-3">
               <UserCheck className="h-8 w-8 text-blue-600" />
               <div>
-                <p className="text-sm text-gray-600">Active Users</p>
-                <p className="text-2xl font-bold">2,641</p>
+                <p className="text-sm text-muted-foreground">Active Users</p>
+                <p className="text-2xl font-bold text-foreground">2,641</p>
               </div>
             </div>
           </CardContent>
@@ -158,8 +159,8 @@ const UserManagement = () => {
             <div className="flex items-center gap-3">
               <UserX className="h-8 w-8 text-red-600" />
               <div>
-                <p className="text-sm text-gray-600">Suspended</p>
-                <p className="text-2xl font-bold">12</p>
+                <p className="text-sm text-muted-foreground">Suspended</p>
+                <p className="text-2xl font-bold text-foreground">12</p>
               </div>
             </div>
           </CardContent>
@@ -169,8 +170,8 @@ const UserManagement = () => {
             <div className="flex items-center gap-3">
               <Calendar className="h-8 w-8 text-purple-600" />
               <div>
-                <p className="text-sm text-gray-600">New Today</p>
-                <p className="text-2xl font-bold">23</p>
+                <p className="text-sm text-muted-foreground">New Today</p>
+                <p className="text-2xl font-bold text-foreground">23</p>
               </div>
             </div>
           </CardContent>
@@ -180,33 +181,35 @@ const UserManagement = () => {
       {/* Users Table */}
       <Card>
         <CardHeader>
-          <CardTitle>User Management</CardTitle>
+          <CardTitle className="text-foreground">User Management</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="border-b">
-                  <th className="text-left p-4">User</th>
-                  <th className="text-left p-4">Role</th>
-                  <th className="text-left p-4">Status</th>
-                  <th className="text-left p-4">Courses</th>
-                  <th className="text-left p-4">Join Date</th>
-                  <th className="text-left p-4">Last Login</th>
-                  <th className="text-left p-4">Actions</th>
+                  <th className="text-left p-4 text-foreground font-medium">User</th>
+                  <th className="text-left p-4 text-foreground font-medium">Role</th>
+                  <th className="text-left p-4 text-foreground font-medium">Status</th>
+                  <th className="text-left p-4 text-foreground font-medium">Courses</th>
+                  <th className="text-left p-4 text-foreground font-medium">Join Date</th>
+                  <th className="text-left p-4 text-foreground font-medium">Last Login</th>
+                  <th className="text-left p-4 text-foreground font-medium">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {users.map((user) => (
-                  <tr key={user.id} className="border-b hover:bg-gray-50">
+                  <tr key={user.id} className="border-b hover:bg-muted/50">
                     <td className="p-4">
                       <div className="flex items-center gap-3">
                         <Avatar>
-                          <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                          <AvatarFallback className="bg-primary text-primary-foreground">
+                            {user.name.split(' ').map(n => n[0]).join('')}
+                          </AvatarFallback>
                         </Avatar>
                         <div>
-                          <p className="font-medium">{user.name}</p>
-                          <p className="text-sm text-gray-600">{user.email}</p>
+                          <p className="font-medium text-foreground">{user.name}</p>
+                          <p className="text-sm text-muted-foreground">{user.email}</p>
                         </div>
                       </div>
                     </td>
@@ -217,13 +220,13 @@ const UserManagement = () => {
                       {getStatusBadge(user.status)}
                     </td>
                     <td className="p-4">
-                      <span className="font-medium">{user.coursesEnrolled}</span>
+                      <span className="font-medium text-foreground">{user.coursesEnrolled}</span>
                     </td>
                     <td className="p-4">
-                      <span className="text-sm">{user.joinDate}</span>
+                      <span className="text-sm text-foreground">{user.joinDate}</span>
                     </td>
                     <td className="p-4">
-                      <span className="text-sm text-gray-600">{user.lastLogin}</span>
+                      <span className="text-sm text-muted-foreground">{user.lastLogin}</span>
                     </td>
                     <td className="p-4">
                       <DropdownMenu>

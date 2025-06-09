@@ -73,13 +73,13 @@ const AdminDashboard = () => {
           return (
             <Card key={index} className="hover:shadow-lg transition-shadow">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-gray-600">
+                <CardTitle className="text-sm font-medium text-muted-foreground">
                   {stat.title}
                 </CardTitle>
                 <Icon className={`h-5 w-5 ${stat.color}`} />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
+                <div className="text-2xl font-bold text-foreground">{stat.value}</div>
                 <div className="flex items-center text-sm mt-1">
                   {stat.trend === "up" ? (
                     <TrendingUp className="h-4 w-4 text-green-500 mr-1" />
@@ -89,7 +89,7 @@ const AdminDashboard = () => {
                   <span className={stat.trend === "up" ? "text-green-600" : "text-red-600"}>
                     {stat.change}
                   </span>
-                  <span className="text-gray-500 ml-1">from last month</span>
+                  <span className="text-muted-foreground ml-1">from last month</span>
                 </div>
               </CardContent>
             </Card>
@@ -101,7 +101,7 @@ const AdminDashboard = () => {
         {/* Recent Activities */}
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-foreground">
               <Eye className="h-5 w-5" />
               Recent Activities
             </CardTitle>
@@ -109,12 +109,12 @@ const AdminDashboard = () => {
           <CardContent>
             <div className="space-y-4">
               {recentActivities.map((activity, index) => (
-                <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div key={index} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
                   <div>
-                    <p className="font-medium text-gray-900">{activity.action}</p>
-                    <p className="text-sm text-gray-600">by {activity.user}</p>
+                    <p className="font-medium text-foreground">{activity.action}</p>
+                    <p className="text-sm text-muted-foreground">by {activity.user}</p>
                   </div>
-                  <span className="text-xs text-gray-500">{activity.time}</span>
+                  <span className="text-xs text-muted-foreground">{activity.time}</span>
                 </div>
               ))}
             </div>
@@ -127,7 +127,7 @@ const AdminDashboard = () => {
         {/* Pending Actions */}
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-foreground">
               <AlertTriangle className="h-5 w-5" />
               Pending Actions
             </CardTitle>
@@ -142,8 +142,8 @@ const AdminDashboard = () => {
                       action.priority === 'medium' ? 'bg-yellow-500' : 'bg-green-500'
                     }`} />
                     <div>
-                      <p className="font-medium">{action.type}</p>
-                      <p className="text-sm text-gray-600">{action.count} pending</p>
+                      <p className="font-medium text-foreground">{action.type}</p>
+                      <p className="text-sm text-muted-foreground">{action.count} pending</p>
                     </div>
                   </div>
                   <Button size="sm" variant="outline">
@@ -159,28 +159,28 @@ const AdminDashboard = () => {
       {/* System Health */}
       <Card>
         <CardHeader>
-          <CardTitle>System Health</CardTitle>
+          <CardTitle className="text-foreground">System Health</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="space-y-2">
               <div className="flex justify-between">
-                <span className="text-sm font-medium">Server Performance</span>
-                <span className="text-sm text-gray-600">92%</span>
+                <span className="text-sm font-medium text-foreground">Server Performance</span>
+                <span className="text-sm text-muted-foreground">92%</span>
               </div>
               <Progress value={92} className="h-2" />
             </div>
             <div className="space-y-2">
               <div className="flex justify-between">
-                <span className="text-sm font-medium">Database Health</span>
-                <span className="text-sm text-gray-600">98%</span>
+                <span className="text-sm font-medium text-foreground">Database Health</span>
+                <span className="text-sm text-muted-foreground">98%</span>
               </div>
               <Progress value={98} className="h-2" />
             </div>
             <div className="space-y-2">
               <div className="flex justify-between">
-                <span className="text-sm font-medium">API Response Time</span>
-                <span className="text-sm text-gray-600">87%</span>
+                <span className="text-sm font-medium text-foreground">API Response Time</span>
+                <span className="text-sm text-muted-foreground">87%</span>
               </div>
               <Progress value={87} className="h-2" />
             </div>

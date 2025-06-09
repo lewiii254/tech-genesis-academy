@@ -19,6 +19,7 @@ import Groups from "./pages/Groups";
 import Leaderboard from "./pages/Leaderboard";
 import Profile from "./pages/Profile";
 import AIChat from "./pages/AIChat";
+import AIStudyAssistantPage from "./pages/AIStudyAssistant";
 import Certificates from "./pages/Certificates";
 import Timetable from "./pages/Timetable";
 import Pricing from "./pages/Pricing";
@@ -109,6 +110,11 @@ const App = () => (
               <Route path="/ai-chat" element={
                 <ProtectedRoute>
                   <AIChat />
+                </ProtectedRoute>
+              } />
+              <Route path="/ai-study-assistant" element={
+                <ProtectedRoute>
+                  <AIStudyAssistantPage />
                 </ProtectedRoute>
               } />
               <Route path="/certificates" element={

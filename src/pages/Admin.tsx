@@ -39,11 +39,11 @@ const Admin = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900 flex items-center gap-3">
+              <h1 className="text-4xl font-bold text-foreground flex items-center gap-3">
                 <Shield className="h-10 w-10 text-blue-600" />
                 Admin Dashboard
               </h1>
-              <p className="text-gray-600 mt-2">Complete platform management and monitoring</p>
+              <p className="text-muted-foreground mt-2">Complete platform management and monitoring</p>
             </div>
             <Badge variant="secondary" className="px-4 py-2">
               Super Admin
