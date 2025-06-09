@@ -1,508 +1,428 @@
 import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
-import { MessageSquare, Heart, Share2, Calendar, Users, TrendingUp, Star, Send, Plus, ThumbsUp } from "lucide-react";
-import TeamCollaboration from "@/components/TeamCollaboration";
-import NetworkingEvents from "@/components/NetworkingEvents";
-import { useToast } from "@/hooks/use-toast";
-import { useNavigate } from "react-router-dom";
-
-interface Discussion {
-  id: string;
-  title: string;
-  author: string;
-  content: string;
-  replies: number;
-  likes: number;
-  date: string;
-  avatar: string;
-  liked: boolean;
-  comments: Comment[];
-}
-
-interface Comment {
-  id: string;
-  author: string;
-  content: string;
-  date: string;
-  avatar: string;
-}
-
-interface Review {
-  id: string;
-  author: string;
-  course: string;
-  rating: number;
-  comment: string;
-  date: string;
-  avatar: string;
-}
-
-const initialDiscussions: Discussion[] = [
-  {
-    id: "1",
-    title: "Best Resources for Learning React in 2024?",
-    author: "Jane Doe",
-    content: "Hey everyone! I'm looking for the best and most up-to-date resources for learning React this year. Any recommendations for courses, tutorials, or documentation?",
-    replies: 15,
-    likes: 42,
-    date: "2 days ago",
-    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=64&h=64&fit=crop&crop=face",
-    liked: false,
-    comments: [
-      {
-        id: "c1",
-        author: "John Smith",
-        content: "I highly recommend the official React documentation. It's been updated recently and has great examples!",
-        date: "1 day ago",
-        avatar: "JS"
-      }
-    ]
-  },
-  {
-    id: "2",
-    title: "Tips for Optimizing Node.js Performance",
-    author: "John Smith",
-    content: "What are some proven strategies for optimizing the performance of Node.js applications? I'm working on a project that needs to handle a lot of concurrent requests.",
-    replies: 8,
-    likes: 28,
-    date: "5 days ago",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=64&h=64&fit=crop&crop=face",
-    liked: false,
-    comments: []
-  }
-];
-
-const reviews: Review[] = [
-  {
-    id: "1",
-    author: "Alice Johnson",
-    course: "Python for Data Science",
-    rating: 5,
-    comment: "This course was amazing! The instructor was very knowledgeable and the content was well-structured. I learned a lot about data analysis and machine learning.",
-    date: "1 week ago",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00d5a4ee9aa5?w=64&h=64&fit=crop&crop=face"
-  },
-  {
-    id: "2",
-    author: "Bob Williams",
-    course: "Full Stack Web Development",
-    rating: 4,
-    comment: "A comprehensive course that covers all the essential aspects of web development. The projects were challenging but rewarding.",
-    date: "2 weeks ago",
-    avatar: "https://images.unsplash.com/photo-1534528741702-a0cfae58b707?w=64&h=64&fit=crop&crop=face"
-  }
-];
+import { Heart, MessageCircle, Share2, Calendar, MapPin, Users, Link, ImagePlus } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const Community = () => {
   const [activeTab, setActiveTab] = useState("discussions");
-  const [discussions, setDiscussions] = useState<Discussion[]>(initialDiscussions);
-  const [newPostTitle, setNewPostTitle] = useState("");
-  const [newPostContent, setNewPostContent] = useState("");
-  const [showNewPostForm, setShowNewPostForm] = useState(false);
-  const [commentContent, setCommentContent] = useState<{[key: string]: string}>({});
-  const [showComments, setShowComments] = useState<{[key: string]: boolean}>({});
-  const { toast } = useToast();
-  const navigate = useNavigate();
+  const [discussions, setDiscussions] = useState([
+    {
+      id: 1,
+      title: "React Best Practices",
+      content: "What are some best practices for React development?",
+      author: "John Doe",
+      time: "2 hours ago",
+      likes: 23,
+      replies: 5,
+      category: "Programming",
+      isLiked: false
+    },
+    {
+      id: 2,
+      title: "Marketing Strategies",
+      content: "What are effective marketing strategies for a new online course?",
+      author: "Jane Smith",
+      time: "1 day ago",
+      likes: 15,
+      replies: 2,
+      category: "Marketing",
+      isLiked: false
+    }
+  ]);
+
+  const [posts, setPosts] = useState([
+    {
+      id: 3,
+      title: "New Course: AI Fundamentals",
+      content: "Excited to announce my new course on AI fundamentals!",
+      author: "Mike Johnson",
+      time: "3 hours ago",
+      likes: 35,
+      replies: 10,
+      category: "Announcements",
+      isLiked: false
+    },
+    {
+      id: 4,
+      title: "Looking for Study Partners",
+      content: "Anyone interested in forming a study group for the upcoming exam?",
+      author: "Sarah Wilson",
+      time: "2 days ago",
+      likes: 12,
+      replies: 3,
+      category: "Study Groups",
+      isLiked: false
+    }
+  ]);
+
+  const [newPost, setNewPost] = useState({
+    title: "",
+    content: "",
+    category: "General"
+  });
+
+  const [showCreatePost, setShowCreatePost] = useState(false);
+
+  const handleLike = (id: number, type: 'discussion' | 'post') => {
+    if (type === 'discussion') {
+      setDiscussions(prev => prev.map(item => 
+        item.id === id ? { ...item, likes: item.likes + 1, isLiked: !item.isLiked } : item
+      ));
+    } else {
+      setPosts(prev => prev.map(item => 
+        item.id === id ? { ...item, likes: item.likes + 1, isLiked: !item.isLiked } : item
+      ));
+    }
+  };
+
+  const handleReply = (id: number) => {
+    console.log(`Reply to post/discussion ${id}`);
+  };
 
   const handleCreatePost = () => {
-    if (!newPostTitle.trim() || !newPostContent.trim()) {
-      toast({
-        title: "Error",
-        description: "Please fill in both title and content",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    const newPost: Discussion = {
-      id: Date.now().toString(),
-      title: newPostTitle,
-      author: "Current User",
-      content: newPostContent,
-      replies: 0,
+    const newPostData = {
+      id: Date.now(),
+      ...newPost,
+      author: "You",
+      time: "Just now",
       likes: 0,
-      date: "Just now",
-      avatar: "CU",
-      liked: false,
-      comments: []
+      replies: 0,
+      isLiked: false
     };
 
-    setDiscussions([newPost, ...discussions]);
-    setNewPostTitle("");
-    setNewPostContent("");
-    setShowNewPostForm(false);
-    
-    toast({
-      title: "Success",
-      description: "Your post has been created!",
-    });
-  };
-
-  const handleLikePost = (postId: string) => {
-    setDiscussions(discussions.map(discussion => {
-      if (discussion.id === postId) {
-        return {
-          ...discussion,
-          liked: !discussion.liked,
-          likes: discussion.liked ? discussion.likes - 1 : discussion.likes + 1
-        };
-      }
-      return discussion;
-    }));
-
-    toast({
-      title: discussion.liked ? "Unliked" : "Liked",
-      description: discussion.liked ? "Removed like from post" : "You liked this post!",
-    });
-  };
-
-  const handleSharePost = (postTitle: string) => {
-    navigator.clipboard.writeText(`Check out this discussion: ${postTitle}`);
-    toast({
-      title: "Shared!",
-      description: "Post link copied to clipboard",
-    });
-  };
-
-  const handleAddComment = (postId: string) => {
-    const content = commentContent[postId];
-    if (!content?.trim()) {
-      toast({
-        title: "Error",
-        description: "Please enter a comment",
-        variant: "destructive"
-      });
-      return;
+    if (activeTab === "discussions") {
+      setDiscussions(prev => [newPostData, ...prev]);
+    } else {
+      setPosts(prev => [newPostData, ...prev]);
     }
 
-    const newComment: Comment = {
-      id: Date.now().toString(),
-      author: "Current User",
-      content: content,
-      date: "Just now",
-      avatar: "CU"
-    };
-
-    setDiscussions(discussions.map(discussion => {
-      if (discussion.id === postId) {
-        return {
-          ...discussion,
-          comments: [...discussion.comments, newComment],
-          replies: discussion.replies + 1
-        };
-      }
-      return discussion;
-    }));
-
-    setCommentContent({...commentContent, [postId]: ""});
-    
-    toast({
-      title: "Success",
-      description: "Your comment has been added!",
-    });
+    setNewPost({ title: "", content: "", category: "General" });
+    setShowCreatePost(false);
   };
 
-  const toggleComments = (postId: string) => {
-    setShowComments({...showComments, [postId]: !showComments[postId]});
+  const handleJoinEvent = (eventId: number) => {
+    console.log(`Joined event ${eventId}`);
   };
 
-  const handlePartnerClick = (partnerName: string) => {
-    toast({
-      title: `${partnerName} Partnership`,
-      description: `Learn more about our collaboration with ${partnerName}`,
-    });
-  };
+  const events = [
+    {
+      id: 1,
+      title: "React Meetup",
+      date: "2024-03-15",
+      location: "Nairobi Garage",
+      description: "Join us for a React meetup!",
+      attendees: 30,
+      isOnline: false
+    },
+    {
+      id: 2,
+      title: "Digital Marketing Webinar",
+      date: "2024-03-20",
+      location: "Online",
+      description: "Learn about digital marketing strategies.",
+      attendees: 50,
+      isOnline: true
+    }
+  ];
 
-  const handleSubmitProjectReview = () => {
-    toast({
-      title: "Project Submitted!",
-      description: "Your project has been submitted for expert review. You'll receive feedback within 24-48 hours.",
-    });
-  };
+  const categories = ["General", "Programming", "Marketing", "Study Groups", "Announcements"];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 p-4 sm:p-6">
-      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
-        {/* Header */}
-        <div className="text-center space-y-4">
-          <h1 className="text-3xl sm:text-4xl font-bold text-slate-900">TechLearn Community</h1>
-          <p className="text-lg sm:text-xl text-slate-800">Connect, collaborate, and grow with fellow developers</p>
-          
-          {/* Partnership Information */}
-          <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg p-4 sm:p-6 mt-6 shadow-lg">
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">Our Partners</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-              <div className="text-center cursor-pointer transition-transform hover:scale-105" onClick={() => handlePartnerClick("Power Learn Project")}>
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-blue-500 to-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-white font-bold text-sm sm:text-lg">PLP</span>
-                </div>
-                <h3 className="text-white font-semibold text-sm sm:text-base">Power Learn Project</h3>
-                <p className="text-blue-100 text-xs sm:text-sm">Empowering African youth with tech skills</p>
-              </div>
-              <div className="text-center cursor-pointer transition-transform hover:scale-105" onClick={() => handlePartnerClick("Safaricom")}>
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-green-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-white font-bold text-sm sm:text-lg">SF</span>
-                </div>
-                <h3 className="text-white font-semibold text-sm sm:text-base">Safaricom</h3>
-                <p className="text-blue-100 text-xs sm:text-sm">Leading telecommunications provider in Kenya</p>
-              </div>
-              <div className="text-center cursor-pointer transition-transform hover:scale-105" onClick={() => handlePartnerClick("S-Hook")}>
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-white font-bold text-sm sm:text-lg">SH</span>
-                </div>
-                <h3 className="text-white font-semibold text-sm sm:text-base">S-Hook</h3>
-                <p className="text-blue-100 text-xs sm:text-sm">Innovation and technology solutions</p>
-              </div>
-            </div>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 p-4">
+      {/* Header */}
+      <div className="mb-8">
+        <div className="max-w-6xl mx-auto">
+          <h1 className="text-4xl font-bold text-gray-900">Community</h1>
+          <p className="text-gray-600 mt-2">Connect, share, and learn with fellow students</p>
         </div>
+      </div>
 
-        {/* Tabs */}
-        <div className="flex flex-wrap gap-2 bg-white/80 rounded-lg p-1 shadow-md">
-          {["discussions", "teams", "events", "reviews"].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`flex-1 min-w-[100px] sm:min-w-[120px] py-2 sm:py-3 px-3 sm:px-4 rounded-md text-xs sm:text-sm font-medium transition-all ${
-                activeTab === tab
-                  ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md"
-                  : "text-slate-800 hover:text-slate-900 hover:bg-blue-100"
-              }`}
-            >
-              {tab.charAt(0).toUpperCase() + tab.slice(1)}
-            </button>
-          ))}
-        </div>
+      <div className="max-w-6xl mx-auto">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+          <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4">
+            <TabsTrigger value="discussions" className="text-sm">Discussions</TabsTrigger>
+            <TabsTrigger value="posts" className="text-sm">Posts</TabsTrigger>
+            <TabsTrigger value="events" className="text-sm">Events</TabsTrigger>
+            <TabsTrigger value="resources" className="text-sm">Resources</TabsTrigger>
+          </TabsList>
 
-        {/* Tab Content */}
-        {activeTab === "discussions" && (
-          <div className="space-y-6 sm:space-y-8">
-            {/* Create Post Button */}
-            <div className="text-center">
-              <Button 
-                onClick={() => setShowNewPostForm(!showNewPostForm)}
-                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-md"
-              >
-                <Plus className="h-4 w-4 mr-2" />
-                Create New Post
-              </Button>
-            </div>
+          <TabsContent value="discussions">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2 space-y-4">
+                <Button onClick={() => setShowCreatePost(true)} className="w-full sm:w-auto">
+                  Create Discussion
+                </Button>
 
-            {/* New Post Form */}
-            {showNewPostForm && (
-              <Card className="bg-white/90 backdrop-blur-md border-blue-200 shadow-lg">
-                <CardHeader>
-                  <CardTitle className="text-slate-900">Create New Discussion</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <Input
-                    placeholder="Enter post title..."
-                    value={newPostTitle}
-                    onChange={(e) => setNewPostTitle(e.target.value)}
-                    className="bg-blue-50 border-blue-200 text-slate-900 placeholder:text-slate-600"
-                  />
-                  <Textarea
-                    placeholder="What's on your mind?"
-                    value={newPostContent}
-                    onChange={(e) => setNewPostContent(e.target.value)}
-                    className="bg-blue-50 border-blue-200 text-slate-900 placeholder:text-slate-600 min-h-[120px]"
-                  />
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <Button onClick={handleCreatePost} className="bg-gradient-to-r from-blue-600 to-blue-700">
-                      <Send className="h-4 w-4 mr-2" />
-                      Post
-                    </Button>
-                    <Button variant="outline" onClick={() => setShowNewPostForm(false)} className="border-blue-300 text-slate-800 hover:bg-blue-50">
-                      Cancel
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
-            {/* Discussions List */}
-            <div className="space-y-4 sm:space-y-6">
-              {discussions.map((discussion) => (
-                <Card key={discussion.id} className="bg-white/90 backdrop-blur-md border-blue-200 shadow-lg">
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-slate-900 text-lg sm:text-xl">{discussion.title}</CardTitle>
-                    <div className="flex items-center mt-2">
-                      <Avatar className="w-6 h-6">
-                        <AvatarFallback className="bg-blue-500 text-white">
-                          {discussion.author.charAt(0)}
-                        </AvatarFallback>
-                      </Avatar>
-                      <span className="text-slate-700 ml-2 text-sm">
-                        {discussion.author} - {discussion.date}
-                      </span>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <p className="text-slate-800">{discussion.content}</p>
-                    
-                    {/* Action Buttons */}
-                    <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => handleLikePost(discussion.id)}
-                        className={`text-slate-700 hover:text-slate-900 hover:bg-blue-100 ${discussion.liked ? 'text-red-600 hover:text-red-700' : ''}`}
-                      >
-                        <Heart className={`h-4 w-4 mr-1 ${discussion.liked ? 'fill-current' : ''}`} />
-                        <span className="text-xs sm:text-sm">{discussion.likes}</span>
-                      </Button>
-                      
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => toggleComments(discussion.id)}
-                        className="text-slate-700 hover:text-slate-900 hover:bg-blue-100"
-                      >
-                        <MessageSquare className="h-4 w-4 mr-1" />
-                        <span className="text-xs sm:text-sm">{discussion.replies} Comments</span>
-                      </Button>
-                      
-                      <Button 
-                        variant="ghost" 
-                        size="sm" 
-                        onClick={() => handleSharePost(discussion.title)}
-                        className="text-slate-700 hover:text-slate-900 hover:bg-blue-100"
-                      >
-                        <Share2 className="h-4 w-4 mr-1" />
-                        <span className="text-xs sm:text-sm">Share</span>
-                      </Button>
-                    </div>
-
-                    {/* Comments Section */}
-                    {showComments[discussion.id] && (
-                      <div className="space-y-3 border-t border-blue-200 pt-4">
-                        {discussion.comments.map((comment) => (
-                          <div key={comment.id} className="flex space-x-3">
-                            <Avatar className="w-6 h-6">
-                              <AvatarFallback className="bg-blue-400 text-white text-xs">
-                                {comment.avatar}
-                              </AvatarFallback>
-                            </Avatar>
-                            <div className="flex-1">
-                              <div className="bg-blue-50 rounded-lg p-3">
-                                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
-                                  <span className="text-slate-900 text-sm font-medium">{comment.author}</span>
-                                  <span className="text-slate-600 text-xs">{comment.date}</span>
-                                </div>
-                                <p className="text-slate-800 text-sm">{comment.content}</p>
-                              </div>
-                            </div>
+                {discussions.map((item) => (
+                  <Card key={item.id} className="hover:shadow-lg transition-shadow">
+                    <CardContent className="p-6">
+                      <div className="flex items-start gap-4">
+                        <Avatar>
+                          <AvatarFallback>{item.author[0]}</AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2">
+                            <h3 className="font-semibold text-gray-900">{item.author}</h3>
+                            <span className="text-sm text-gray-500">{item.time}</span>
+                            <Badge variant="outline">{item.category}</Badge>
                           </div>
-                        ))}
-                        
-                        {/* Add Comment */}
-                        <div className="flex space-x-3">
-                          <Avatar className="w-6 h-6">
-                            <AvatarFallback className="bg-blue-600 text-white text-xs">
-                              CU
-                            </AvatarFallback>
-                          </Avatar>
-                          <div className="flex-1 flex flex-col sm:flex-row gap-2">
-                            <Input
-                              placeholder="Write a comment..."
-                              value={commentContent[discussion.id] || ""}
-                              onChange={(e) => setCommentContent({...commentContent, [discussion.id]: e.target.value})}
-                              className="bg-blue-50 border-blue-200 text-slate-900 placeholder:text-slate-600"
-                            />
-                            <Button 
-                              size="sm" 
-                              onClick={() => handleAddComment(discussion.id)}
-                              className="bg-gradient-to-r from-blue-600 to-blue-700 shrink-0"
+                          <h4 className="font-medium text-lg mb-2">{item.title}</h4>
+                          <p className="text-gray-700 mb-4">{item.content}</p>
+                          <div className="flex items-center gap-6">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => handleLike(item.id, 'discussion')}
+                              className={item.isLiked ? "text-red-600" : ""}
                             >
-                              <Send className="h-4 w-4" />
+                              <Heart className={`h-4 w-4 mr-1 ${item.isLiked ? 'fill-current' : ''}`} />
+                              {item.likes}
+                            </Button>
+                            <Button variant="ghost" size="sm" onClick={() => handleReply(item.id)}>
+                              <MessageCircle className="h-4 w-4 mr-1" />
+                              {item.replies}
+                            </Button>
+                            <Button variant="ghost" size="sm">
+                              <Share2 className="h-4 w-4 mr-1" />
+                              Share
                             </Button>
                           </div>
                         </div>
                       </div>
-                    )}
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              {/* Sidebar */}
+              <div className="space-y-4">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Categories</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2">
+                      {categories.map((category) => (
+                        <li key={category} className="flex items-center justify-between">
+                          <span>{category}</span>
+                          <Badge variant="secondary">12</Badge>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Top Members</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-3">
+                      {[1, 2, 3].map((i) => (
+                        <li key={i} className="flex items-center gap-3">
+                          <Avatar>
+                            <AvatarFallback>JD</AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <h4 className="font-medium">John Doe</h4>
+                            <p className="text-sm text-gray-500">560 points</p>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="posts">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2 space-y-4">
+                <Button onClick={() => setShowCreatePost(true)} className="w-full sm:w-auto">
+                  Create Post
+                </Button>
+
+                {posts.map((item) => (
+                  <Card key={item.id} className="hover:shadow-lg transition-shadow">
+                    <CardContent className="p-6">
+                      <div className="flex items-start gap-4">
+                        <Avatar>
+                          <AvatarFallback>{item.author[0]}</AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2">
+                            <h3 className="font-semibold text-gray-900">{item.author}</h3>
+                            <span className="text-sm text-gray-500">{item.time}</span>
+                            <Badge variant="outline">{item.category}</Badge>
+                          </div>
+                          <h4 className="font-medium text-lg mb-2">{item.title}</h4>
+                          <p className="text-gray-700 mb-4">{item.content}</p>
+                          <div className="flex items-center gap-6">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => handleLike(item.id, 'post')}
+                              className={item.isLiked ? "text-red-600" : ""}
+                            >
+                              <Heart className={`h-4 w-4 mr-1 ${item.isLiked ? 'fill-current' : ''}`} />
+                              {item.likes}
+                            </Button>
+                            <Button variant="ghost" size="sm" onClick={() => handleReply(item.id)}>
+                              <MessageCircle className="h-4 w-4 mr-1" />
+                              {item.replies}
+                            </Button>
+                            <Button variant="ghost" size="sm">
+                              <Share2 className="h-4 w-4 mr-1" />
+                              Share
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              {/* Sidebar */}
+              <div className="space-y-4">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Categories</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2">
+                      {categories.map((category) => (
+                        <li key={category} className="flex items-center justify-between">
+                          <span>{category}</span>
+                          <Badge variant="secondary">12</Badge>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Top Members</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-3">
+                      {[1, 2, 3].map((i) => (
+                        <li key={i} className="flex items-center gap-3">
+                          <Avatar>
+                            <AvatarFallback>JD</AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <h4 className="font-medium">John Doe</h4>
+                            <p className="text-sm text-gray-500">560 points</p>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="events">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {events.map((event) => (
+                <Card key={event.id} className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="text-lg font-semibold">{event.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="flex items-center gap-2">
+                      <Calendar className="h-4 w-4" />
+                      <span>{event.date}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {event.isOnline ? <Link className="h-4 w-4" /> : <MapPin className="h-4 w-4" />}
+                      <span>{event.location}</span>
+                    </div>
+                    <p className="text-gray-700">{event.description}</p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Users className="h-4 w-4" />
+                        <span>{event.attendees} attendees</span>
+                      </div>
+                      <Button size="sm" onClick={() => handleJoinEvent(event.id)}>Join Event</Button>
+                    </div>
                   </CardContent>
                 </Card>
               ))}
             </div>
-          </div>
-        )}
+          </TabsContent>
 
-        {activeTab === "teams" && (
-          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8">
-            <TeamCollaboration />
-            <Card className="bg-white/90 backdrop-blur-md border-blue-200 shadow-lg">
-              <CardHeader>
-                <CardTitle className="text-slate-900">Advanced Project Reviews</CardTitle>
-                <CardDescription className="text-slate-700">
-                  Get expert feedback on your projects
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="border border-blue-200 rounded-lg p-4 bg-blue-50">
-                  <div className="flex items-center justify-between mb-3">
-                    <h4 className="text-slate-900 font-medium">E-commerce Dashboard</h4>
-                    <Badge className="bg-blue-500/20 text-slate-700">Reviewed</Badge>
-                  </div>
-                  <p className="text-slate-800 text-sm mb-3">React + Node.js project with payment integration</p>
-                  <div className="flex flex-wrap items-center gap-3 text-sm text-slate-700">
-                    <span>★★★★☆ 4.5/5</span>
-                    <span>Mentor: Sarah K.</span>
-                    <span>2 days ago</span>
-                  </div>
-                </div>
-                <Button 
-                  onClick={handleSubmitProjectReview}
-                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
-                >
-                  Submit Project for Review
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        )}
-
-        {activeTab === "events" && (
-          <div className="space-y-6 sm:space-y-8">
-            <NetworkingEvents />
-          </div>
-        )}
-
-        {activeTab === "reviews" && (
-          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8">
-            {reviews.map((review) => (
-              <Card key={review.id} className="bg-white/90 backdrop-blur-md border-blue-200 shadow-lg">
-                <CardHeader>
-                  <div className="flex items-center">
-                    <Avatar className="w-8 h-8">
-                      <AvatarFallback className="bg-blue-500 text-white">
-                        {review.author.charAt(0)}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div className="ml-3">
-                      <CardTitle className="text-slate-900 text-lg">{review.author}</CardTitle>
-                      <p className="text-slate-700 text-sm">Reviewed {review.course}</p>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center mb-3">
-                    {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 text-yellow-500 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-slate-800">{review.comment}</p>
-                  <p className="text-slate-600 text-sm mt-3">Posted on {review.date}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        )}
+          <TabsContent value="resources">
+            <div>
+              <h2>Resources Content</h2>
+              {/* Add resources content here */}
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
+
+      {/* Create Post Dialog */}
+      <Dialog open={showCreatePost} onOpenChange={setShowCreatePost}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>Create New Post</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium mb-2">Title</label>
+              <Input
+                value={newPost.title}
+                onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
+                placeholder="Enter post title"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">Content</label>
+              <Textarea
+                value={newPost.content}
+                onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
+                placeholder="Enter post content"
+                rows={3}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">Category</label>
+              <select
+                className="w-full px-3 py-2 border rounded-md"
+                value={newPost.category}
+                onChange={(e) => setNewPost({ ...newPost, category: e.target.value })}
+              >
+                {categories.map((category) => (
+                  <option key={category} value={category}>{category}</option>
+                ))}
+              </select>
+            </div>
+            <div className="flex gap-3 pt-4">
+              <Button onClick={handleCreatePost} className="flex-1">
+                Create Post
+              </Button>
+              <Button variant="outline" onClick={() => setShowCreatePost(false)}>
+                Cancel
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
