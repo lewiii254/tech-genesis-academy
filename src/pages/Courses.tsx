@@ -1,10 +1,11 @@
+
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Star, BookOpen, Clock, Users, Play, Award, CheckCircle, Target, Filter, Grid, List } from "lucide-react";
+import { Star, BookOpen, Clock, Users, Play, Award, CheckCircle, Target, Filter, Grid, List, CreditCard } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const allCourses = [
@@ -52,24 +53,25 @@ const allCourses = [
   },
   {
     id: 3,
-    title: "UI/UX Design Masterclass",
-    description: "Design beautiful and functional user interfaces with Figma, Adobe XD, and modern design principles",
+    title: "Advanced React & TypeScript Mastery",
+    description: "Deep dive into React hooks, context, performance optimization, and TypeScript integration",
     image: "photo-1581091226825-a6a2a5aee158",
     level: "Advanced",
     duration: "8 weeks",
-    rating: 4.7,
+    rating: 4.8,
     students: 987,
-    category: "Design",
-    price: "Free",
-    enrolled: true,
-    progress: 95,
+    category: "Web Development",
+    price: "KES 15,000",
+    enrolled: false,
+    progress: 0,
     modules: 16,
     projects: 5,
     instructor: "Alex Rivera",
-    skills: ["Figma", "Adobe XD", "User Research", "Prototyping", "Design Systems"],
-    featured: false,
+    skills: ["React 18", "TypeScript", "Redux Toolkit", "Testing Library", "Vite"],
+    featured: true,
     certificate: true,
-    difficulty: 8
+    difficulty: 8,
+    premium: true
   },
   {
     id: 4,
@@ -94,24 +96,25 @@ const allCourses = [
   },
   {
     id: 5,
-    title: "Software Testing & Quality Assurance",
-    description: "Learn comprehensive testing frameworks including Jest, Cypress, Selenium, and test automation",
-    image: "photo-1605810230434-7631ac76ec81",
-    level: "Intermediate",
-    duration: "8 weeks",
-    rating: 4.5,
+    title: "Blockchain Development with Solidity",
+    description: "Build decentralized applications (DApps) and smart contracts on Ethereum blockchain",
+    image: "photo-1639762681485-074b7f938ba0",
+    level: "Advanced",
+    duration: "10 weeks",
+    rating: 4.9,
     students: 543,
-    category: "Testing",
-    price: "Free",
+    category: "Blockchain",
+    price: "KES 25,000",
     enrolled: false,
     progress: 0,
     modules: 18,
     projects: 6,
     instructor: "Mark Thompson",
-    skills: ["Jest", "Cypress", "Selenium", "Unit Testing", "Integration Testing"],
-    featured: false,
+    skills: ["Solidity", "Web3.js", "Ethereum", "Smart Contracts", "DeFi"],
+    featured: true,
     certificate: true,
-    difficulty: 6
+    difficulty: 9,
+    premium: true
   },
   {
     id: 6,
@@ -136,66 +139,69 @@ const allCourses = [
   },
   {
     id: 7,
-    title: "Mobile App Development with React Native",
-    description: "Build cross-platform mobile apps for iOS and Android with React Native and Expo",
+    title: "Flutter Mobile App Development",
+    description: "Build cross-platform mobile apps for iOS and Android with Flutter and Dart",
     image: "photo-1581091226825-a6a2a5aee158",
     level: "Intermediate",
     duration: "10 weeks",
     rating: 4.7,
     students: 892,
     category: "Mobile Development",
-    price: "Free",
+    price: "KES 18,000",
     enrolled: false,
     progress: 0,
     modules: 22,
     projects: 7,
     instructor: "Carlos Rodriguez",
-    skills: ["React Native", "Expo", "Redux", "Native Modules", "App Store Deployment"],
+    skills: ["Flutter", "Dart", "Firebase", "Native Modules", "App Store Deployment"],
     featured: false,
     certificate: true,
-    difficulty: 7
+    difficulty: 7,
+    premium: true
   },
   {
     id: 8,
-    title: "Advanced JavaScript & TypeScript",
-    description: "Master modern JavaScript ES6+ features and TypeScript for building robust applications",
-    image: "photo-1461749280684-dccba630e2f6",
+    title: "Cybersecurity & Ethical Hacking",
+    description: "Learn penetration testing, network security, and ethical hacking techniques",
+    image: "photo-1488590528505-98d2b5aba04b",
     level: "Advanced",
-    duration: "8 weeks",
+    duration: "12 weeks",
     rating: 4.8,
     students: 1456,
-    category: "Programming",
-    price: "Free",
+    category: "Cybersecurity",
+    price: "KES 22,000",
     enrolled: false,
     progress: 0,
-    modules: 16,
-    projects: 5,
+    modules: 24,
+    projects: 8,
     instructor: "David Kim",
-    skills: ["ES6+", "TypeScript", "Async/Await", "Design Patterns", "Performance"],
-    featured: false,
+    skills: ["Penetration Testing", "Kali Linux", "Network Security", "OSINT", "Metasploit"],
+    featured: true,
     certificate: true,
-    difficulty: 8
+    difficulty: 9,
+    premium: true
   },
   {
     id: 9,
-    title: "Graphics Design Fundamentals",
-    description: "Learn design principles, color theory, typography, and create stunning visuals with Adobe Creative Suite",
-    image: "photo-1581090464777-f3220bbe1b8b",
+    title: "Digital Marketing & SEO Mastery",
+    description: "Master digital marketing strategies, SEO, social media marketing, and analytics",
+    image: "photo-1460925895917-afdab827c52f",
     level: "Beginner",
-    duration: "6 weeks",
+    duration: "8 weeks",
     rating: 4.6,
     students: 634,
-    category: "Design",
-    price: "Free",
+    category: "Marketing",
+    price: "KES 12,000",
     enrolled: false,
     progress: 0,
-    modules: 14,
-    projects: 8,
+    modules: 16,
+    projects: 6,
     instructor: "Maria Santos",
-    skills: ["Photoshop", "Illustrator", "InDesign", "Color Theory", "Typography"],
+    skills: ["SEO", "Google Analytics", "Facebook Ads", "Content Marketing", "Email Marketing"],
     featured: false,
     certificate: true,
-    difficulty: 4
+    difficulty: 4,
+    premium: true
   },
   {
     id: 10,
@@ -220,24 +226,25 @@ const allCourses = [
   },
   {
     id: 11,
-    title: "Cybersecurity Essentials",
-    description: "Learn cybersecurity fundamentals, ethical hacking, and protect systems from security threats",
-    image: "photo-1488590528505-98d2b5aba04b",
+    title: "Game Development with Unity",
+    description: "Create 2D and 3D games using Unity engine and C# programming",
+    image: "photo-1511512578047-dfb367046420",
     level: "Intermediate",
-    duration: "9 weeks",
+    duration: "14 weeks",
     rating: 4.7,
     students: 789,
-    category: "Cybersecurity",
-    price: "Free",
+    category: "Game Development",
+    price: "KES 20,000",
     enrolled: false,
     progress: 0,
-    modules: 20,
-    projects: 6,
+    modules: 28,
+    projects: 8,
     instructor: "Lisa Anderson",
-    skills: ["Network Security", "Penetration Testing", "Cryptography", "Risk Assessment"],
+    skills: ["Unity", "C#", "3D Modeling", "Game Physics", "Mobile Game Development"],
     featured: false,
     certificate: true,
-    difficulty: 7
+    difficulty: 7,
+    premium: true
   },
   {
     id: 12,
@@ -259,12 +266,143 @@ const allCourses = [
     featured: false,
     certificate: true,
     difficulty: 9
+  },
+  {
+    id: 13,
+    title: "UI/UX Design with Figma",
+    description: "Design beautiful user interfaces and experiences using Figma and design thinking principles",
+    image: "photo-1581091226825-a6a2a5aee158",
+    level: "Beginner",
+    duration: "6 weeks",
+    rating: 4.5,
+    students: 892,
+    category: "Design",
+    price: "KES 10,000",
+    enrolled: false,
+    progress: 0,
+    modules: 14,
+    projects: 5,
+    instructor: "Sophie Williams",
+    skills: ["Figma", "Design Systems", "Prototyping", "User Research", "Adobe XD"],
+    featured: false,
+    certificate: true,
+    difficulty: 4,
+    premium: true
+  },
+  {
+    id: 14,
+    title: "iOS App Development with Swift",
+    description: "Build native iOS applications using Swift and Xcode with modern iOS features",
+    image: "photo-1512941937669-90a1b58e7e9c",
+    level: "Intermediate",
+    duration: "12 weeks",
+    rating: 4.8,
+    students: 445,
+    category: "Mobile Development",
+    price: "KES 24,000",
+    enrolled: false,
+    progress: 0,
+    modules: 26,
+    projects: 6,
+    instructor: "Ahmed Hassan",
+    skills: ["Swift", "Xcode", "Core Data", "SwiftUI", "App Store Connect"],
+    featured: true,
+    certificate: true,
+    difficulty: 8,
+    premium: true
+  },
+  {
+    id: 15,
+    title: "Data Analytics with Power BI",
+    description: "Transform data into insights using Microsoft Power BI, DAX, and advanced analytics",
+    image: "photo-1551288049-bebda4e38f71",
+    level: "Intermediate",
+    duration: "8 weeks",
+    rating: 4.6,
+    students: 623,
+    category: "Data Science",
+    price: "KES 16,000",
+    enrolled: false,
+    progress: 0,
+    modules: 18,
+    projects: 7,
+    instructor: "Grace Mutua",
+    skills: ["Power BI", "DAX", "Power Query", "Excel", "SQL Server"],
+    featured: false,
+    certificate: true,
+    difficulty: 6,
+    premium: true
+  },
+  {
+    id: 16,
+    title: "E-commerce with Shopify",
+    description: "Build and manage successful online stores using Shopify platform and dropshipping",
+    image: "photo-1556742049-0cfed4f6a45d",
+    level: "Beginner",
+    duration: "6 weeks",
+    rating: 4.4,
+    students: 534,
+    category: "E-commerce",
+    price: "Free",
+    enrolled: false,
+    progress: 0,
+    modules: 12,
+    projects: 4,
+    instructor: "John Kamau",
+    skills: ["Shopify", "Dropshipping", "Product Research", "Facebook Ads", "Customer Service"],
+    featured: false,
+    certificate: true,
+    difficulty: 3
+  },
+  {
+    id: 17,
+    title: "Artificial Intelligence with Python",
+    description: "Build AI applications using TensorFlow, PyTorch, and deep learning algorithms",
+    image: "photo-1555255707-c07966088b7b",
+    level: "Advanced",
+    duration: "16 weeks",
+    rating: 4.9,
+    students: 234,
+    category: "AI/ML",
+    price: "KES 30,000",
+    enrolled: false,
+    progress: 0,
+    modules: 32,
+    projects: 12,
+    instructor: "Dr. Peter Wanjiku",
+    skills: ["TensorFlow", "PyTorch", "Deep Learning", "Computer Vision", "NLP"],
+    featured: true,
+    certificate: true,
+    difficulty: 10,
+    premium: true
+  },
+  {
+    id: 18,
+    title: "Graphic Design Mastery",
+    description: "Create stunning graphics using Adobe Creative Suite, typography, and brand design",
+    image: "photo-1581090464777-f3220bbe1b8b",
+    level: "Beginner",
+    duration: "10 weeks",
+    rating: 4.5,
+    students: 678,
+    category: "Design",
+    price: "KES 14,000",
+    enrolled: false,
+    progress: 0,
+    modules: 20,
+    projects: 8,
+    instructor: "Faith Njeri",
+    skills: ["Photoshop", "Illustrator", "InDesign", "Typography", "Brand Design"],
+    featured: false,
+    certificate: true,
+    difficulty: 5,
+    premium: true
   }
 ];
 
-const categories = ["All", "Web Development", "Programming", "Design", "Database", "Testing", "AI/ML", "Mobile Development", "Cloud Computing", "Cybersecurity", "DevOps"];
+const categories = ["All", "Web Development", "Programming", "Design", "Database", "Blockchain", "AI/ML", "Mobile Development", "Cloud Computing", "Cybersecurity", "DevOps", "Marketing", "Game Development", "Data Science", "E-commerce"];
 const levels = ["All", "Beginner", "Intermediate", "Advanced"];
-const sortOptions = ["Popular", "Rating", "Newest", "Duration"];
+const sortOptions = ["Popular", "Rating", "Newest", "Duration", "Price"];
 
 const Courses = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -273,6 +411,7 @@ const Courses = () => {
   const [sortBy, setSortBy] = useState("Popular");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [showFeaturedOnly, setShowFeaturedOnly] = useState(false);
+  const [showFreeOnly, setShowFreeOnly] = useState(false);
 
   let filteredCourses = allCourses.filter(course => {
     const matchesSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -281,8 +420,9 @@ const Courses = () => {
     const matchesCategory = selectedCategory === "All" || course.category === selectedCategory;
     const matchesLevel = selectedLevel === "All" || course.level === selectedLevel;
     const matchesFeatured = !showFeaturedOnly || course.featured;
+    const matchesFree = !showFreeOnly || course.price === "Free";
     
-    return matchesSearch && matchesCategory && matchesLevel && matchesFeatured;
+    return matchesSearch && matchesCategory && matchesLevel && matchesFeatured && matchesFree;
   });
 
   // Sort courses
@@ -296,6 +436,13 @@ const Courses = () => {
     case "Newest":
       filteredCourses.sort((a, b) => b.id - a.id);
       break;
+    case "Price":
+      filteredCourses.sort((a, b) => {
+        const priceA = a.price === "Free" ? 0 : parseInt(a.price.replace(/[^\d]/g, ''));
+        const priceB = b.price === "Free" ? 0 : parseInt(b.price.replace(/[^\d]/g, ''));
+        return priceA - priceB;
+      });
+      break;
     default: // Popular
       filteredCourses.sort((a, b) => b.students - a.students);
   }
@@ -307,6 +454,17 @@ const Courses = () => {
         <div className="text-center space-y-4">
           <h1 className="text-3xl sm:text-4xl font-bold text-blue-900">Discover Courses</h1>
           <p className="text-lg sm:text-xl text-blue-700">Master new skills with our comprehensive learning programs</p>
+          <div className="flex justify-center gap-4 flex-wrap">
+            <Badge className="bg-green-100 text-green-800 border-green-200">
+              Free Courses Available
+            </Badge>
+            <Badge className="bg-purple-100 text-purple-800 border-purple-200">
+              Premium Content
+            </Badge>
+            <Badge className="bg-yellow-100 text-yellow-800 border-yellow-200">
+              Industry Certificates
+            </Badge>
+          </div>
         </div>
 
         {/* Filters */}
@@ -370,6 +528,18 @@ const Courses = () => {
                   <Star className="h-4 w-4 mr-2" />
                   Featured Only
                 </Button>
+
+                <Button
+                  variant={showFreeOnly ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setShowFreeOnly(!showFreeOnly)}
+                  className={showFreeOnly 
+                    ? "bg-green-600 hover:bg-green-700" 
+                    : "border-green-300 text-green-700 hover:bg-green-50"
+                  }
+                >
+                  Free Courses
+                </Button>
                 
                 <div className="flex items-center space-x-2">
                   <span className="text-sm text-blue-700">View:</span>
@@ -429,8 +599,14 @@ const Courses = () => {
                     Featured
                   </Badge>
                 )}
+                {course.premium && (
+                  <Badge className="absolute top-2 right-2 bg-purple-500 text-white">
+                    <CreditCard className="h-3 w-3 mr-1" />
+                    Premium
+                  </Badge>
+                )}
                 {course.enrolled && (
-                  <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs">
+                  <div className="absolute bottom-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs">
                     {course.progress}%
                   </div>
                 )}
@@ -472,6 +648,22 @@ const Courses = () => {
                     <div className="flex items-center text-blue-700">
                       <Target className="h-4 w-4 mr-1" />
                       {course.difficulty}/10
+                    </div>
+                  </div>
+
+                  {/* Price */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className={`font-bold text-lg ${
+                        course.price === "Free" ? "text-green-600" : "text-purple-600"
+                      }`}>
+                        {course.price}
+                      </span>
+                      {course.premium && course.price !== "Free" && (
+                        <Badge className="bg-purple-100 text-purple-800 border-purple-200 text-xs">
+                          Premium
+                        </Badge>
+                      )}
                     </div>
                   </div>
 
@@ -536,7 +728,7 @@ const Courses = () => {
                       ) : (
                         <>
                           <BookOpen className="h-4 w-4 mr-2" />
-                          Start Course
+                          {course.price === "Free" ? "Start Course" : "Enroll Now"}
                         </>
                       )}
                     </Button>
@@ -562,6 +754,7 @@ const Courses = () => {
                   setSelectedCategory("All");
                   setSelectedLevel("All");
                   setShowFeaturedOnly(false);
+                  setShowFreeOnly(false);
                 }}
                 className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
               >
@@ -570,6 +763,41 @@ const Courses = () => {
             </CardContent>
           </Card>
         )}
+
+        {/* Course Statistics */}
+        <Card className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+          <CardContent className="p-8 text-center">
+            <h3 className="text-2xl font-bold mb-4">Transform Your Career Today</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
+              <div>
+                <div className="text-3xl font-bold">{allCourses.length}+</div>
+                <div className="text-blue-100">Courses Available</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold">{allCourses.filter(c => c.price === "Free").length}</div>
+                <div className="text-blue-100">Free Courses</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold">{allCourses.filter(c => c.premium).length}</div>
+                <div className="text-blue-100">Premium Courses</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold">15+</div>
+                <div className="text-blue-100">Categories</div>
+              </div>
+            </div>
+            <p className="text-blue-100 mb-6 text-lg">Join thousands of learners advancing their careers</p>
+            <div className="flex justify-center gap-4">
+              <Button 
+                size="lg"
+                className="bg-white text-blue-600 hover:bg-gray-100"
+              >
+                <BookOpen className="mr-2 h-5 w-5" />
+                Start Learning Today
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
