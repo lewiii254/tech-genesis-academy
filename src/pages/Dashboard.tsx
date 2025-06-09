@@ -129,11 +129,15 @@ const Dashboard = () => {
           <JobPlacementCard />
         </div>
 
-        {/* Custom Learning Path */}
-        <CustomLearningPath />
+        {/* Custom Learning Path with Better Visibility */}
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <CustomLearningPath />
+        </div>
 
-        {/* Paid Courses Section */}
-        <PaidCourses />
+        {/* Paid Courses Section with Better Visibility */}
+        <div className="bg-white rounded-lg shadow-lg p-6">
+          <PaidCourses />
+        </div>
 
         {/* Additional Features */}
         <div className="text-center">
