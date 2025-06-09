@@ -9,6 +9,7 @@ import { MessageSquare, Heart, Share2, Calendar, Users, TrendingUp, Star, Send, 
 import TeamCollaboration from "@/components/TeamCollaboration";
 import NetworkingEvents from "@/components/NetworkingEvents";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 interface Discussion {
   id: string;
@@ -106,6 +107,7 @@ const Community = () => {
   const [commentContent, setCommentContent] = useState<{[key: string]: string}>({});
   const [showComments, setShowComments] = useState<{[key: string]: boolean}>({});
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleCreatePost = () => {
     if (!newPostTitle.trim() || !newPostContent.trim()) {
@@ -152,6 +154,19 @@ const Community = () => {
       }
       return discussion;
     }));
+
+    toast({
+      title: discussion.liked ? "Unliked" : "Liked",
+      description: discussion.liked ? "Removed like from post" : "You liked this post!",
+    });
+  };
+
+  const handleSharePost = (postTitle: string) => {
+    navigator.clipboard.writeText(`Check out this discussion: ${postTitle}`);
+    toast({
+      title: "Shared!",
+      description: "Post link copied to clipboard",
+    });
   };
 
   const handleAddComment = (postId: string) => {
@@ -196,33 +211,47 @@ const Community = () => {
     setShowComments({...showComments, [postId]: !showComments[postId]});
   };
 
+  const handlePartnerClick = (partnerName: string) => {
+    toast({
+      title: `${partnerName} Partnership`,
+      description: `Learn more about our collaboration with ${partnerName}`,
+    });
+  };
+
+  const handleSubmitProjectReview = () => {
+    toast({
+      title: "Project Submitted!",
+      description: "Your project has been submitted for expert review. You'll receive feedback within 24-48 hours.",
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 p-4 sm:p-6">
       <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-3xl sm:text-4xl font-bold text-blue-900">TechLearn Community</h1>
-          <p className="text-lg sm:text-xl text-blue-700">Connect, collaborate, and grow with fellow developers</p>
+          <h1 className="text-3xl sm:text-4xl font-bold text-slate-900">TechLearn Community</h1>
+          <p className="text-lg sm:text-xl text-slate-800">Connect, collaborate, and grow with fellow developers</p>
           
           {/* Partnership Information */}
           <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg p-4 sm:p-6 mt-6 shadow-lg">
             <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">Our Partners</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-              <div className="text-center">
+              <div className="text-center cursor-pointer transition-transform hover:scale-105" onClick={() => handlePartnerClick("Power Learn Project")}>
                 <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-blue-500 to-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
                   <span className="text-white font-bold text-sm sm:text-lg">PLP</span>
                 </div>
                 <h3 className="text-white font-semibold text-sm sm:text-base">Power Learn Project</h3>
                 <p className="text-blue-100 text-xs sm:text-sm">Empowering African youth with tech skills</p>
               </div>
-              <div className="text-center">
+              <div className="text-center cursor-pointer transition-transform hover:scale-105" onClick={() => handlePartnerClick("Safaricom")}>
                 <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-green-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-3">
                   <span className="text-white font-bold text-sm sm:text-lg">SF</span>
                 </div>
                 <h3 className="text-white font-semibold text-sm sm:text-base">Safaricom</h3>
                 <p className="text-blue-100 text-xs sm:text-sm">Leading telecommunications provider in Kenya</p>
               </div>
-              <div className="text-center">
+              <div className="text-center cursor-pointer transition-transform hover:scale-105" onClick={() => handlePartnerClick("S-Hook")}>
                 <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
                   <span className="text-white font-bold text-sm sm:text-lg">SH</span>
                 </div>
@@ -242,7 +271,7 @@ const Community = () => {
               className={`flex-1 min-w-[100px] sm:min-w-[120px] py-2 sm:py-3 px-3 sm:px-4 rounded-md text-xs sm:text-sm font-medium transition-all ${
                 activeTab === tab
                   ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md"
-                  : "text-blue-700 hover:text-blue-900 hover:bg-blue-100"
+                  : "text-slate-800 hover:text-slate-900 hover:bg-blue-100"
               }`}
             >
               {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -268,27 +297,27 @@ const Community = () => {
             {showNewPostForm && (
               <Card className="bg-white/90 backdrop-blur-md border-blue-200 shadow-lg">
                 <CardHeader>
-                  <CardTitle className="text-blue-900">Create New Discussion</CardTitle>
+                  <CardTitle className="text-slate-900">Create New Discussion</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <Input
                     placeholder="Enter post title..."
                     value={newPostTitle}
                     onChange={(e) => setNewPostTitle(e.target.value)}
-                    className="bg-blue-50 border-blue-200 text-blue-900 placeholder:text-blue-600"
+                    className="bg-blue-50 border-blue-200 text-slate-900 placeholder:text-slate-600"
                   />
                   <Textarea
                     placeholder="What's on your mind?"
                     value={newPostContent}
                     onChange={(e) => setNewPostContent(e.target.value)}
-                    className="bg-blue-50 border-blue-200 text-blue-900 placeholder:text-blue-600 min-h-[120px]"
+                    className="bg-blue-50 border-blue-200 text-slate-900 placeholder:text-slate-600 min-h-[120px]"
                   />
                   <div className="flex flex-col sm:flex-row gap-3">
                     <Button onClick={handleCreatePost} className="bg-gradient-to-r from-blue-600 to-blue-700">
                       <Send className="h-4 w-4 mr-2" />
                       Post
                     </Button>
-                    <Button variant="outline" onClick={() => setShowNewPostForm(false)} className="border-blue-300 text-blue-700 hover:bg-blue-50">
+                    <Button variant="outline" onClick={() => setShowNewPostForm(false)} className="border-blue-300 text-slate-800 hover:bg-blue-50">
                       Cancel
                     </Button>
                   </div>
@@ -301,20 +330,20 @@ const Community = () => {
               {discussions.map((discussion) => (
                 <Card key={discussion.id} className="bg-white/90 backdrop-blur-md border-blue-200 shadow-lg">
                   <CardHeader className="pb-3">
-                    <CardTitle className="text-blue-900 text-lg sm:text-xl">{discussion.title}</CardTitle>
+                    <CardTitle className="text-slate-900 text-lg sm:text-xl">{discussion.title}</CardTitle>
                     <div className="flex items-center mt-2">
                       <Avatar className="w-6 h-6">
                         <AvatarFallback className="bg-blue-500 text-white">
                           {discussion.author.charAt(0)}
                         </AvatarFallback>
                       </Avatar>
-                      <span className="text-blue-700 ml-2 text-sm">
+                      <span className="text-slate-700 ml-2 text-sm">
                         {discussion.author} - {discussion.date}
                       </span>
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <p className="text-blue-800">{discussion.content}</p>
+                    <p className="text-slate-800">{discussion.content}</p>
                     
                     {/* Action Buttons */}
                     <div className="flex flex-wrap items-center gap-3 sm:gap-4">
@@ -322,7 +351,7 @@ const Community = () => {
                         variant="ghost"
                         size="sm"
                         onClick={() => handleLikePost(discussion.id)}
-                        className={`text-blue-700 hover:text-blue-900 hover:bg-blue-100 ${discussion.liked ? 'text-red-600 hover:text-red-700' : ''}`}
+                        className={`text-slate-700 hover:text-slate-900 hover:bg-blue-100 ${discussion.liked ? 'text-red-600 hover:text-red-700' : ''}`}
                       >
                         <Heart className={`h-4 w-4 mr-1 ${discussion.liked ? 'fill-current' : ''}`} />
                         <span className="text-xs sm:text-sm">{discussion.likes}</span>
@@ -332,13 +361,18 @@ const Community = () => {
                         variant="ghost"
                         size="sm"
                         onClick={() => toggleComments(discussion.id)}
-                        className="text-blue-700 hover:text-blue-900 hover:bg-blue-100"
+                        className="text-slate-700 hover:text-slate-900 hover:bg-blue-100"
                       >
                         <MessageSquare className="h-4 w-4 mr-1" />
                         <span className="text-xs sm:text-sm">{discussion.replies} Comments</span>
                       </Button>
                       
-                      <Button variant="ghost" size="sm" className="text-blue-700 hover:text-blue-900 hover:bg-blue-100">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        onClick={() => handleSharePost(discussion.title)}
+                        className="text-slate-700 hover:text-slate-900 hover:bg-blue-100"
+                      >
                         <Share2 className="h-4 w-4 mr-1" />
                         <span className="text-xs sm:text-sm">Share</span>
                       </Button>
@@ -357,10 +391,10 @@ const Community = () => {
                             <div className="flex-1">
                               <div className="bg-blue-50 rounded-lg p-3">
                                 <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 mb-1">
-                                  <span className="text-blue-900 text-sm font-medium">{comment.author}</span>
-                                  <span className="text-blue-600 text-xs">{comment.date}</span>
+                                  <span className="text-slate-900 text-sm font-medium">{comment.author}</span>
+                                  <span className="text-slate-600 text-xs">{comment.date}</span>
                                 </div>
-                                <p className="text-blue-800 text-sm">{comment.content}</p>
+                                <p className="text-slate-800 text-sm">{comment.content}</p>
                               </div>
                             </div>
                           </div>
@@ -378,7 +412,7 @@ const Community = () => {
                               placeholder="Write a comment..."
                               value={commentContent[discussion.id] || ""}
                               onChange={(e) => setCommentContent({...commentContent, [discussion.id]: e.target.value})}
-                              className="bg-blue-50 border-blue-200 text-blue-900 placeholder:text-blue-600"
+                              className="bg-blue-50 border-blue-200 text-slate-900 placeholder:text-slate-600"
                             />
                             <Button 
                               size="sm" 
@@ -403,25 +437,28 @@ const Community = () => {
             <TeamCollaboration />
             <Card className="bg-white/90 backdrop-blur-md border-blue-200 shadow-lg">
               <CardHeader>
-                <CardTitle className="text-blue-900">Advanced Project Reviews</CardTitle>
-                <CardDescription className="text-blue-700">
+                <CardTitle className="text-slate-900">Advanced Project Reviews</CardTitle>
+                <CardDescription className="text-slate-700">
                   Get expert feedback on your projects
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="border border-blue-200 rounded-lg p-4 bg-blue-50">
                   <div className="flex items-center justify-between mb-3">
-                    <h4 className="text-blue-900 font-medium">E-commerce Dashboard</h4>
-                    <Badge className="bg-blue-500/20 text-blue-700">Reviewed</Badge>
+                    <h4 className="text-slate-900 font-medium">E-commerce Dashboard</h4>
+                    <Badge className="bg-blue-500/20 text-slate-700">Reviewed</Badge>
                   </div>
-                  <p className="text-blue-800 text-sm mb-3">React + Node.js project with payment integration</p>
-                  <div className="flex flex-wrap items-center gap-3 text-sm text-blue-700">
+                  <p className="text-slate-800 text-sm mb-3">React + Node.js project with payment integration</p>
+                  <div className="flex flex-wrap items-center gap-3 text-sm text-slate-700">
                     <span>★★★★☆ 4.5/5</span>
                     <span>Mentor: Sarah K.</span>
                     <span>2 days ago</span>
                   </div>
                 </div>
-                <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800">
+                <Button 
+                  onClick={handleSubmitProjectReview}
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
+                >
                   Submit Project for Review
                 </Button>
               </CardContent>
@@ -447,8 +484,8 @@ const Community = () => {
                       </AvatarFallback>
                     </Avatar>
                     <div className="ml-3">
-                      <CardTitle className="text-blue-900 text-lg">{review.author}</CardTitle>
-                      <p className="text-blue-700 text-sm">Reviewed {review.course}</p>
+                      <CardTitle className="text-slate-900 text-lg">{review.author}</CardTitle>
+                      <p className="text-slate-700 text-sm">Reviewed {review.course}</p>
                     </div>
                   </div>
                 </CardHeader>
@@ -458,8 +495,8 @@ const Community = () => {
                       <Star key={i} className="h-4 w-4 text-yellow-500 fill-current" />
                     ))}
                   </div>
-                  <p className="text-blue-800">{review.comment}</p>
-                  <p className="text-blue-600 text-sm mt-3">Posted on {review.date}</p>
+                  <p className="text-slate-800">{review.comment}</p>
+                  <p className="text-slate-600 text-sm mt-3">Posted on {review.date}</p>
                 </CardContent>
               </Card>
             ))}

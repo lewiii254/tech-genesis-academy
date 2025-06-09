@@ -1,10 +1,9 @@
+
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Calendar, Clock, MapPin, Users, Video, Plus, Search, Filter, Bell } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -144,6 +143,8 @@ const Events = () => {
   const [selectedType, setSelectedType] = useState<string>("All");
   const [selectedLevel, setSelectedLevel] = useState<string>("All");
   const [showOnlyFree, setShowOnlyFree] = useState(false);
+  const [registeredEvents, setRegisteredEvents] = useState<string[]>([]);
+  const [alertsEnabled, setAlertsEnabled] = useState(false);
   const { toast } = useToast();
 
   const filteredEvents = events.filter(event => {
@@ -157,7 +158,18 @@ const Events = () => {
     return matchesSearch && matchesType && matchesLevel && matchesPrice;
   });
 
-  const handleRegister = (eventTitle: string, price: number) => {
+  const handleRegister = (eventId: string, eventTitle: string, price: number) => {
+    if (registeredEvents.includes(eventId)) {
+      toast({
+        title: "Already Registered",
+        description: `You're already registered for ${eventTitle}`,
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setRegisteredEvents([...registeredEvents, eventId]);
+
     if (price === 0) {
       toast({
         title: "Registered Successfully!",
@@ -165,8 +177,8 @@ const Events = () => {
       });
     } else {
       toast({
-        title: "Proceeding to Payment",
-        description: `Redirecting to payment for ${eventTitle} (KES ${price.toLocaleString()})`,
+        title: "Registration Confirmed!",
+        description: `Registration for ${eventTitle} confirmed. Payment of KES ${price.toLocaleString()} processed.`,
       });
     }
   };
@@ -175,6 +187,16 @@ const Events = () => {
     toast({
       title: "Joining Live Event",
       description: `Opening ${eventTitle} in a new window...`,
+    });
+  };
+
+  const handleSetAlerts = () => {
+    setAlertsEnabled(!alertsEnabled);
+    toast({
+      title: alertsEnabled ? "Alerts Disabled" : "Alerts Enabled",
+      description: alertsEnabled 
+        ? "You will no longer receive event notifications" 
+        : "You'll now receive notifications for upcoming events",
     });
   };
 
@@ -211,7 +233,11 @@ const Events = () => {
               <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
               <span className="font-medium">Live Now:</span>
               <span>Mobile App Monetization Strategies</span>
-              <Button size="sm" className="ml-auto bg-red-600 hover:bg-red-700 text-white">
+              <Button 
+                size="sm" 
+                onClick={() => handleJoinLive("Mobile App Monetization Strategies")}
+                className="ml-auto bg-red-600 hover:bg-red-700 text-white"
+              >
                 Join Live
               </Button>
             </div>
@@ -231,9 +257,16 @@ const Events = () => {
               />
             </div>
             
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+            <Button 
+              onClick={handleSetAlerts}
+              className={`${
+                alertsEnabled 
+                  ? "bg-green-600 hover:bg-green-700" 
+                  : "bg-blue-600 hover:bg-blue-700"
+              } text-white`}
+            >
               <Bell className="mr-2 h-4 w-4" />
-              Set Alerts
+              {alertsEnabled ? "Alerts On" : "Set Alerts"}
             </Button>
           </div>
           
@@ -288,6 +321,11 @@ const Events = () => {
                 {event.upcoming && (
                   <div className="absolute top-2 right-2 bg-blue-500 text-white px-2 py-1 rounded-full text-xs font-medium">
                     UPCOMING
+                  </div>
+                )}
+                {registeredEvents.includes(event.id) && (
+                  <div className="absolute bottom-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+                    REGISTERED
                   </div>
                 )}
               </div>
@@ -356,11 +394,20 @@ const Events = () => {
                   ) : (
                     <Button 
                       size="sm"
-                      onClick={() => handleRegister(event.title, event.price)}
-                      className="bg-blue-600 hover:bg-blue-700 text-white"
-                      disabled={event.registered >= event.capacity}
+                      onClick={() => handleRegister(event.id, event.title, event.price)}
+                      className={`${
+                        registeredEvents.includes(event.id)
+                          ? "bg-green-600 hover:bg-green-700"
+                          : "bg-blue-600 hover:bg-blue-700"
+                      } text-white`}
+                      disabled={event.registered >= event.capacity && !registeredEvents.includes(event.id)}
                     >
-                      {event.registered >= event.capacity ? "Full" : "Register"}
+                      {registeredEvents.includes(event.id)
+                        ? "Registered"
+                        : event.registered >= event.capacity 
+                          ? "Full" 
+                          : "Register"
+                      }
                     </Button>
                   )}
                 </div>

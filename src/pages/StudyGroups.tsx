@@ -86,6 +86,8 @@ const studyGroups: StudyGroup[] = [
 const StudyGroups = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>("All");
+  const [joinedGroups, setJoinedGroups] = useState<string[]>([]);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [newGroup, setNewGroup] = useState({
     name: "",
     description: "",
@@ -106,7 +108,17 @@ const StudyGroups = () => {
     return matchesSearch && matchesDifficulty;
   });
 
-  const handleJoinGroup = (groupName: string) => {
+  const handleJoinGroup = (groupId: string, groupName: string) => {
+    if (joinedGroups.includes(groupId)) {
+      toast({
+        title: "Already Joined",
+        description: `You're already a member of ${groupName}`,
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setJoinedGroups([...joinedGroups, groupId]);
     toast({
       title: "Joined Study Group!",
       description: `You've successfully joined ${groupName}. Check your email for meeting details.`,
@@ -123,11 +135,28 @@ const StudyGroups = () => {
       return;
     }
 
+    // Create new group object
+    const createdGroup = {
+      id: Date.now().toString(),
+      name: newGroup.name,
+      description: newGroup.description,
+      subject: newGroup.subject,
+      members: 1,
+      maxMembers: parseInt(newGroup.maxMembers) || 10,
+      meetingTime: newGroup.meetingTime || "TBD",
+      location: newGroup.location || "Online",
+      difficulty: newGroup.difficulty as "Beginner" | "Intermediate" | "Advanced",
+      tags: newGroup.tags ? newGroup.tags.split(",").map(tag => tag.trim()) : [],
+      organizer: "You",
+      nextMeeting: "TBD"
+    };
+
     toast({
       title: "Study Group Created!",
       description: `${newGroup.name} has been created successfully. Members will be notified.`,
     });
 
+    // Reset form and close dialog
     setNewGroup({
       name: "",
       description: "",
@@ -138,6 +167,7 @@ const StudyGroups = () => {
       difficulty: "Beginner",
       tags: ""
     });
+    setIsDialogOpen(false);
   };
 
   const getDifficultyColor = (difficulty: string) => {
@@ -182,7 +212,7 @@ const StudyGroups = () => {
               <option value="Advanced">Advanced</option>
             </select>
 
-            <Dialog>
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
                 <Button className="bg-blue-600 hover:bg-blue-700 text-white">
                   <Plus className="mr-2 h-4 w-4" />
@@ -312,11 +342,20 @@ const StudyGroups = () => {
                   <span className="text-sm text-slate-600">by {group.organizer}</span>
                   <Button 
                     size="sm"
-                    onClick={() => handleJoinGroup(group.name)}
-                    className="bg-blue-600 hover:bg-blue-700 text-white"
-                    disabled={group.members >= group.maxMembers}
+                    onClick={() => handleJoinGroup(group.id, group.name)}
+                    className={`${
+                      joinedGroups.includes(group.id) 
+                        ? "bg-green-600 hover:bg-green-700" 
+                        : "bg-blue-600 hover:bg-blue-700"
+                    } text-white`}
+                    disabled={group.members >= group.maxMembers && !joinedGroups.includes(group.id)}
                   >
-                    {group.members >= group.maxMembers ? "Full" : "Join Group"}
+                    {joinedGroups.includes(group.id) 
+                      ? "Joined" 
+                      : group.members >= group.maxMembers 
+                        ? "Full" 
+                        : "Join Group"
+                    }
                   </Button>
                 </div>
               </CardContent>
