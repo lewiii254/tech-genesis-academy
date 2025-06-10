@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Check, Star, Users, BookOpen, Award, Smartphone, CreditCard } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Check, Smartphone, Zap, Users, Award, Star } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useMpesaPayment } from "@/hooks/useMpesaPayment";
 import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 
 const pricingPlans = [
   {

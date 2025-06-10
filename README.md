@@ -38,6 +38,15 @@
 - 📈 **Adaptive Learning Paths** - AI optimizes your learning journey in real-time
 - 🔥 **Gamified Study Sessions** - AI-powered streaks, achievements, and challenges
 
+### 💰 **Fully Integrated M-PESA Payment System** - *Seamless African Payment Solution*
+- 📱 **Complete M-PESA Integration** - STK Push, payment confirmation, and real-time status tracking
+- ⚡ **Instant Course Access** - Automatic enrollment upon successful M-PESA payment
+- 💳 **Secure Payment Processing** - Enterprise-grade security with payment receipts and tracking
+- 🔄 **Real-time Payment Status** - Live payment verification and automatic course activation
+- 📊 **Payment Analytics** - Comprehensive transaction history and reporting
+- 🛡️ **Payment Security** - End-to-end encryption and fraud protection
+- 💸 **Affordable Pricing** - Courses priced in Kenyan Shillings for local accessibility
+
 ### 🎓 **Comprehensive Learning Experience**
 - 📖 **18+ Premium Courses** spanning Web Development, AI/ML, Blockchain, Mobile Development, and more
 - 🆓 **Free Courses** available for basic skill building
@@ -45,11 +54,13 @@
 - 🏆 **Industry-Recognized Certificates** upon course completion
 - 📱 **Mobile-Responsive Design** for learning on any device
 
-### 💰 **Safaricom M-PESA Integration** 
-- 📱 **Seamless Mobile Payments** via M-PESA
-- 💸 **Affordable Pricing** in Kenyan Shillings (KES)
-- 🔒 **Secure Payment Processing** 
-- ⚡ **Instant Course Access** after payment confirmation
+### 💼 **Integrated Job Placement Board**
+- 🎯 **Exclusive Job Opportunities** from top Kenyan tech companies
+- 📋 **Direct Application System** - Apply for jobs directly through our platform
+- 🏢 **Company Partnerships** - Direct connections with Safaricom, Equity Bank, M-Shule, and more
+- 📱 **USSD Job Applications** - Apply for jobs even without internet using USSD codes
+- 💰 **Salary Transparency** - Clear salary ranges and job requirements
+- 🚀 **Career Advancement** - From learning to employment in one platform
 
 ### 👥 **Interactive Learning Community**
 - 🤝 **Study Groups** for collaborative learning

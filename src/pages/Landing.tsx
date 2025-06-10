@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Users, Award, Star, ArrowRight, Play, CheckCircle } from "lucide-react";
+import { BookOpen, Users, Award, Star, ArrowRight, Play, CheckCircle, Briefcase, Building, MapPin, DollarSign } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -14,6 +14,11 @@ const Landing = () => {
       icon: BookOpen,
       title: "Expert-Led Courses",
       description: "Learn from industry professionals with real-world experience in Kenya's tech scene"
+    },
+    {
+      icon: Briefcase,
+      title: "Job Placement Board",
+      description: "Access exclusive job opportunities from top Kenyan companies and apply directly through our platform"
     },
     {
       icon: Users,
@@ -57,6 +62,30 @@ const Landing = () => {
       role: "UX Designer at iHub",
       content: "From beginner to professional in 6 months. The quality of education here is unmatched.",
       avatar: "GW"
+    }
+  ];
+
+  const jobHighlights = [
+    {
+      title: "Senior Frontend Developer",
+      company: "Safaricom PLC",
+      location: "Nairobi, Kenya",
+      salary: "KES 180,000 - 300,000",
+      type: "Full-time"
+    },
+    {
+      title: "Data Scientist",
+      company: "Equity Bank",
+      location: "Nairobi, Kenya", 
+      salary: "KES 200,000 - 350,000",
+      type: "Full-time"
+    },
+    {
+      title: "Mobile App Developer",
+      company: "M-Shule",
+      location: "Nairobi, Kenya",
+      salary: "KES 120,000 - 200,000",
+      type: "Full-time"
     }
   ];
 
@@ -128,7 +157,7 @@ const Landing = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <Card key={index} className="bg-white border-slate-200 hover:border-blue-300 transition-all duration-300 group shadow-md">
                 <CardHeader className="text-center">
@@ -144,6 +173,61 @@ const Landing = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Job Board Showcase Section */}
+      <section className="py-20 px-6 bg-slate-50">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
+              Exclusive Job Opportunities
+            </h2>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+              Get direct access to premium job opportunities from Kenya's top tech companies. Our job board connects you with employers looking for skilled professionals.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            {jobHighlights.map((job, index) => (
+              <Card key={index} className="bg-white border-slate-200 hover:border-blue-300 transition-all duration-300 shadow-md">
+                <CardContent className="p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <Badge className="bg-blue-100 text-blue-800 border-blue-200">
+                      {job.type}
+                    </Badge>
+                    <div className="flex items-center gap-1">
+                      <Building className="h-4 w-4 text-slate-500" />
+                    </div>
+                  </div>
+                  <h4 className="text-slate-900 font-semibold text-lg mb-2">{job.title}</h4>
+                  <p className="text-slate-700 mb-3">{job.company}</p>
+                  <div className="space-y-2 text-sm text-slate-600">
+                    <div className="flex items-center gap-2">
+                      <MapPin className="h-4 w-4" />
+                      <span>{job.location}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <DollarSign className="h-4 w-4" />
+                      <span className="font-medium text-green-600">{job.salary}</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <Button asChild size="lg" className="bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white">
+              <Link to="/jobs">
+                <Briefcase className="mr-2 h-5 w-5" />
+                View All Job Opportunities
+              </Link>
+            </Button>
+            <p className="text-slate-600 mt-4">
+              Join our platform to access exclusive job postings and apply directly through TechLearn Kenya
+            </p>
           </div>
         </div>
       </section>
