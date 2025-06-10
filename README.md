@@ -285,25 +285,25 @@ VITE_APP_URL=http://localhost:5173
 
 ## 🔮 Future Roadmap
 
-### 🎯 **Phase 1: Enhanced AI Features** (Q1 2024)
+### 🎯 **Phase 1: Enhanced AI Features**
 - 🎥 **AI Video Tutors** - Personalized video explanations
 - 📱 **Mobile AI App** - Native iOS and Android applications
 - 🎧 **Voice-First Learning** - Audio-only study sessions
 - 🔄 **Offline AI Mode** - Download AI models for offline use
 
-### 🌟 **Phase 2: Advanced Intelligence** (Q2 2024)
+### 🌟 **Phase 2: Advanced Intelligence** 
 - 🤖 **Multi-Agent AI System** - Specialized AI tutors for each subject
 - 📊 **Predictive Learning Analytics** - Early intervention for struggling students
 - 🎯 **Micro-Learning AI** - Bite-sized, personalized content delivery
 - 💬 **Emotional Intelligence** - AI that responds to learner emotions
 
-### 🌍 **Phase 3: Pan-African Expansion** (Q3 2024)
+### 🌍 **Phase 3: Pan-African Expansion** 
 - 🌐 **Multi-language AI** - Swahili, French, Portuguese AI tutors
 - 💱 **Local Payment Methods** - Mobile money across Africa
 - 🏢 **University Partnerships** - Academic institution collaborations
 - 🏛️ **Government Programs** - Public sector training initiatives
 
-### 🚀 **Phase 4: Global AI Leadership** (Q4 2024)
+### 🚀 **Phase 4: Global AI Leadership** 
 - 🌎 **International Markets** - Expansion beyond Africa
 - 🎓 **AI-Certified Degrees** - Accredited AI-assisted education
 - 💼 **Corporate AI Training** - Enterprise learning solutions
@@ -312,12 +312,6 @@ VITE_APP_URL=http://localhost:5173
 ---
 
 ## 🏆 Awards & Recognition
-
-### 🌟 **Recent Achievements**
-- 🥇 **Best AI EdTech Solution** - Africa Tech Awards 2024
-- 🌟 **Innovation in Learning** - Global EdTech Summit 2024
-- 🎓 **Education Excellence** - Digital Education Summit 2024
-- 🤖 **AI Innovation Award** - African AI Conference 2024
 
 ---
 
