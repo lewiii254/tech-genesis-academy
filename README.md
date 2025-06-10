@@ -29,7 +29,8 @@
 
 
 ## Payment Of the Premium Courses via STK MPESA PUSH IS FULLY FUNCTIONAL
-
+## [Deployed Live Link]()
+## [PitchDeck Link]()
 ---
 
 ## ✨ Key Features
