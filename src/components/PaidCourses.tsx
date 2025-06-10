@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -416,5 +417,3 @@ const PaidCourses = () => {
 };
 
 export default PaidCourses;
-
-</edits_to_apply>
