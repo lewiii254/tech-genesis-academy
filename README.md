@@ -13,6 +13,8 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.0+-06B6D4?style=for-the-badge&logo=tailwindcss)](https://tailwindcss.com/)
 [![Supabase](https://img.shields.io/badge/Supabase-Backend-3ECF8E?style=for-the-badge&logo=supabase)](https://supabase.com/)
 [![Safaricom](https://img.shields.io/badge/M--PESA-Payment-00A651?style=for-the-badge)](https://developer.safaricom.co.ke/)
+[![Safaricom](https://img.shields.io/badge/Safaricom-00A651?style=for-the-badge&logo=safaricom)](https://www.safaricom.co.ke/)
+
 
 </div>
 
