@@ -29,7 +29,7 @@
 
 
 ## Payment Of the Premium Courses via STK MPESA PUSH IS FULLY FUNCTIONAL
-## [Deployed Live Link]()
+### [Deployed Live Link](https://tech-genesis-academy.vercel.app/)
 ## [PitchDeck Link]()
 ---
 
