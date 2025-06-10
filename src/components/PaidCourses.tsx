@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -7,6 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { BookOpen, Clock, Users, Star, Smartphone, CheckCircle, Play, Heart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useMpesaPayment } from "@/hooks/useMpesaPayment";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 
 interface PaidCourse {
   id: string;
@@ -85,9 +87,11 @@ const PaidCourses = () => {
   const [paymentStep, setPaymentStep] = useState<"details" | "payment" | "processing">("details");
   const [wishlist, setWishlist] = useState<string[]>([]);
   const { toast } = useToast();
+  const { initiatePayment, isProcessing } = useMpesaPayment();
+  const { user } = useAuth();
 
   const handleEnrollment = async () => {
-    if (!selectedCourse) return;
+    if (!selectedCourse || !user) return;
 
     if (!phoneNumber) {
       toast({
@@ -100,20 +104,64 @@ const PaidCourses = () => {
 
     setPaymentStep("processing");
 
-    toast({
-      title: "M-PESA Payment Initiated",
-      description: `Please check your phone (${phoneNumber}) for the M-PESA prompt to pay KES ${selectedCourse.price.toLocaleString()}.`,
+    const result = await initiatePayment({
+      amount: selectedCourse.price,
+      phoneNumber,
+      paymentType: 'course_enrollment',
+      referenceId: selectedCourse.id,
     });
 
-    setTimeout(() => {
-      toast({
-        title: "Payment Successful!",
-        description: `Welcome to ${selectedCourse.title}! You now have lifetime access to this course.`,
-      });
+    if (result) {
+      // Start polling for payment status
+      pollPaymentStatus(result.paymentId);
+    } else {
       setPaymentStep("details");
-      setSelectedCourse(null);
-      setPhoneNumber("");
-    }, 3000);
+    }
+  };
+
+  const pollPaymentStatus = async (paymentId: string) => {
+    const maxAttempts = 30; // Poll for 2.5 minutes
+    let attempts = 0;
+
+    const checkStatus = async () => {
+      attempts++;
+      
+      const { data } = await supabase
+        .from('payments')
+        .select('status, mpesa_receipt_number')
+        .eq('id', paymentId)
+        .single();
+
+      if (data?.status === 'success') {
+        toast({
+          title: "Payment Successful!",
+          description: `Welcome to ${selectedCourse?.title}! You now have lifetime access to this course. Receipt: ${data.mpesa_receipt_number}`,
+        });
+        setPaymentStep("details");
+        setSelectedCourse(null);
+        setPhoneNumber("");
+        return;
+      } else if (data?.status === 'failed') {
+        toast({
+          title: "Payment Failed",
+          description: "Your payment was not successful. Please try again.",
+          variant: "destructive",
+        });
+        setPaymentStep("details");
+        return;
+      } else if (attempts < maxAttempts) {
+        setTimeout(checkStatus, 5000);
+      } else {
+        toast({
+          title: "Payment Timeout",
+          description: "Payment verification timed out. Please check your payment status manually.",
+          variant: "destructive",
+        });
+        setPaymentStep("details");
+      }
+    };
+
+    setTimeout(checkStatus, 5000);
   };
 
   const toggleWishlist = (courseId: string) => {
@@ -314,10 +362,10 @@ const PaidCourses = () => {
                           
                           <Button
                             onClick={handleEnrollment}
-                            disabled={paymentStep === "processing"}
+                            disabled={paymentStep === "processing" || isProcessing}
                             className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
                           >
-                            {paymentStep === "processing" ? (
+                            {paymentStep === "processing" || isProcessing ? (
                               "Processing Payment..."
                             ) : (
                               <>
@@ -368,3 +416,5 @@ const PaidCourses = () => {
 };
 
 export default PaidCourses;
+
+</edits_to_apply>

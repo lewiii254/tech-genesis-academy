@@ -1,10 +1,11 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Check, Star, Users, BookOpen, Award, Smartphone, CreditCard } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useMpesaPayment } from "@/hooks/useMpesaPayment";
+import { useAuth } from "@/hooks/useAuth";
 
 const pricingPlans = [
   {
@@ -68,12 +69,23 @@ const Pricing = () => {
   const [paymentMethod, setPaymentMethod] = useState<"mpesa" | "card">("mpesa");
   const [phoneNumber, setPhoneNumber] = useState("");
   const { toast } = useToast();
+  const { initiatePayment, isProcessing } = useMpesaPayment();
+  const { user } = useAuth();
 
   const handleSubscribe = async (planId: string, price: number) => {
     if (planId === "free") {
       toast({
         title: "Welcome to TechLearn!",
         description: "You're now on the free plan. Start learning immediately!",
+      });
+      return;
+    }
+
+    if (!user) {
+      toast({
+        title: "Authentication Required",
+        description: "Please log in to subscribe to a plan.",
+        variant: "destructive",
       });
       return;
     }
@@ -87,39 +99,76 @@ const Pricing = () => {
       return;
     }
 
-    setSelectedPlan(planId);
-    
-    try {
-      if (paymentMethod === "mpesa") {
-        // Simulate M-PESA payment
-        toast({
-          title: "M-PESA Payment Initiated",
-          description: `Please check your phone (${phoneNumber}) for the M-PESA prompt to pay KES ${price.toLocaleString()}.`,
-        });
-        
-        // Simulate payment processing
-        setTimeout(() => {
-          toast({
-            title: "Payment Successful!",
-            description: `Welcome to TechLearn ${planId}! Your subscription is now active.`,
-          });
-          setSelectedPlan(null);
-        }, 3000);
+    if (paymentMethod === "mpesa") {
+      setSelectedPlan(planId);
+      
+      const result = await initiatePayment({
+        amount: price,
+        phoneNumber,
+        paymentType: 'subscription',
+        referenceId: planId,
+      });
+
+      if (result) {
+        // Start polling for payment status
+        pollPaymentStatus(result.paymentId);
       } else {
-        // Card payment simulation
-        toast({
-          title: "Redirecting to Payment",
-          description: "You'll be redirected to our secure payment gateway.",
-        });
+        setSelectedPlan(null);
       }
-    } catch (error) {
+    } else {
+      // Card payment simulation
       toast({
-        title: "Payment Failed",
-        description: "There was an error processing your payment. Please try again.",
+        title: "Card Payment",
+        description: "Card payment integration coming soon. Please use M-PESA for now.",
         variant: "destructive",
       });
-      setSelectedPlan(null);
     }
+  };
+
+  const pollPaymentStatus = async (paymentId: string) => {
+    const maxAttempts = 30; // Poll for 2.5 minutes (30 * 5 seconds)
+    let attempts = 0;
+
+    const checkStatus = async () => {
+      attempts++;
+      
+      const { data } = await supabase
+        .from('payments')
+        .select('status, mpesa_receipt_number')
+        .eq('id', paymentId)
+        .single();
+
+      if (data?.status === 'success') {
+        toast({
+          title: "Payment Successful!",
+          description: `Payment confirmed! Receipt: ${data.mpesa_receipt_number}. Your subscription is now active.`,
+        });
+        setSelectedPlan(null);
+        return;
+      } else if (data?.status === 'failed') {
+        toast({
+          title: "Payment Failed",
+          description: "Your payment was not successful. Please try again.",
+          variant: "destructive",
+        });
+        setSelectedPlan(null);
+        return;
+      } else if (attempts < maxAttempts) {
+        // Continue polling
+        setTimeout(checkStatus, 5000); // Check every 5 seconds
+      } else {
+        // Timeout
+        toast({
+          title: "Payment Timeout",
+          description: "Payment verification timed out. Please check your payment status manually.",
+          variant: "destructive",
+        });
+        setSelectedPlan(null);
+      }
+    };
+
+    // Start checking after 5 seconds
+    setTimeout(checkStatus, 5000);
   };
 
   return (
@@ -209,9 +258,10 @@ const Pricing = () => {
                           size="sm"
                           onClick={() => setPaymentMethod("card")}
                           className="flex-1"
+                          disabled
                         >
                           <CreditCard className="mr-2 h-4 w-4" />
-                          Card
+                          Card (Soon)
                         </Button>
                       </div>
                     </div>
@@ -233,10 +283,10 @@ const Pricing = () => {
 
                 <Button
                   onClick={() => handleSubscribe(plan.id, plan.price)}
-                  disabled={selectedPlan === plan.id}
+                  disabled={selectedPlan === plan.id || isProcessing}
                   className={`w-full bg-gradient-to-r ${plan.color} hover:opacity-90 text-white`}
                 >
-                  {selectedPlan === plan.id ? "Processing..." : 
+                  {selectedPlan === plan.id ? "Processing Payment..." : 
                    plan.id === "free" ? "Get Started Free" : `Subscribe for KES ${plan.price.toLocaleString()}/month`}
                 </Button>
               </CardContent>

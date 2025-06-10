@@ -1,1 +1,11 @@
+
 project_id = "msjvkpmubbrvaxviivvl"
+
+[functions.mpesa-payment]
+verify_jwt = true
+
+[functions.mpesa-callback]
+verify_jwt = false
+
+[functions.check-payment-status]
+verify_jwt = true
