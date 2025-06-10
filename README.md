@@ -27,6 +27,9 @@
 ### 🎯 Mission Statement
 > *"Democratizing technology education across Africa, one student at a time"* 💪
 
+
+## Payment Of the Premium Courses via STK MPESA PUSH IS FULLY FUNCTIONAL
+
 ---
 
 ## ✨ Key Features
