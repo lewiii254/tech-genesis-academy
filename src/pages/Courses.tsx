@@ -413,7 +413,7 @@ const Courses = () => {
   const [showFeaturedOnly, setShowFeaturedOnly] = useState(false);
   const [showFreeOnly, setShowFreeOnly] = useState(false);
 
-  let filteredCourses = allCourses.filter(course => {
+  const filteredCourses = allCourses.filter(course => {
     const matchesSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          course.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          course.skills.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase()));

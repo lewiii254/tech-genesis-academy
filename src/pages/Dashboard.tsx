@@ -19,34 +19,34 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center">
-        <div className="text-slate-800 text-xl">Loading...</div>
+      <div className="min-h-screen bg-gradient-to-br from-background to-cyan-50 flex items-center justify-center">
+        <div className="text-foreground text-xl">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-4 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-br from-background to-cyan-50 p-4 sm:p-6">
       <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-3xl sm:text-4xl font-bold text-slate-800">
+          <h1 className="text-3xl sm:text-4xl font-bold text-foreground">
             Welcome back, {profile?.full_name || profile?.username || 'Learner'}! 👋
           </h1>
-          <p className="text-lg sm:text-xl text-slate-600">Continue your learning journey</p>
+          <p className="text-lg sm:text-xl text-muted-foreground">Continue your learning journey</p>
         </div>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          <Card className="bg-white border-slate-200 shadow-md">
+          <Card className="bg-card border-border shadow-md">
             <CardContent className="p-4 sm:p-6">
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-md">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-primary to-cyan-600 rounded-full flex items-center justify-center shadow-md">
                   <BookOpen className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                 </div>
                 <div>
-                  <p className="text-slate-600 text-sm font-medium">Courses Completed</p>
-                  <p className="text-slate-800 text-xl sm:text-2xl font-bold">{profile?.total_points ? Math.floor(profile.total_points / 100) : 0}</p>
+                  <p className="text-muted-foreground text-sm font-medium">Courses Completed</p>
+                  <p className="text-card-foreground text-xl sm:text-2xl font-bold">{profile?.total_points ? Math.floor(profile.total_points / 100) : 0}</p>
                 </div>
               </div>
             </CardContent>
