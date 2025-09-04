@@ -33,21 +33,21 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 flex items-center justify-center p-6">
+    <div className="min-h-screen bg-gradient-to-br from-background via-cyan-50 to-primary/10 flex items-center justify-center p-6">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center shadow-lg">
+            <div className="w-16 h-16 bg-gradient-to-r from-primary to-cyan-700 rounded-lg flex items-center justify-center shadow-lg">
               <BookOpen className="h-8 w-8 text-white" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-blue-900 mb-2">TechLearn Kenya</h1>
-          <p className="text-blue-700">Join thousands of learners advancing their tech skills</p>
+          <h1 className="text-3xl font-bold text-foreground mb-2">TechLearn Kenya</h1>
+          <p className="text-muted-foreground">Join thousands of learners advancing their tech skills</p>
         </div>
 
         <Tabs defaultValue="signin" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 mb-6 bg-white/80 border-blue-200">
-            <TabsTrigger value="signin" className="flex items-center space-x-2 text-blue-700 data-[state=active]:bg-blue-100 data-[state=active]:text-blue-900">
+          <TabsList className="grid w-full grid-cols-2 mb-6 bg-card/80 border-border">
+            <TabsTrigger value="signin" className="flex items-center space-x-2 text-foreground data-[state=active]:bg-primary/10 data-[state=active]:text-primary">
               <LogIn className="h-4 w-4" />
               <span>Sign In</span>
             </TabsTrigger>
