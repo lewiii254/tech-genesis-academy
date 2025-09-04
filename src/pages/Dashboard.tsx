@@ -10,10 +10,6 @@ import JobPlacementCard from "@/components/JobPlacementCard";
 import CustomLearningPath from "@/components/CustomLearningPath";
 import PaidCourses from "@/components/PaidCourses";
 
-interface DashboardProps {
-  // You can define props here if needed
-}
-
 const Dashboard = () => {
   const { profile, loading } = useProfile();
 
