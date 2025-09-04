@@ -90,22 +90,22 @@ const Landing = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-cyan-50">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative py-20 px-6 text-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-100/50 to-background/50 backdrop-blur-sm"></div>
+      <section className="relative py-20 px-6 text-center overflow-hidden bg-slate-50">
+        <div className="absolute inset-0 bg-slate-100/50 backdrop-blur-sm"></div>
         <div className="relative max-w-6xl mx-auto">
           <div className="mb-8">
-            <Badge className="bg-primary/10 text-primary border-primary/20 mb-6">
+            <Badge className="bg-cyan-50 text-cyan-700 border-cyan-200 mb-6">
               🚀 Kenya's #1 Tech Learning Platform
             </Badge>
-            <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 leading-tight">
+            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
               Master Tech Skills,
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-700">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-cyan-700">
                 {" "}Transform Your Future
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-4xl mx-auto">
+            <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-4xl mx-auto">
               Join thousands of Kenyans advancing their careers through industry-relevant tech education. 
               Learn from experts, build real projects, and land your dream job.
             </p>
@@ -113,19 +113,19 @@ const Landing = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             {user ? (
-              <Button asChild size="lg" className="bg-gradient-to-r from-primary to-cyan-700 hover:from-primary/90 hover:to-cyan-700/90 text-lg px-8 py-4 text-white">
+              <Button asChild size="lg" className="bg-gradient-to-r from-cyan-600 to-cyan-700 hover:from-cyan-700 hover:to-cyan-800 text-lg px-8 py-4 text-white">
                 <Link to="/dashboard">
                   Go to Dashboard <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
             ) : (
               <>
-                <Button asChild size="lg" className="bg-gradient-to-r from-primary to-cyan-700 hover:from-primary/90 hover:to-cyan-700/90 text-lg px-8 py-4 text-white">
+                <Button asChild size="lg" className="bg-gradient-to-r from-cyan-600 to-cyan-700 hover:from-cyan-700 hover:to-cyan-800 text-lg px-8 py-4 text-white">
                   <Link to="/auth">
                     Start Learning Today <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
-                <Button variant="outline" size="lg" className="border-border text-foreground hover:bg-muted text-lg px-8 py-4">
+                <Button variant="outline" size="lg" className="border-gray-300 text-gray-700 hover:bg-gray-50 text-lg px-8 py-4">
                   <Play className="mr-2 h-5 w-5" />
                   Watch Demo
                 </Button>

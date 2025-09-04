@@ -88,15 +88,15 @@ export function Navigation() {
   ];
 
   return (
-    <nav className="bg-card border-b border-border sticky top-0 z-50 shadow-sm">
+    <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-primary to-cyan-700 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-gradient-to-r from-cyan-600 to-cyan-700 rounded-lg flex items-center justify-center">
               <BookOpen className="h-5 w-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-foreground">TechLearn Kenya</span>
+            <span className="text-xl font-bold text-gray-900">TechLearn Kenya</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -106,7 +106,7 @@ export function Navigation() {
                 <NavigationMenuList>
                   {navigationItems.map((section) => (
                     <NavigationMenuItem key={section.title}>
-                      <NavigationMenuTrigger className="text-foreground hover:text-primary">
+                      <NavigationMenuTrigger className="text-gray-700 hover:text-cyan-600">
                         {section.title}
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
@@ -116,15 +116,15 @@ export function Navigation() {
                               <Link
                                 to={item.href}
                                 className={cn(
-                                  "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-muted",
-                                  isActive(item.href) && "bg-primary/10 text-primary"
+                                  "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-50",
+                                  isActive(item.href) && "bg-cyan-50 text-cyan-700"
                                 )}
                               >
                                 <div className="flex items-center space-x-2">
                                   <item.icon className="h-4 w-4" />
                                   <div className="text-sm font-medium">{item.title}</div>
                                 </div>
-                                <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
+                                <p className="line-clamp-2 text-xs leading-snug text-gray-600">
                                   {item.description}
                                 </p>
                               </Link>
@@ -139,8 +139,8 @@ export function Navigation() {
                     <Link
                       to="/ai-chat"
                       className={cn(
-                        "inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-muted focus:bg-muted focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-muted data-[state=open]:bg-muted",
-                        isActive("/ai-chat") && "bg-primary/10 text-primary"
+                        "inline-flex h-10 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-50 focus:bg-gray-50 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-50 data-[state=open]:bg-gray-50",
+                        isActive("/ai-chat") && "bg-cyan-50 text-cyan-700"
                       )}
                     >
                       <MessageSquare className="h-4 w-4 mr-2" />
@@ -157,7 +157,7 @@ export function Navigation() {
             {user ? (
               <div className="flex items-center space-x-4">
                 <Link to="/profile">
-                  <Button variant="ghost" size="sm" className="text-foreground hover:text-primary">
+                  <Button variant="ghost" size="sm" className="text-gray-700 hover:text-cyan-600">
                     <User className="h-4 w-4 mr-2" />
                     Profile
                   </Button>
@@ -166,7 +166,7 @@ export function Navigation() {
                   variant="outline" 
                   size="sm" 
                   onClick={handleSignOut}
-                  className="border-border text-foreground hover:bg-muted"
+                  className="border-gray-300 text-gray-700 hover:bg-gray-50"
                 >
                   Sign Out
                 </Button>
@@ -174,12 +174,12 @@ export function Navigation() {
             ) : (
               <div className="flex items-center space-x-2">
                 <Link to="/auth">
-                  <Button variant="ghost" size="sm" className="text-foreground hover:text-primary">
+                  <Button variant="ghost" size="sm" className="text-gray-700 hover:text-cyan-600">
                     Sign In
                   </Button>
                 </Link>
                 <Link to="/auth">
-                  <Button size="sm" className="bg-primary hover:bg-primary/90 text-white">
+                  <Button size="sm" className="bg-cyan-600 hover:bg-cyan-700 text-white">
                     Get Started
                   </Button>
                 </Link>
@@ -193,7 +193,7 @@ export function Navigation() {
               variant="ghost"
               size="sm"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-foreground"
+              className="text-gray-700"
             >
               {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
@@ -202,7 +202,7 @@ export function Navigation() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && user && (
-          <div className="lg:hidden border-t border-border py-4">
+          <div className="lg:hidden border-t border-gray-200 py-4">
             <div className="grid gap-2">
               {mobileMenuItems.map((item) => (
                 <Link
@@ -210,8 +210,8 @@ export function Navigation() {
                   to={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={cn(
-                    "flex items-center space-x-3 px-3 py-2 rounded-md text-foreground hover:bg-muted",
-                    isActive(item.href) && "bg-primary/10 text-primary"
+                    "flex items-center space-x-3 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-50",
+                    isActive(item.href) && "bg-cyan-50 text-cyan-700"
                   )}
                 >
                   <item.icon className="h-4 w-4" />
@@ -219,11 +219,11 @@ export function Navigation() {
                 </Link>
               ))}
               
-              <div className="border-t border-border pt-4 mt-4">
+              <div className="border-t border-gray-200 pt-4 mt-4">
                 <Link
                   to="/profile"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center space-x-3 px-3 py-2 rounded-md text-foreground hover:bg-muted"
+                  className="flex items-center space-x-3 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-50"
                 >
                   <User className="h-4 w-4" />
                   <span>Profile</span>
@@ -233,7 +233,7 @@ export function Navigation() {
                     handleSignOut();
                     setIsMobileMenuOpen(false);
                   }}
-                  className="flex items-center space-x-3 px-3 py-2 rounded-md text-foreground hover:bg-muted w-full text-left"
+                  className="flex items-center space-x-3 px-3 py-2 rounded-md text-gray-700 hover:bg-gray-50 w-full text-left"
                 >
                   <span>Sign Out</span>
                 </button>
@@ -244,19 +244,19 @@ export function Navigation() {
 
         {/* Mobile Auth Menu (when not logged in) */}
         {isMobileMenuOpen && !user && (
-          <div className="lg:hidden border-t border-border py-4">
+          <div className="lg:hidden border-t border-gray-200 py-4">
             <div className="grid gap-2">
               <Link
                 to="/auth"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="px-3 py-2 text-foreground hover:bg-muted rounded-md"
+                className="px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md"
               >
                 Sign In
               </Link>
               <Link
                 to="/auth"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="px-3 py-2 bg-primary text-white hover:bg-primary/90 rounded-md text-center"
+                className="px-3 py-2 bg-cyan-600 text-white hover:bg-cyan-700 rounded-md text-center"
               >
                 Get Started
               </Link>
