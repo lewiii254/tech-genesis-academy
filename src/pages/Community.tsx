@@ -139,12 +139,12 @@ const Community = () => {
   const categories = ["General", "Programming", "Marketing", "Study Groups", "Announcements"];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-4">
       {/* Header */}
       <div className="mb-8">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-4xl font-bold text-gray-900">Community</h1>
-          <p className="text-gray-600 mt-2">Connect, share, and learn with fellow students</p>
+          <h1 className="text-4xl font-bold text-slate-900">Community</h1>
+          <p className="text-slate-600 mt-2">Connect, share, and learn with fellow students</p>
         </div>
       </div>
 
@@ -165,7 +165,7 @@ const Community = () => {
                 </Button>
 
                 {discussions.map((item) => (
-                  <Card key={item.id} className="hover:shadow-lg transition-shadow">
+                  <Card key={item.id} className="bg-white border-slate-200 hover:shadow-lg transition-shadow">
                     <CardContent className="p-6">
                       <div className="flex items-start gap-4">
                         <Avatar>
@@ -173,12 +173,12 @@ const Community = () => {
                         </Avatar>
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
-                            <h3 className="font-semibold text-gray-900">{item.author}</h3>
-                            <span className="text-sm text-gray-500">{item.time}</span>
+                            <h3 className="font-semibold text-slate-900">{item.author}</h3>
+                            <span className="text-sm text-slate-500">{item.time}</span>
                             <Badge variant="outline">{item.category}</Badge>
                           </div>
                           <h4 className="font-medium text-lg mb-2">{item.title}</h4>
-                          <p className="text-gray-700 mb-4">{item.content}</p>
+                          <p className="text-slate-700 mb-4">{item.content}</p>
                           <div className="flex items-center gap-6">
                             <Button
                               variant="ghost"
@@ -207,14 +207,14 @@ const Community = () => {
 
               {/* Sidebar */}
               <div className="space-y-4">
-                <Card>
+                <Card className="bg-white border-slate-200">
                   <CardHeader>
-                    <CardTitle>Categories</CardTitle>
+                    <CardTitle className="text-slate-900">Categories</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2">
                       {categories.map((category) => (
-                        <li key={category} className="flex items-center justify-between">
+                        <li key={category} className="flex items-center justify-between text-slate-700">
                           <span>{category}</span>
                           <Badge variant="secondary">12</Badge>
                         </li>
@@ -223,9 +223,9 @@ const Community = () => {
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="bg-white border-slate-200">
                   <CardHeader>
-                    <CardTitle>Top Members</CardTitle>
+                    <CardTitle className="text-slate-900">Top Members</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-3">
@@ -235,8 +235,8 @@ const Community = () => {
                             <AvatarFallback>JD</AvatarFallback>
                           </Avatar>
                           <div>
-                            <h4 className="font-medium">John Doe</h4>
-                            <p className="text-sm text-gray-500">560 points</p>
+                            <h4 className="font-medium text-slate-900">John Doe</h4>
+                            <p className="text-sm text-slate-500">560 points</p>
                           </div>
                         </li>
                       ))}
@@ -255,7 +255,7 @@ const Community = () => {
                 </Button>
 
                 {posts.map((item) => (
-                  <Card key={item.id} className="hover:shadow-lg transition-shadow">
+                  <Card key={item.id} className="bg-white border-slate-200 hover:shadow-lg transition-shadow">
                     <CardContent className="p-6">
                       <div className="flex items-start gap-4">
                         <Avatar>
@@ -263,12 +263,12 @@ const Community = () => {
                         </Avatar>
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
-                            <h3 className="font-semibold text-gray-900">{item.author}</h3>
-                            <span className="text-sm text-gray-500">{item.time}</span>
+                            <h3 className="font-semibold text-slate-900">{item.author}</h3>
+                            <span className="text-sm text-slate-500">{item.time}</span>
                             <Badge variant="outline">{item.category}</Badge>
                           </div>
                           <h4 className="font-medium text-lg mb-2">{item.title}</h4>
-                          <p className="text-gray-700 mb-4">{item.content}</p>
+                          <p className="text-slate-700 mb-4">{item.content}</p>
                           <div className="flex items-center gap-6">
                             <Button
                               variant="ghost"
@@ -297,14 +297,14 @@ const Community = () => {
 
               {/* Sidebar */}
               <div className="space-y-4">
-                <Card>
+                <Card className="bg-white border-slate-200">
                   <CardHeader>
-                    <CardTitle>Categories</CardTitle>
+                    <CardTitle className="text-slate-900">Categories</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2">
                       {categories.map((category) => (
-                        <li key={category} className="flex items-center justify-between">
+                        <li key={category} className="flex items-center justify-between text-slate-700">
                           <span>{category}</span>
                           <Badge variant="secondary">12</Badge>
                         </li>
@@ -313,9 +313,9 @@ const Community = () => {
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="bg-white border-slate-200">
                   <CardHeader>
-                    <CardTitle>Top Members</CardTitle>
+                    <CardTitle className="text-slate-900">Top Members</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-3">
@@ -325,8 +325,8 @@ const Community = () => {
                             <AvatarFallback>JD</AvatarFallback>
                           </Avatar>
                           <div>
-                            <h4 className="font-medium">John Doe</h4>
-                            <p className="text-sm text-gray-500">560 points</p>
+                            <h4 className="font-medium text-slate-900">John Doe</h4>
+                            <p className="text-sm text-slate-500">560 points</p>
                           </div>
                         </li>
                       ))}
@@ -340,9 +340,9 @@ const Community = () => {
           <TabsContent value="events">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {events.map((event) => (
-                <Card key={event.id} className="hover:shadow-lg transition-shadow">
+                <Card key={event.id} className="bg-white border-slate-200 hover:shadow-lg transition-shadow">
                   <CardHeader>
-                    <CardTitle className="text-lg font-semibold">{event.title}</CardTitle>
+                    <CardTitle className="text-lg font-semibold text-slate-900">{event.title}</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex items-center gap-2">
@@ -353,7 +353,7 @@ const Community = () => {
                       {event.isOnline ? <Link className="h-4 w-4" /> : <MapPin className="h-4 w-4" />}
                       <span>{event.location}</span>
                     </div>
-                    <p className="text-gray-700">{event.description}</p>
+                    <p className="text-slate-700">{event.description}</p>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <Users className="h-4 w-4" />
@@ -378,32 +378,34 @@ const Community = () => {
 
       {/* Create Post Dialog */}
       <Dialog open={showCreatePost} onOpenChange={setShowCreatePost}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-2xl bg-white border-slate-200">
           <DialogHeader>
-            <DialogTitle>Create New Post</DialogTitle>
+            <DialogTitle className="text-slate-900">Create New Post</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2">Title</label>
+              <label className="block text-sm font-medium mb-2 text-slate-900">Title</label>
               <Input
                 value={newPost.title}
                 onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
                 placeholder="Enter post title"
+                className="bg-slate-50 border-slate-300 text-slate-900"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Content</label>
+              <label className="block text-sm font-medium mb-2 text-slate-900">Content</label>
               <Textarea
                 value={newPost.content}
                 onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
                 placeholder="Enter post content"
                 rows={3}
+                className="bg-slate-50 border-slate-300 text-slate-900"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Category</label>
+              <label className="block text-sm font-medium mb-2 text-slate-900">Category</label>
               <select
-                className="w-full px-3 py-2 border rounded-md"
+                className="w-full px-3 py-2 border rounded-md bg-slate-50 border-slate-300 text-slate-900"
                 value={newPost.category}
                 onChange={(e) => setNewPost({ ...newPost, category: e.target.value })}
               >
@@ -413,10 +415,10 @@ const Community = () => {
               </select>
             </div>
             <div className="flex gap-3 pt-4">
-              <Button onClick={handleCreatePost} className="flex-1">
+              <Button onClick={handleCreatePost} className="flex-1 bg-blue-600 hover:bg-blue-700">
                 Create Post
               </Button>
-              <Button variant="outline" onClick={() => setShowCreatePost(false)}>
+              <Button variant="outline" onClick={() => setShowCreatePost(false)} className="border-slate-300 text-slate-700 hover:bg-slate-50">
                 Cancel
               </Button>
             </div>
