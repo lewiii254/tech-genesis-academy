@@ -192,7 +192,7 @@ const AIChat = () => {
             ].map(({ mode, label, icon: Icon }) => (
               <button
                 key={mode}
-                onClick={() => setChatMode(mode as any)}
+                onClick={() => setChatMode(mode as "general" | "code" | "career")}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
                   chatMode === mode
                     ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md"

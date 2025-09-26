@@ -3,6 +3,23 @@ import "https://deno.land/x/xhr@0.1.0/mod.ts";
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.50.0';
 
+interface MpesaItem {
+  Name: string;
+  Value: string | number;
+}
+
+interface Payment {
+  id: string;
+  user_id: string;
+  amount: number;
+  payment_type: 'subscription' | 'course';
+  payment_plan?: string;
+  course_id?: number;
+  mpesa_receipt_number?: string;
+  transaction_date?: string;
+  status: string;
+}
+
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
@@ -54,7 +71,7 @@ serve(async (req) => {
       let transactionDate = '';
       let amountPaid = 0;
 
-      items.forEach((item: any) => {
+      items.forEach((item: MpesaItem) => {
         switch (item.Name) {
           case 'MpesaReceiptNumber':
             mpesaReceiptNumber = item.Value;
@@ -123,7 +140,7 @@ serve(async (req) => {
   }
 });
 
-async function processSubscription(payment: any) {
+async function processSubscription(payment: Payment) {
   try {
     // Calculate expiry date based on plan
     const now = new Date();
@@ -151,7 +168,7 @@ async function processSubscription(payment: any) {
   }
 }
 
-async function processCourseEnrollment(payment: any) {
+async function processCourseEnrollment(payment: Payment) {
   try {
     // Create course enrollment
     const { error } = await supabase
