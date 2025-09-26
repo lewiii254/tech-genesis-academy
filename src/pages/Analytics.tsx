@@ -55,12 +55,12 @@ const Analytics = () => {
   const totalPoints = weeklyProgress.reduce((sum, day) => sum + day.points, 0);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary p-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-4xl font-bold text-slate-800">Learning Analytics</h1>
+            <h1 className="text-4xl font-bold text-slate-900">Learning Analytics</h1>
             <p className="text-xl text-slate-600">Track your progress and optimize your learning journey</p>
           </div>
           <Button className="bg-blue-600 hover:bg-blue-700">
@@ -71,12 +71,12 @@ const Analytics = () => {
 
         {/* Key Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <Card className="bg-white border-slate-200">
+          <Card className="bg-white border-slate-200 hover:shadow-lg transition-shadow">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-slate-600 text-sm font-medium">Total Hours</p>
-                  <p className="text-slate-800 text-2xl font-bold">{totalHours.toFixed(1)}</p>
+                  <p className="text-slate-900 text-2xl font-bold">{totalHours.toFixed(1)}</p>
                   <p className="text-green-600 text-xs">This week</p>
                 </div>
                 <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
@@ -86,12 +86,12 @@ const Analytics = () => {
             </CardContent>
           </Card>
 
-          <Card className="bg-white border-slate-200">
+          <Card className="bg-white border-slate-200 hover:shadow-lg transition-shadow">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-slate-600 text-sm font-medium">Points Earned</p>
-                  <p className="text-slate-800 text-2xl font-bold">{totalPoints}</p>
+                  <p className="text-slate-900 text-2xl font-bold">{totalPoints}</p>
                   <p className="text-green-600 text-xs">This week</p>
                 </div>
                 <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
@@ -101,27 +101,27 @@ const Analytics = () => {
             </CardContent>
           </Card>
 
-          <Card className="bg-white border-slate-200">
+          <Card className="bg-white border-slate-200 hover:shadow-lg transition-shadow">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-slate-600 text-sm font-medium">Avg Daily</p>
-                  <p className="text-slate-800 text-2xl font-bold">{avgDailyHours.toFixed(1)}h</p>
+                  <p className="text-slate-900 text-2xl font-bold">{avgDailyHours.toFixed(1)}h</p>
                   <p className="text-blue-600 text-xs">+0.5h from last week</p>
                 </div>
-                <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
-                  <TrendingUp className="h-6 w-6 text-orange-600" />
+                <div className="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center">
+                  <TrendingUp className="h-6 w-6 text-cyan-600" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-white border-slate-200">
+          <Card className="bg-white border-slate-200 hover:shadow-lg transition-shadow">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-slate-600 text-sm font-medium">Learning Streak</p>
-                  <p className="text-slate-800 text-2xl font-bold">{profile?.learning_streak || 0}</p>
+                  <p className="text-slate-900 text-2xl font-bold">{profile?.learning_streak || 0}</p>
                   <p className="text-green-600 text-xs">Days</p>
                 </div>
                 <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
@@ -135,9 +135,9 @@ const Analytics = () => {
         {/* Charts Row */}
         <div className="grid lg:grid-cols-2 gap-6">
           {/* Weekly Progress Chart */}
-          <Card className="bg-white border-slate-200">
+          <Card className="bg-white border-slate-200 hover:shadow-lg transition-shadow">
             <CardHeader>
-              <CardTitle className="text-slate-800">Weekly Learning Progress</CardTitle>
+              <CardTitle className="text-slate-900">Weekly Learning Progress</CardTitle>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
@@ -148,21 +148,21 @@ const Analytics = () => {
                   <Tooltip 
                     contentStyle={{ 
                       backgroundColor: '#FFFFFF',
-                      border: '1px solid #E2E8F0',
+                      border: '1px solid #CBD5E1',
                       borderRadius: '8px'
                     }}
                   />
-                  <Line type="monotone" dataKey="hours" stroke="#3B82F6" strokeWidth={3} />
-                  <Line type="monotone" dataKey="points" stroke="#10B981" strokeWidth={3} />
+                  <Line type="monotone" dataKey="hours" stroke="#2563EB" strokeWidth={3} />
+                  <Line type="monotone" dataKey="points" stroke="#059669" strokeWidth={3} />
                 </LineChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>
 
           {/* Monthly Courses Chart */}
-          <Card className="bg-white border-slate-200">
+          <Card className="bg-white border-slate-200 hover:shadow-lg transition-shadow">
             <CardHeader>
-              <CardTitle className="text-slate-800">Monthly Course Progress</CardTitle>
+              <CardTitle className="text-slate-900">Monthly Course Progress</CardTitle>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
@@ -173,12 +173,12 @@ const Analytics = () => {
                   <Tooltip 
                     contentStyle={{ 
                       backgroundColor: '#FFFFFF',
-                      border: '1px solid #E2E8F0',
+                      border: '1px solid #CBD5E1',
                       borderRadius: '8px'
                     }}
                   />
-                  <Bar dataKey="completed" fill="#3B82F6" />
-                  <Bar dataKey="started" fill="#93C5FD" />
+                  <Bar dataKey="completed" fill="#2563EB" />
+                  <Bar dataKey="started" fill="#60A5FA" />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>
@@ -188,9 +188,9 @@ const Analytics = () => {
         {/* Skills and Goals Row */}
         <div className="grid lg:grid-cols-2 gap-6">
           {/* Skill Distribution */}
-          <Card className="bg-white border-slate-200">
+          <Card className="bg-white border-slate-200 hover:shadow-lg transition-shadow">
             <CardHeader>
-              <CardTitle className="text-slate-800">Skill Distribution</CardTitle>
+              <CardTitle className="text-slate-900">Skill Distribution</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex flex-col lg:flex-row items-center">
@@ -217,7 +217,7 @@ const Analytics = () => {
                         className="w-3 h-3 rounded-full" 
                         style={{ backgroundColor: skill.color }}
                       />
-                      <span className="text-sm text-slate-600">{skill.name} ({skill.value}%)</span>
+                      <span className="text-sm text-slate-700">{skill.name} ({skill.value}%)</span>
                     </div>
                   ))}
                 </div>
@@ -226,22 +226,22 @@ const Analytics = () => {
           </Card>
 
           {/* Learning Goals */}
-          <Card className="bg-white border-slate-200">
+          <Card className="bg-white border-slate-200 hover:shadow-lg transition-shadow">
             <CardHeader>
-              <CardTitle className="text-slate-800">Learning Goals</CardTitle>
+              <CardTitle className="text-slate-900">Learning Goals</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {learningGoals.map((goal, index) => (
                 <div key={index} className="space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="text-sm font-medium text-slate-700">{goal.goal}</span>
-                    <Badge className={`${goal.progress === 100 ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'}`}>
+                    <Badge className={`${goal.progress === 100 ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}`}>
                       {goal.current}/{goal.target}
                     </Badge>
                   </div>
                   <div className="w-full bg-slate-200 rounded-full h-2">
                     <div 
-                      className={`h-2 rounded-full ${goal.progress === 100 ? 'bg-green-500' : 'bg-blue-500'}`}
+                      className={`h-2 rounded-full ${goal.progress === 100 ? 'bg-green-600' : 'bg-blue-600'}`}
                       style={{ width: `${goal.progress}%` }}
                     />
                   </div>
@@ -253,22 +253,22 @@ const Analytics = () => {
         </div>
 
         {/* Recent Achievements */}
-        <Card className="bg-white border-slate-200">
+        <Card className="bg-white border-slate-200 hover:shadow-lg transition-shadow">
           <CardHeader>
-            <CardTitle className="text-slate-800">Recent Achievements</CardTitle>
+            <CardTitle className="text-slate-900">Recent Achievements</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
               {recentAchievements.map((achievement, index) => (
-                <div key={index} className="bg-slate-50 rounded-lg p-4 space-y-2">
+                <div key={index} className="bg-slate-50 rounded-lg p-4 space-y-2 hover:bg-slate-100 transition-colors">
                   <div className="flex items-center gap-2">
-                    <Award className="h-5 w-5 text-amber-600" />
-                    <span className="font-medium text-slate-800">{achievement.title}</span>
+                    <Award className="h-5 w-5 text-blue-600" />
+                    <span className="font-medium text-slate-900">{achievement.title}</span>
                   </div>
                   <p className="text-sm text-slate-600">{achievement.description}</p>
                   <div className="flex justify-between items-center text-xs">
                     <span className="text-slate-500">{achievement.date}</span>
-                    <Badge className="bg-amber-100 text-amber-800">+{achievement.points} pts</Badge>
+                    <Badge className="bg-blue-100 text-blue-800">+{achievement.points} pts</Badge>
                   </div>
                 </div>
               ))}

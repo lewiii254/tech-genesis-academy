@@ -22,27 +22,27 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary p-4 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-4 sm:p-6">
       <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-3xl sm:text-4xl font-bold text-foreground">
+          <h1 className="text-3xl sm:text-4xl font-bold text-slate-900">
             Welcome back, {profile?.full_name || profile?.username || 'Learner'}! 👋
           </h1>
-          <p className="text-lg sm:text-xl text-muted-foreground">Continue your learning journey</p>
+          <p className="text-lg sm:text-xl text-slate-600">Continue your learning journey</p>
         </div>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          <Card className="bg-card border-border shadow-md">
+          <Card className="bg-white border-slate-200 shadow-md hover:shadow-lg transition-shadow">
             <CardContent className="p-4 sm:p-6">
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-primary to-primary/80 rounded-full flex items-center justify-center shadow-md">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full flex items-center justify-center shadow-md">
                   <BookOpen className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                 </div>
                 <div>
-                  <p className="text-muted-foreground text-sm font-medium">Courses Completed</p>
-                  <p className="text-card-foreground text-xl sm:text-2xl font-bold">{profile?.total_points ? Math.floor(profile.total_points / 100) : 0}</p>
+                  <p className="text-slate-600 text-sm font-medium">Courses Completed</p>
+                  <p className="text-slate-900 text-xl sm:text-2xl font-bold">{profile?.total_points ? Math.floor(profile.total_points / 100) : 0}</p>
                 </div>
               </div>
             </CardContent>
@@ -51,7 +51,7 @@ const Dashboard = () => {
           <Card className="bg-white border-slate-200 shadow-md">
             <CardContent className="p-4 sm:p-6">
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full flex items-center justify-center shadow-md">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-cyan-600 to-cyan-700 rounded-full flex items-center justify-center shadow-md">
                   <Star className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                 </div>
                 <div>
@@ -65,7 +65,7 @@ const Dashboard = () => {
           <Card className="bg-white border-slate-200 shadow-md sm:col-span-2 lg:col-span-1">
             <CardContent className="p-4 sm:p-6">
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-700 to-blue-800 rounded-full flex items-center justify-center shadow-md">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-green-600 to-green-700 rounded-full flex items-center justify-center shadow-md">
                   <Calendar className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                 </div>
                 <div>
@@ -79,7 +79,7 @@ const Dashboard = () => {
 
         {/* New Features Quick Access */}
         <div className="grid md:grid-cols-3 gap-6">
-          <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200 shadow-md hover:shadow-lg transition-shadow">
+          <Card className="bg-white border-slate-200 shadow-md hover:shadow-lg transition-shadow">
             <CardContent className="p-6 text-center">
               <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <UsersRound className="h-6 w-6 text-white" />
@@ -92,7 +92,7 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200 shadow-md hover:shadow-lg transition-shadow">
+          <Card className="bg-white border-slate-200 shadow-md hover:shadow-lg transition-shadow">
             <CardContent className="p-6 text-center">
               <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <BookOpen className="h-6 w-6 text-white" />
@@ -105,7 +105,7 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200 shadow-md hover:shadow-lg transition-shadow">
+          <Card className="bg-white border-slate-200 shadow-md hover:shadow-lg transition-shadow">
             <CardContent className="p-6 text-center">
               <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Calendar className="h-6 w-6 text-white" />

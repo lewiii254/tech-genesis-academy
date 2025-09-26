@@ -448,12 +448,12 @@ const Courses = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 p-4 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-4 sm:p-6">
       <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-3xl sm:text-4xl font-bold text-blue-900">Discover Courses</h1>
-          <p className="text-lg sm:text-xl text-blue-700">Master new skills with our comprehensive learning programs</p>
+          <h1 className="text-3xl sm:text-4xl font-bold text-slate-900">Discover Courses</h1>
+          <p className="text-lg sm:text-xl text-slate-600">Master new skills with our comprehensive learning programs</p>
           <div className="flex justify-center gap-4 flex-wrap">
             <Badge className="bg-green-100 text-green-800 border-green-200">
               Free Courses Available
@@ -461,14 +461,14 @@ const Courses = () => {
             <Badge className="bg-purple-100 text-purple-800 border-purple-200">
               Premium Content
             </Badge>
-            <Badge className="bg-amber-100 text-amber-800 border-amber-200">
+            <Badge className="bg-blue-100 text-blue-800 border-blue-200">
               Industry Certificates
             </Badge>
           </div>
         </div>
 
         {/* Filters */}
-        <Card className="bg-white/90 backdrop-blur-md border-blue-200 shadow-lg">
+        <Card className="bg-white border-slate-200 shadow-lg">
           <CardContent className="p-4 sm:p-6">
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
               <div className="lg:col-span-2">
@@ -476,12 +476,12 @@ const Courses = () => {
                   placeholder="Search courses, skills, or topics..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="bg-blue-50 border-blue-200 text-blue-900 placeholder:text-blue-600"
+                  className="bg-slate-50 border-slate-300 text-slate-900 placeholder:text-slate-500"
                 />
               </div>
               
               <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                <SelectTrigger className="bg-blue-50 border-blue-200 text-blue-900">
+                <SelectTrigger className="bg-slate-50 border-slate-300 text-slate-900">
                   <SelectValue placeholder="Category" />
                 </SelectTrigger>
                 <SelectContent>
@@ -492,7 +492,7 @@ const Courses = () => {
               </Select>
 
               <Select value={selectedLevel} onValueChange={setSelectedLevel}>
-                <SelectTrigger className="bg-blue-50 border-blue-200 text-blue-900">
+                <SelectTrigger className="bg-slate-50 border-slate-300 text-slate-900">
                   <SelectValue placeholder="Level" />
                 </SelectTrigger>
                 <SelectContent>
@@ -503,7 +503,7 @@ const Courses = () => {
               </Select>
 
               <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="bg-blue-50 border-blue-200 text-blue-900">
+                <SelectTrigger className="bg-slate-50 border-slate-300 text-slate-900">
                   <SelectValue placeholder="Sort by" />
                 </SelectTrigger>
                 <SelectContent>
@@ -522,7 +522,7 @@ const Courses = () => {
                   onClick={() => setShowFeaturedOnly(!showFeaturedOnly)}
                   className={showFeaturedOnly 
                     ? "bg-blue-600 hover:bg-blue-700" 
-                    : "border-blue-300 text-blue-700 hover:bg-blue-50"
+                    : "border-slate-300 text-slate-700 hover:bg-slate-50"
                   }
                 >
                   <Star className="h-4 w-4 mr-2" />
@@ -535,21 +535,21 @@ const Courses = () => {
                   onClick={() => setShowFreeOnly(!showFreeOnly)}
                   className={showFreeOnly 
                     ? "bg-green-600 hover:bg-green-700" 
-                    : "border-green-300 text-green-700 hover:bg-green-50"
+                    : "border-slate-300 text-slate-700 hover:bg-slate-50"
                   }
                 >
                   Free Courses
                 </Button>
                 
                 <div className="flex items-center space-x-2">
-                  <span className="text-sm text-blue-700">View:</span>
+                  <span className="text-sm text-slate-700">View:</span>
                   <Button
                     variant={viewMode === "grid" ? "default" : "outline"}
                     size="sm"
                     onClick={() => setViewMode("grid")}
                     className={viewMode === "grid" 
                       ? "bg-blue-600 hover:bg-blue-700" 
-                      : "border-blue-300 text-blue-700 hover:bg-blue-50"
+                      : "border-slate-300 text-slate-700 hover:bg-slate-50"
                     }
                   >
                     <Grid className="h-4 w-4" />
@@ -560,7 +560,7 @@ const Courses = () => {
                     onClick={() => setViewMode("list")}
                     className={viewMode === "list" 
                       ? "bg-blue-600 hover:bg-blue-700" 
-                      : "border-blue-300 text-blue-700 hover:bg-blue-50"
+                      : "border-slate-300 text-slate-700 hover:bg-slate-50"
                     }
                   >
                     <List className="h-4 w-4" />
@@ -568,7 +568,7 @@ const Courses = () => {
                 </div>
               </div>
               
-              <p className="text-sm text-blue-700">
+              <p className="text-sm text-slate-700">
                 Showing {filteredCourses.length} of {allCourses.length} courses
               </p>
             </div>
@@ -581,13 +581,13 @@ const Courses = () => {
           : "space-y-4"
         }>
           {filteredCourses.map((course) => (
-            <Card key={course.id} className={`bg-white/90 backdrop-blur-md border-blue-200 shadow-lg hover:shadow-xl transition-all duration-300 group ${
+            <Card key={course.id} className={`bg-white border-slate-200 shadow-lg hover:shadow-xl transition-all duration-300 group ${
               viewMode === "list" ? "flex flex-col sm:flex-row" : ""
             }`}>
               {/* Course Image */}
               <div className={`relative overflow-hidden ${
                 viewMode === "list" ? "sm:w-48 h-48 sm:h-auto" : "h-48"
-              } bg-gradient-to-br from-blue-500 to-blue-600 rounded-t-lg ${
+              } bg-gradient-to-br from-blue-600 to-blue-700 rounded-t-lg ${
                 viewMode === "list" ? "sm:rounded-l-lg sm:rounded-t-none" : ""
               }`}>
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -616,16 +616,16 @@ const Courses = () => {
                 <CardHeader className={viewMode === "list" ? "p-0 pb-4" : ""}>
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <CardTitle className="text-blue-900 group-hover:text-blue-700 transition-colors">
+                      <CardTitle className="text-slate-900 group-hover:text-blue-700 transition-colors">
                         {course.title}
                       </CardTitle>
-                      <p className="text-blue-700 text-sm mt-1">by {course.instructor}</p>
+                      <p className="text-slate-600 text-sm mt-1">by {course.instructor}</p>
                     </div>
-                    <Badge className="bg-blue-100 text-blue-700 ml-2">
+                    <Badge className="bg-slate-100 text-slate-700 ml-2">
                       {course.level}
                     </Badge>
                   </div>
-                  <CardDescription className="text-blue-600 mt-2">
+                  <CardDescription className="text-slate-600 mt-2">
                     {course.description}
                   </CardDescription>
                 </CardHeader>
@@ -633,19 +633,19 @@ const Courses = () => {
                 <CardContent className={`space-y-4 ${viewMode === "list" ? "p-0" : ""}`}>
                   {/* Course Stats */}
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 text-sm">
-                    <div className="flex items-center text-blue-700">
+                    <div className="flex items-center text-slate-600">
                       <Clock className="h-4 w-4 mr-1" />
                       {course.duration}
                     </div>
-                    <div className="flex items-center text-blue-700">
+                    <div className="flex items-center text-slate-600">
                       <Users className="h-4 w-4 mr-1" />
                       {course.students.toLocaleString()}
                     </div>
-                    <div className="flex items-center text-blue-700">
-                      <Star className="h-4 w-4 mr-1 text-amber-500" />
+                    <div className="flex items-center text-slate-600">
+                      <Star className="h-4 w-4 mr-1 text-blue-500" />
                       {course.rating}
                     </div>
-                    <div className="flex items-center text-blue-700">
+                    <div className="flex items-center text-slate-600">
                       <Target className="h-4 w-4 mr-1" />
                       {course.difficulty}/10
                     </div>
@@ -671,12 +671,12 @@ const Courses = () => {
                   {course.enrolled && (
                     <div className="space-y-2">
                       <div className="flex justify-between items-center text-sm">
-                        <span className="text-blue-700">Progress</span>
-                        <span className="text-blue-900 font-medium">{course.progress}%</span>
+                        <span className="text-slate-600">Progress</span>
+                        <span className="text-slate-900 font-medium">{course.progress}%</span>
                       </div>
-                      <div className="w-full bg-blue-200 rounded-full h-2">
+                      <div className="w-full bg-slate-200 rounded-full h-2">
                         <div 
-                          className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full transition-all duration-300"
+                          className="bg-gradient-to-r from-blue-600 to-blue-700 h-2 rounded-full transition-all duration-300"
                           style={{ width: `${course.progress}%` }}
                         />
                       </div>
@@ -686,19 +686,19 @@ const Courses = () => {
                   {/* Skills */}
                   <div className="flex flex-wrap gap-1">
                     {course.skills.slice(0, 4).map((skill, index) => (
-                      <Badge key={index} variant="outline" className="border-blue-300 text-blue-700 text-xs">
+                      <Badge key={index} variant="outline" className="border-slate-300 text-slate-700 text-xs">
                         {skill}
                       </Badge>
                     ))}
                     {course.skills.length > 4 && (
-                      <Badge variant="outline" className="border-blue-300 text-blue-700 text-xs">
+                      <Badge variant="outline" className="border-slate-300 text-slate-700 text-xs">
                         +{course.skills.length - 4} more
                       </Badge>
                     )}
                   </div>
 
                   {/* Course Features */}
-                  <div className="flex items-center justify-between text-sm text-blue-700">
+                  <div className="flex items-center justify-between text-sm text-slate-600">
                     <div className="flex items-center space-x-4">
                       <span className="flex items-center">
                         <BookOpen className="h-4 w-4 mr-1" />
@@ -711,7 +711,7 @@ const Courses = () => {
                     </div>
                     {course.certificate && (
                       <div className="flex items-center">
-                        <Award className="h-4 w-4 mr-1 text-amber-500" />
+                        <Award className="h-4 w-4 mr-1 text-blue-500" />
                         <span>Certificate</span>
                       </div>
                     )}
@@ -741,11 +741,11 @@ const Courses = () => {
 
         {/* No Results */}
         {filteredCourses.length === 0 && (
-          <Card className="bg-white/90 backdrop-blur-md border-blue-200 shadow-lg">
+          <Card className="bg-white border-slate-200 shadow-lg">
             <CardContent className="p-12 text-center">
-              <BookOpen className="h-16 w-16 text-blue-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-blue-900 mb-2">No courses found</h3>
-              <p className="text-blue-700 mb-4">
+              <BookOpen className="h-16 w-16 text-slate-400 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-slate-900 mb-2">No courses found</h3>
+              <p className="text-slate-600 mb-4">
                 Try adjusting your search criteria or browse our featured courses.
               </p>
               <Button 
@@ -765,7 +765,7 @@ const Courses = () => {
         )}
 
         {/* Course Statistics */}
-        <Card className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <Card className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
           <CardContent className="p-8 text-center">
             <h3 className="text-2xl font-bold mb-4">Transform Your Career Today</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
@@ -790,7 +790,7 @@ const Courses = () => {
             <div className="flex justify-center gap-4">
               <Button 
                 size="lg"
-                className="bg-white text-blue-600 hover:bg-gray-100"
+                className="bg-white text-blue-600 hover:bg-blue-50"
               >
                 <BookOpen className="mr-2 h-5 w-5" />
                 Start Learning Today

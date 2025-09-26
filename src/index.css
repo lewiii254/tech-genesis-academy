@@ -1,62 +1,71 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
+    /* Professional Blue Color Palette */
+    
     /* Main backgrounds - Clean and professional */
-    --background: 250 251 252;        /* #FAFBFC - Clean light background */
-    --foreground: 30 41 59;           /* #1E293B - High contrast text */
+    --background: 248 250 252;        /* #F8FAFC - Ultra clean light background */
+    --foreground: 15 23 42;           /* #0F172A - Deep slate for high contrast text */
 
-    /* Card surfaces */
+    /* Card surfaces - Pure white for clarity */
     --card: 255 255 255;              /* #FFFFFF - Pure white cards */
-    --card-foreground: 30 41 59;      /* #1E293B - High contrast text */
+    --card-foreground: 15 23 42;      /* #0F172A - High contrast text */
 
     /* Popover surfaces */
     --popover: 255 255 255;           /* #FFFFFF - Pure white popover */
-    --popover-foreground: 30 41 59;   /* #1E293B - High contrast text */
+    --popover-foreground: 15 23 42;   /* #0F172A - High contrast text */
 
-    /* Primary brand colors - Professional blue */
-    --primary: 30 64 175;             /* #1E40AF - Professional primary blue */ 
+    /* Primary brand colors - Professional blue gradient */
+    --primary: 37 99 235;             /* #2563EB - Professional primary blue */ 
     --primary-foreground: 255 255 255; /* #FFFFFF - White text on primary */
 
-    /* Secondary surfaces - Subtle contrast */
-    --secondary: 241 245 249;         /* #F1F5F9 - Muted background */
-    --secondary-foreground: 71 85 105; /* #475569 - Medium contrast text */
+    /* Secondary surfaces - Subtle blue tint */
+    --secondary: 241 245 249;         /* #F1F5F9 - Light blue-gray background */
+    --secondary-foreground: 51 65 85; /* #334155 - Medium contrast text */
 
     /* Muted surfaces and text */
-    --muted: 241 245 249;             /* #F1F5F9 - Muted background */
-    --muted-foreground: 100 116 139;  /* #64748B - Light contrast text */
+    --muted: 248 250 252;             /* #F8FAFC - Very light background */
+    --muted-foreground: 100 116 139;  /* #64748B - Muted text */
 
-    /* Accent color - Purple for special highlights */
-    --accent: 124 58 237;             /* #7C3AED - Purple accent */
+    /* Accent color - Complementary teal for highlights */
+    --accent: 14 165 233;             /* #0EA5E9 - Sky blue accent */
     --accent-foreground: 255 255 255; /* #FFFFFF - White text on accent */
 
     /* Destructive/Error states */
-    --destructive: 220 38 38;         /* #DC2626 - Error red */
+    --destructive: 239 68 68;         /* #EF4444 - Error red */
     --destructive-foreground: 255 255 255; /* #FFFFFF - White text on error */
 
-    /* Borders and inputs - Subtle boundaries */
+    /* Success states */
+    --success: 34 197 94;             /* #22C55E - Success green */
+    --success-foreground: 255 255 255; /* #FFFFFF - White text on success */
+
+    /* Warning states */
+    --warning: 245 158 11;            /* #F59E0B - Warning amber */
+    --warning-foreground: 255 255 255; /* #FFFFFF - White text on warning */
+
+    /* Borders and inputs - Professional boundaries */
     --border: 226 232 240;            /* #E2E8F0 - Subtle border */
     --input: 226 232 240;             /* #E2E8F0 - Input border */
-    --ring: 30 64 175;                /* #1E40AF - Focus ring (primary) */
+    --ring: 37 99 235;                /* #2563EB - Focus ring (primary) */
 
     --radius: 0.5rem;
 
     /* Sidebar - Clean professional look */
     --sidebar-background: 255 255 255; /* #FFFFFF - White sidebar */
-    --sidebar-foreground: 30 41 59;    /* #1E293B - Dark text */
-    --sidebar-primary: 30 64 175;      /* #1E40AF - Primary blue */
+    --sidebar-foreground: 15 23 42;    /* #0F172A - Dark text */
+    --sidebar-primary: 37 99 235;      /* #2563EB - Primary blue */
     --sidebar-primary-foreground: 255 255 255; /* #FFFFFF - White text */
     --sidebar-accent: 241 245 249;     /* #F1F5F9 - Muted accent */
-    --sidebar-accent-foreground: 71 85 105; /* #475569 - Medium text */
+    --sidebar-accent-foreground: 51 65 85; /* #334155 - Medium text */
     --sidebar-border: 226 232 240;     /* #E2E8F0 - Subtle border */
-    --sidebar-ring: 30 64 175;         /* #1E40AF - Focus ring */
+    --sidebar-ring: 37 99 235;         /* #2563EB - Focus ring */
   }
 
   .dark {
-    /* Dark backgrounds - Professional dark theme */
+    /* Professional dark theme */
     --background: 15 23 42;           /* #0F172A - Dark slate background */
     --foreground: 248 250 252;        /* #F8FAFC - Light text */
 
@@ -68,7 +77,7 @@
     --popover: 30 41 59;              /* #1E293B - Dark popover background */
     --popover-foreground: 248 250 252; /* #F8FAFC - Light text */
 
-    /* Primary colors for dark mode - Brighter blue for better contrast */
+    /* Primary colors for dark mode */
     --primary: 59 130 246;            /* #3B82F6 - Brighter blue for dark mode */
     --primary-foreground: 15 23 42;   /* #0F172A - Dark text on primary */
 
@@ -80,12 +89,12 @@
     --muted: 51 65 85;                /* #334155 - Medium dark surface */
     --muted-foreground: 148 163 184;  /* #94A3B8 - Muted light text */
 
-    /* Accent color for dark mode - Success green */
-    --accent: 5 150 105;              /* #059669 - Success green accent */
+    /* Accent color for dark mode */
+    --accent: 14 165 233;             /* #0EA5E9 - Sky blue accent */
     --accent-foreground: 255 255 255; /* #FFFFFF - White text on accent */
 
-    /* Destructive/Error states - same red works in dark mode */
-    --destructive: 220 38 38;         /* #DC2626 - Error red */
+    /* Destructive/Error states */
+    --destructive: 239 68 68;         /* #EF4444 - Error red */
     --destructive-foreground: 255 255 255; /* #FFFFFF - White text on error */
 
     /* Dark mode borders and inputs */
@@ -93,7 +102,7 @@
     --input: 51 65 85;                /* #334155 - Dark input border */
     --ring: 59 130 246;               /* #3B82F6 - Bright blue focus ring */
 
-    /* Dark sidebar - Consistent with main dark theme */
+    /* Dark sidebar */
     --sidebar-background: 30 41 59;   /* #1E293B - Dark sidebar */
     --sidebar-foreground: 248 250 252; /* #F8FAFC - Light text */
     --sidebar-primary: 59 130 246;    /* #3B82F6 - Bright blue */
@@ -112,18 +121,135 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  }
+
+  /* Professional gradient backgrounds for pages */
+  .page-gradient {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  }
+
+  .page-gradient-dark {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  }
+
+  /* Professional card styling */
+  .professional-card {
+    @apply bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all duration-200;
+  }
+
+  .professional-card-dark {
+    @apply bg-slate-800 border border-slate-700 shadow-sm hover:shadow-md transition-all duration-200;
+  }
+
+  /* Button improvements */
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white shadow-sm hover:shadow-md transition-all duration-200;
+  }
+
+  .btn-secondary {
+    @apply bg-slate-100 hover:bg-slate-200 text-slate-900 border border-slate-300 transition-all duration-200;
+  }
+
+  /* Text improvements for better readability */
+  .text-primary-readable {
+    @apply text-slate-900;
+  }
+
+  .text-secondary-readable {
+    @apply text-slate-700;
+  }
+
+  .text-muted-readable {
+    @apply text-slate-600;
+  }
+
+  /* Professional gradients */
+  .gradient-primary {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  }
+
+  .gradient-secondary {
+    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  }
+
+  .gradient-accent {
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  }
+
+  /* Remove any yellow backgrounds */
+  .bg-yellow-50,
+  .bg-yellow-100,
+  .bg-yellow-200,
+  .bg-amber-50,
+  .bg-amber-100 {
+    @apply bg-blue-50 !important;
+  }
+
+  .text-yellow-600,
+  .text-yellow-700,
+  .text-yellow-800,
+  .text-amber-600,
+  .text-amber-700,
+  .text-amber-800 {
+    @apply text-blue-700 !important;
+  }
+
+  /* Ensure high contrast for accessibility */
+  .high-contrast-text {
+    @apply text-slate-900;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Professional spacing */
+  .section-padding {
+    @apply py-16 px-6;
+  }
+
+  .container-max {
+    @apply max-w-7xl mx-auto;
   }
 }
 
-/* Temporary fix for yellow background issue */
-.bg-card {
-  background-color: white !important;
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-.bg-background {
-  background-color: #fafbfc !important;
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
 }
 
-.bg-muted\/30 {
-  background-color: rgba(241, 245, 249, 0.3) !important;
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Animation improvements */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Professional shadows */
+.shadow-professional {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.shadow-professional-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
