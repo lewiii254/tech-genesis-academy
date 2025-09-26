@@ -15,14 +15,14 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background to-cyan-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-background to-secondary flex items-center justify-center">
         <div className="text-foreground text-xl">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-cyan-50 p-4 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-br from-background to-secondary p-4 sm:p-6">
       <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">
@@ -37,7 +37,7 @@ const Dashboard = () => {
           <Card className="bg-card border-border shadow-md">
             <CardContent className="p-4 sm:p-6">
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-primary to-cyan-600 rounded-full flex items-center justify-center shadow-md">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-primary to-primary/80 rounded-full flex items-center justify-center shadow-md">
                   <BookOpen className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                 </div>
                 <div>

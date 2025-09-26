@@ -96,12 +96,12 @@ const Landing = () => {
         <div className="absolute inset-0 bg-slate-100/50 backdrop-blur-sm"></div>
         <div className="relative max-w-6xl mx-auto">
           <div className="mb-8">
-            <Badge className="bg-cyan-50 text-cyan-700 border-cyan-200 mb-6">
+            <Badge className="bg-primary/10 text-primary border-primary/20 mb-6">
               🚀 Kenya's #1 Tech Learning Platform
             </Badge>
             <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
               Master Tech Skills,
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-cyan-700">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
                 {" "}Transform Your Future
               </span>
             </h1>
@@ -113,14 +113,14 @@ const Landing = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             {user ? (
-              <Button asChild size="lg" className="bg-gradient-to-r from-cyan-600 to-cyan-700 hover:from-cyan-700 hover:to-cyan-800 text-lg px-8 py-4 text-white">
+              <Button asChild size="lg" className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-lg px-8 py-4 text-white">
                 <Link to="/dashboard">
                   Go to Dashboard <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
             ) : (
               <>
-                <Button asChild size="lg" className="bg-gradient-to-r from-cyan-600 to-cyan-700 hover:from-cyan-700 hover:to-cyan-800 text-lg px-8 py-4 text-white">
+                <Button asChild size="lg" className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-lg px-8 py-4 text-white">
                   <Link to="/auth">
                     Start Learning Today <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
@@ -161,7 +161,7 @@ const Landing = () => {
             {features.map((feature, index) => (
               <Card key={index} className="bg-card border-border hover:border-primary/30 transition-all duration-300 group shadow-md">
                 <CardHeader className="text-center">
-                  <div className="mx-auto w-16 h-16 bg-gradient-to-r from-primary to-cyan-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <div className="mx-auto w-16 h-16 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                     <feature.icon className="h-8 w-8 text-white" />
                   </div>
                   <CardTitle className="text-card-foreground text-xl">{feature.title}</CardTitle>
@@ -249,7 +249,7 @@ const Landing = () => {
               <Card key={index} className="bg-card border-border hover:border-primary/30 transition-all duration-300 shadow-md">
                 <CardContent className="p-6">
                   <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-primary to-cyan-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-primary to-primary-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
                       {testimonial.avatar}
                     </div>
                     <div>
@@ -277,14 +277,14 @@ const Landing = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             {user ? (
-              <Button asChild size="lg" className="bg-gradient-to-r from-primary to-cyan-700 hover:from-primary/90 hover:to-cyan-700/90 text-lg px-8 py-4 text-white">
+              <Button asChild size="lg" className="bg-gradient-to-r from-primary to-primary-700 hover:from-primary/90 hover:to-primary-700/90 text-lg px-8 py-4 text-white">
                 <Link to="/courses">
                   Browse Courses <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
             ) : (
               <>
-                <Button asChild size="lg" className="bg-gradient-to-r from-primary to-cyan-700 hover:from-primary/90 hover:to-cyan-700/90 text-lg px-8 py-4 text-white">
+                <Button asChild size="lg" className="bg-gradient-to-r from-primary to-primary-700 hover:from-primary/90 hover:to-primary-700/90 text-lg px-8 py-4 text-white">
                   <Link to="/auth">
                     Get Started Free <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
