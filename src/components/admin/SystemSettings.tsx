@@ -302,9 +302,9 @@ const SystemSettings = () => {
               <Button size="sm" variant="outline">Manage IPs</Button>
             </div>
           </div>
-          <div className="p-4 border rounded-lg bg-yellow-50 border-yellow-200">
-            <h4 className="font-medium text-yellow-800 mb-2">Security Alerts</h4>
-            <p className="text-sm text-yellow-700 mb-3">Configure alerts for suspicious activities</p>
+          <div className="p-4 border rounded-lg bg-orange-50 border-orange-200">
+            <h4 className="font-medium text-orange-800 mb-2">Security Alerts</h4>
+            <p className="text-sm text-orange-700 mb-3">Configure alerts for suspicious activities</p>
             <Button size="sm" variant="outline">Configure Alerts</Button>
           </div>
         </CardContent>

@@ -241,7 +241,7 @@ const Profile = () => {
           
           <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
             <CardContent className="p-4 text-center">
-              <Star className="h-6 w-6 mx-auto mb-2 text-yellow-400" />
+              <Star className="h-6 w-6 mx-auto mb-2 text-amber-400" />
               <p className="text-xl font-bold">{profile?.learning_streak || 0}</p>
               <p className="text-slate-300 text-sm">Day Streak</p>
             </CardContent>

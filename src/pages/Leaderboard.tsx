@@ -128,7 +128,7 @@ const myStats = {
 
 const getRankIcon = (rank: number) => {
   switch (rank) {
-    case 1: return <Crown className="h-6 w-6 text-yellow-400" />;
+    case 1: return <Crown className="h-6 w-6 text-amber-400" />;
     case 2: return <Medal className="h-6 w-6 text-gray-400" />;
     case 3: return <Award className="h-6 w-6 text-amber-600" />;
     default: return <span className="text-lg font-bold text-slate-300">#{rank}</span>;
@@ -140,7 +140,7 @@ const getLevelColor = (level: string) => {
     case "Expert": return "bg-purple-500";
     case "Advanced": return "bg-blue-500";
     case "Intermediate": return "bg-green-500";
-    case "Beginner": return "bg-yellow-500";
+    case "Beginner": return "bg-orange-500";
     default: return "bg-gray-500";
   }
 };
@@ -152,7 +152,7 @@ const Leaderboard = () => {
         {/* Header */}
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center space-x-3">
-            <div className="p-3 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-full">
+            <div className="p-3 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full">
               <Trophy className="h-8 w-8 text-white" />
             </div>
             <h1 className="text-4xl font-bold text-white">Leaderboard</h1>

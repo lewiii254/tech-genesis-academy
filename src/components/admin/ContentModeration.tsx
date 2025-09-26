@@ -92,7 +92,7 @@ const ContentModeration = () => {
     const colors = {
       "Inappropriate Language": "text-red-600",
       "Academic Dishonesty": "text-red-600",
-      "Spam": "text-yellow-600",
+      "Spam": "text-orange-600",
       "False Information": "text-orange-600",
       "Harassment": "text-red-600"
     };
@@ -117,7 +117,7 @@ const ContentModeration = () => {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <Clock className="h-8 w-8 text-yellow-600" />
+              <Clock className="h-8 w-8 text-orange-600" />
               <div>
                 <p className="text-sm text-gray-600">Pending Approval</p>
                 <p className="text-2xl font-bold">8</p>

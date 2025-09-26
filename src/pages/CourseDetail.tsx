@@ -211,7 +211,7 @@ const CourseDetail = () => {
               <span>{course.duration}</span>
             </div>
             <div className="flex items-center gap-1 text-slate-300">
-              <Star className="h-4 w-4 text-yellow-400 fill-current" />
+              <Star className="h-4 w-4 text-amber-400 fill-current" />
               <span>{course.rating} ({course.students} students)</span>
             </div>
           </div>

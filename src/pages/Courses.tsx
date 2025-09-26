@@ -461,7 +461,7 @@ const Courses = () => {
             <Badge className="bg-purple-100 text-purple-800 border-purple-200">
               Premium Content
             </Badge>
-            <Badge className="bg-yellow-100 text-yellow-800 border-yellow-200">
+            <Badge className="bg-amber-100 text-amber-800 border-amber-200">
               Industry Certificates
             </Badge>
           </div>
@@ -594,7 +594,7 @@ const Courses = () => {
                   <BookOpen className="h-12 w-12 text-white opacity-80" />
                 </div>
                 {course.featured && (
-                  <Badge className="absolute top-2 left-2 bg-yellow-500 text-yellow-900">
+                  <Badge className="absolute top-2 left-2 bg-amber-500 text-white">
                     <Star className="h-3 w-3 mr-1" />
                     Featured
                   </Badge>
@@ -642,7 +642,7 @@ const Courses = () => {
                       {course.students.toLocaleString()}
                     </div>
                     <div className="flex items-center text-blue-700">
-                      <Star className="h-4 w-4 mr-1 text-yellow-500" />
+                      <Star className="h-4 w-4 mr-1 text-amber-500" />
                       {course.rating}
                     </div>
                     <div className="flex items-center text-blue-700">
@@ -711,7 +711,7 @@ const Courses = () => {
                     </div>
                     {course.certificate && (
                       <div className="flex items-center">
-                        <Award className="h-4 w-4 mr-1 text-yellow-500" />
+                        <Award className="h-4 w-4 mr-1 text-amber-500" />
                         <span>Certificate</span>
                       </div>
                     )}

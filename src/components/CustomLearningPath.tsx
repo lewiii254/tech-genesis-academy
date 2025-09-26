@@ -97,7 +97,7 @@ const CustomLearningPath = () => {
                   <span className="font-medium">{path.completedModules}/{path.modules} modules</span>
                 </div>
                 <div className="flex items-center gap-2 text-slate-700">
-                  <Award className="h-4 w-4 text-yellow-600" />
+                  <Award className="h-4 w-4 text-amber-600" />
                   <span className="font-medium">{path.duration}</span>
                 </div>
               </div>

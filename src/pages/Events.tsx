@@ -213,7 +213,7 @@ const Events = () => {
   const getLevelColor = (level: string) => {
     switch (level) {
       case "Beginner": return "bg-green-100 text-green-800 border-green-200";
-      case "Intermediate": return "bg-yellow-100 text-yellow-800 border-yellow-200";
+      case "Intermediate": return "bg-amber-100 text-amber-800 border-amber-200";
       case "Advanced": return "bg-red-100 text-red-800 border-red-200";
       default: return "bg-slate-100 text-slate-800 border-slate-200";
     }

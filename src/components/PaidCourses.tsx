@@ -207,7 +207,7 @@ const PaidCourses = () => {
           <Card key={course.id} className="bg-white border-slate-200 hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
             {course.featured && (
               <div className="absolute top-4 left-4 z-10">
-                <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white">
+                <Badge className="bg-gradient-to-r from-amber-400 to-orange-500 text-white">
                   ⭐ Featured
                 </Badge>
               </div>
@@ -247,7 +247,7 @@ const PaidCourses = () => {
                       <Heart className={`h-4 w-4 ${wishlist.includes(course.id) ? 'fill-red-500 text-red-500' : 'text-slate-400'}`} />
                     </Button>
                     <div className="flex items-center gap-1">
-                      <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                      <Star className="h-4 w-4 text-amber-400 fill-current" />
                       <span className="text-slate-700 text-sm font-medium">{course.rating}</span>
                     </div>
                   </div>
