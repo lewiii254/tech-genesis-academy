@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Users, Award, Star, ArrowRight, Play, CheckCircle, Briefcase, Building, MapPin, DollarSign } from "lucide-react";
+import { BookOpen, Users, Award, Star, ArrowRight, Play, CircleCheck as CheckCircle, Briefcase, Building, MapPin, DollarSign } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 

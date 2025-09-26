@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Star, BookOpen, Clock, Users, Play, Award, CheckCircle, Target, Filter, Grid, List, CreditCard } from "lucide-react";
+import { Star, BookOpen, Clock, Users, Play, Award, CircleCheck as CheckCircle, Target, Filter, Grid2x2 as Grid, List, CreditCard } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const allCourses = [

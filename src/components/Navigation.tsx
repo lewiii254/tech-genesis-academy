@@ -10,22 +10,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { 
-  BookOpen, 
-  Users, 
-  Trophy, 
-  User, 
-  MessageSquare, 
-  Calendar,
-  Award,
-  Briefcase,
-  UserCheck,
-  Menu,
-  X,
-  BarChart3,
-  UsersRound,
-  Video
-} from "lucide-react";
+import { BookOpen, Users, Trophy, User, MessageSquare, Calendar, Award, Briefcase, UserCheck, Menu, X, ChartBar as BarChart3, UsersRound, Video } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
 
