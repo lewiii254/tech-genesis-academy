@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Star, Calendar, UsersRound } from "lucide-react";
+import { BookOpen, Star, Calendar, UsersRound, Award } from "lucide-react";
 import { useProfile, Profile } from "@/hooks/useProfile";
+import { useGameification } from "@/hooks/useGameification";
 import MentorshipCard from "@/components/MentorshipCard";
 import JobPlacementCard from "@/components/JobPlacementCard";
 import CustomLearningPath from "@/components/CustomLearningPath";
@@ -12,6 +13,14 @@ import PaidCourses from "@/components/PaidCourses";
 
 const Dashboard = () => {
   const { profile, loading } = useProfile();
+  const { gameState } = useGameification();
+  const [certificates, setCertificates] = useState<any[]>([]);
+
+  useEffect(() => {
+    // Load certificates from localStorage
+    const storedCertificates = JSON.parse(localStorage.getItem('certificates') || '[]');
+    setCertificates(storedCertificates);
+  }, []);
 
   if (loading) {
     return (
@@ -33,7 +42,7 @@ const Dashboard = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           <Card className="bg-white border-slate-200 shadow-md hover:shadow-lg transition-shadow">
             <CardContent className="p-4 sm:p-6">
               <div className="flex items-center gap-4">
@@ -42,7 +51,7 @@ const Dashboard = () => {
                 </div>
                 <div>
                   <p className="text-slate-600 text-sm font-medium">Courses Completed</p>
-                  <p className="text-slate-900 text-xl sm:text-2xl font-bold">{profile?.total_points ? Math.floor(profile.total_points / 100) : 0}</p>
+                  <p className="text-slate-900 text-xl sm:text-2xl font-bold">{certificates.length}</p>
                 </div>
               </div>
             </CardContent>
@@ -56,13 +65,13 @@ const Dashboard = () => {
                 </div>
                 <div>
                   <p className="text-slate-600 text-sm font-medium">Total Points</p>
-                  <p className="text-slate-800 text-xl sm:text-2xl font-bold">{profile?.total_points || 0}</p>
+                  <p className="text-slate-800 text-xl sm:text-2xl font-bold">{gameState.totalPoints}</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-white border-slate-200 shadow-md sm:col-span-2 lg:col-span-1">
+          <Card className="bg-white border-slate-200 shadow-md">
             <CardContent className="p-4 sm:p-6">
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-green-600 to-green-700 rounded-full flex items-center justify-center shadow-md">
@@ -70,12 +79,54 @@ const Dashboard = () => {
                 </div>
                 <div>
                   <p className="text-slate-600 text-sm font-medium">Learning Streak</p>
-                  <p className="text-slate-800 text-xl sm:text-2xl font-bold">{profile?.learning_streak || 0} days</p>
+                  <p className="text-slate-800 text-xl sm:text-2xl font-bold">{gameState.currentStreak} days</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-white border-slate-200 shadow-md">
+            <CardContent className="p-4 sm:p-6">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-amber-600 to-amber-700 rounded-full flex items-center justify-center shadow-md">
+                  <Award className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+                </div>
+                <div>
+                  <p className="text-slate-600 text-sm font-medium">Certificates Earned</p>
+                  <p className="text-slate-800 text-xl sm:text-2xl font-bold">{certificates.length}</p>
                 </div>
               </div>
             </CardContent>
           </Card>
         </div>
+
+        {/* Recent Certificates */}
+        {certificates.length > 0 && (
+          <Card className="bg-white border-slate-200 shadow-md">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-semibold text-slate-800">Recent Certificates</h3>
+                <Button asChild variant="outline" size="sm">
+                  <Link to="/certificates">View All</Link>
+                </Button>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {certificates.slice(0, 3).map((cert: any) => (
+                  <div key={cert.id} className="border border-slate-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Award className="h-8 w-8 text-amber-500" />
+                      <div>
+                        <h4 className="font-semibold text-slate-800 text-sm">{cert.courseTitle}</h4>
+                        <p className="text-xs text-slate-600">Completed {new Date(cert.completedAt).toLocaleDateString()}</p>
+                      </div>
+                    </div>
+                    <p className="text-xs text-slate-500">Certificate ID: {cert.certificateId}</p>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* New Features Quick Access */}
         <div className="grid md:grid-cols-3 gap-6">
