@@ -37,7 +37,7 @@ const SystemSettings = () => {
     paymentGateway: "mpesa"
   });
 
-  const handleSettingChange = (key: string, value: any) => {
+  const handleSettingChange = (key: string, value: string | boolean | number) => {
     setSettings(prev => ({
       ...prev,
       [key]: value

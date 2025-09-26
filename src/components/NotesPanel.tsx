@@ -70,7 +70,7 @@ const NotesPanel = ({ courseId, moduleId, modules }: NotesPanelProps) => {
     });
   };
 
-  const startEditing = (note: any) => {
+  const startEditing = (note: { id: string; title: string; content: string }) => {
     setEditingId(note.id);
     setNewTitle(note.title);
     setNewContent(note.content);

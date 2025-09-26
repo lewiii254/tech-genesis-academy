@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -40,19 +40,7 @@ const Profile = () => {
     skills: [] as string[]
   });
 
-  useEffect(() => {
-    if (profile && !loading) {
-      setEditForm({
-        full_name: profile.full_name || '',
-        bio: profile.bio || '',
-        location: profile.location || '',
-        skills: profile.skills || []
-      });
-      fetchEnrollments();
-    }
-  }, [profile, loading]);
-
-  const fetchEnrollments = async () => {
+  const fetchEnrollments = useCallback(async () => {
     if (!user) return;
 
     const { data, error } = await supabase
@@ -76,7 +64,19 @@ const Profile = () => {
     } else {
       setEnrollments(data || []);
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    if (profile && !loading) {
+      setEditForm({
+        full_name: profile.full_name || '',
+        bio: profile.bio || '',
+        location: profile.location || '',
+        skills: profile.skills || []
+      });
+      fetchEnrollments();
+    }
+  }, [profile, loading, fetchEnrollments]);
 
   const handleSave = async () => {
     const { error } = await updateProfile(editForm);
