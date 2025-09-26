@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Heart, MessageCircle, Share2, Calendar, MapPin, Users, Link, ImagePlus } from "lucide-react";
+import { Heart, MessageCircle, Share2, Calendar, MapPin, Users, Link, ImagePlus, BookOpen, Play } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -368,9 +368,156 @@ const Community = () => {
           </TabsContent>
 
           <TabsContent value="resources">
-            <div>
-              <h2>Resources Content</h2>
-              {/* Add resources content here */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Study Materials */}
+              <Card className="bg-white border-slate-200">
+                <CardHeader>
+                  <CardTitle className="text-slate-900 flex items-center gap-2">
+                    <BookOpen className="h-5 w-5" />
+                    Study Materials
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+                    <h4 className="font-medium text-slate-900">React Best Practices Guide</h4>
+                    <p className="text-sm text-slate-600">Comprehensive guide covering modern React patterns</p>
+                    <div className="flex items-center gap-4 mt-2 text-xs text-slate-500">
+                      <span>📄 PDF</span>
+                      <span>⭐ 4.8</span>
+                      <span>👥 1.2k downloads</span>
+                    </div>
+                  </div>
+                  <div className="p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+                    <h4 className="font-medium text-slate-900">Python Cheat Sheet</h4>
+                    <p className="text-sm text-slate-600">Quick reference for Python syntax and functions</p>
+                    <div className="flex items-center gap-4 mt-2 text-xs text-slate-500">
+                      <span>📄 PDF</span>
+                      <span>⭐ 4.9</span>
+                      <span>👥 2.1k downloads</span>
+                    </div>
+                  </div>
+                  <div className="p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+                    <h4 className="font-medium text-slate-900">Database Design Templates</h4>
+                    <p className="text-sm text-slate-600">Common database patterns and schema designs</p>
+                    <div className="flex items-center gap-4 mt-2 text-xs text-slate-500">
+                      <span>📁 ZIP</span>
+                      <span>⭐ 4.7</span>
+                      <span>👥 856 downloads</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Useful Links */}
+              <Card className="bg-white border-slate-200">
+                <CardHeader>
+                  <CardTitle className="text-slate-900 flex items-center gap-2">
+                    <Link className="h-5 w-5" />
+                    Useful Links
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+                    <h4 className="font-medium text-slate-900">Free Programming Books</h4>
+                    <p className="text-sm text-slate-600">Collection of free programming books and resources</p>
+                    <div className="flex items-center gap-2 mt-2">
+                      <Badge variant="outline" className="text-xs">External</Badge>
+                      <Badge variant="outline" className="text-xs">Free</Badge>
+                    </div>
+                  </div>
+                  <div className="p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+                    <h4 className="font-medium text-slate-900">Developer Roadmaps</h4>
+                    <p className="text-sm text-slate-600">Step by step guides for different tech career paths</p>
+                    <div className="flex items-center gap-2 mt-2">
+                      <Badge variant="outline" className="text-xs">External</Badge>
+                      <Badge variant="outline" className="text-xs">Interactive</Badge>
+                    </div>
+                  </div>
+                  <div className="p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+                    <h4 className="font-medium text-slate-900">Coding Practice Platforms</h4>
+                    <p className="text-sm text-slate-600">Best platforms to practice coding and algorithms</p>
+                    <div className="flex items-center gap-2 mt-2">
+                      <Badge variant="outline" className="text-xs">External</Badge>
+                      <Badge variant="outline" className="text-xs">Practice</Badge>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Video Tutorials */}
+              <Card className="bg-white border-slate-200">
+                <CardHeader>
+                  <CardTitle className="text-slate-900 flex items-center gap-2">
+                    <Play className="h-5 w-5" />
+                    Video Tutorials
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+                    <h4 className="font-medium text-slate-900">Git & GitHub Fundamentals</h4>
+                    <p className="text-sm text-slate-600">Master version control with practical examples</p>
+                    <div className="flex items-center gap-4 mt-2 text-xs text-slate-500">
+                      <span>🎥 45 min</span>
+                      <span>⭐ 4.9</span>
+                      <span>👁️ 12k views</span>
+                    </div>
+                  </div>
+                  <div className="p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+                    <h4 className="font-medium text-slate-900">API Development Crash Course</h4>
+                    <p className="text-sm text-slate-600">Build REST APIs from scratch using Node.js</p>
+                    <div className="flex items-center gap-4 mt-2 text-xs text-slate-500">
+                      <span>🎥 2h 15min</span>
+                      <span>⭐ 4.8</span>
+                      <span>👁️ 8.5k views</span>
+                    </div>
+                  </div>
+                  <div className="p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+                    <h4 className="font-medium text-slate-900">CSS Grid & Flexbox</h4>
+                    <p className="text-sm text-slate-600">Modern CSS layout techniques explained</p>
+                    <div className="flex items-center gap-4 mt-2 text-xs text-slate-500">
+                      <span>🎥 1h 30min</span>
+                      <span>⭐ 4.7</span>
+                      <span>👁️ 15k views</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Community Resources */}
+              <Card className="bg-white border-slate-200">
+                <CardHeader>
+                  <CardTitle className="text-slate-900 flex items-center gap-2">
+                    <Users className="h-5 w-5" />
+                    Community Resources
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+                    <h4 className="font-medium text-slate-900">Study Group Templates</h4>
+                    <p className="text-sm text-slate-600">Organized templates for effective study sessions</p>
+                    <div className="flex items-center gap-2 mt-2">
+                      <Badge variant="outline" className="text-xs">Templates</Badge>
+                      <Badge variant="outline" className="text-xs">Free</Badge>
+                    </div>
+                  </div>
+                  <div className="p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+                    <h4 className="font-medium text-slate-900">Project Ideas Repository</h4>
+                    <p className="text-sm text-slate-600">Collection of project ideas for different skill levels</p>
+                    <div className="flex items-center gap-2 mt-2">
+                      <Badge variant="outline" className="text-xs">Projects</Badge>
+                      <Badge variant="outline" className="text-xs">All levels</Badge>
+                    </div>
+                  </div>
+                  <div className="p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+                    <h4 className="font-medium text-slate-900">Career Guidance</h4>
+                    <p className="text-sm text-slate-600">Resources for job preparation and career development</p>
+                    <div className="flex items-center gap-2 mt-2">
+                      <Badge variant="outline" className="text-xs">Career</Badge>
+                      <Badge variant="outline" className="text-xs">Guide</Badge>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </TabsContent>
         </Tabs>
