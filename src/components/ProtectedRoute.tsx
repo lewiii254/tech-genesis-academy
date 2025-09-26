@@ -18,12 +18,6 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     );
   }
 
-  // TODO: Remove this temporary bypass for development/testing
-  // Temporarily bypass authentication for development testing
-  if (process.env.NODE_ENV === 'development') {
-    return <>{children}</>;
-  }
-
   if (!user) {
     return <Navigate to="/auth" replace />;
   }

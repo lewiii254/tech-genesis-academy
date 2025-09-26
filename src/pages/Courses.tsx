@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -412,40 +412,52 @@ const Courses = () => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [showFeaturedOnly, setShowFeaturedOnly] = useState(false);
   const [showFreeOnly, setShowFreeOnly] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const filteredCourses = allCourses.filter(course => {
-    const matchesSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         course.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         course.skills.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase()));
-    const matchesCategory = selectedCategory === "All" || course.category === selectedCategory;
-    const matchesLevel = selectedLevel === "All" || course.level === selectedLevel;
-    const matchesFeatured = !showFeaturedOnly || course.featured;
-    const matchesFree = !showFreeOnly || course.price === "Free";
+  // Memoize filtered and sorted courses for better performance
+  const filteredCourses = useMemo(() => {
+    setIsLoading(true);
     
-    return matchesSearch && matchesCategory && matchesLevel && matchesFeatured && matchesFree;
-  });
+    const filtered = allCourses.filter(course => {
+      const matchesSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           course.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           course.skills.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase()));
+      const matchesCategory = selectedCategory === "All" || course.category === selectedCategory;
+      const matchesLevel = selectedLevel === "All" || course.level === selectedLevel;
+      const matchesFeatured = !showFeaturedOnly || course.featured;
+      const matchesFree = !showFreeOnly || course.price === "Free";
+      
+      return matchesSearch && matchesCategory && matchesLevel && matchesFeatured && matchesFree;
+    });
 
-  // Sort courses
-  switch (sortBy) {
-    case "Rating":
-      filteredCourses.sort((a, b) => b.rating - a.rating);
-      break;
-    case "Duration":
-      filteredCourses.sort((a, b) => parseInt(a.duration) - parseInt(b.duration));
-      break;
-    case "Newest":
-      filteredCourses.sort((a, b) => b.id - a.id);
-      break;
-    case "Price":
-      filteredCourses.sort((a, b) => {
-        const priceA = a.price === "Free" ? 0 : parseInt(a.price.replace(/[^\d]/g, ''));
-        const priceB = b.price === "Free" ? 0 : parseInt(b.price.replace(/[^\d]/g, ''));
-        return priceA - priceB;
-      });
-      break;
-    default: // Popular
-      filteredCourses.sort((a, b) => b.students - a.students);
-  }
+    // Sort courses
+    const sorted = [...filtered];
+    switch (sortBy) {
+      case "Rating":
+        sorted.sort((a, b) => b.rating - a.rating);
+        break;
+      case "Duration":
+        sorted.sort((a, b) => parseInt(a.duration) - parseInt(b.duration));
+        break;
+      case "Newest":
+        sorted.sort((a, b) => b.id - a.id);
+        break;
+      case "Price":
+        sorted.sort((a, b) => {
+          const priceA = a.price === "Free" ? 0 : parseInt(a.price.replace(/[^\d]/g, ''));
+          const priceB = b.price === "Free" ? 0 : parseInt(b.price.replace(/[^\d]/g, ''));
+          return priceA - priceB;
+        });
+        break;
+      default: // Popular
+        sorted.sort((a, b) => b.students - a.students);
+    }
+    
+    // Simulate brief loading state for better UX
+    setTimeout(() => setIsLoading(false), 100);
+    
+    return sorted;
+  }, [searchTerm, selectedCategory, selectedLevel, sortBy, showFeaturedOnly, showFreeOnly]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-4 sm:p-6">
@@ -568,19 +580,63 @@ const Courses = () => {
                 </div>
               </div>
               
-              <p className="text-sm text-slate-700">
-                Showing {filteredCourses.length} of {allCourses.length} courses
-              </p>
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <p className="text-sm text-slate-700">
+                  Showing {filteredCourses.length} of {allCourses.length} courses
+                  {(searchTerm || selectedCategory !== "All" || selectedLevel !== "All" || showFeaturedOnly || showFreeOnly) && (
+                    <span className="ml-2 text-blue-600">
+                      (filtered)
+                    </span>
+                  )}
+                </p>
+                
+                {/* Active Filters */}
+                {(searchTerm || selectedCategory !== "All" || selectedLevel !== "All" || showFeaturedOnly || showFreeOnly) && (
+                  <div className="flex flex-wrap gap-2">
+                    {searchTerm && (
+                      <Badge variant="secondary" className="text-xs">
+                        Search: {searchTerm}
+                      </Badge>
+                    )}
+                    {selectedCategory !== "All" && (
+                      <Badge variant="secondary" className="text-xs">
+                        Category: {selectedCategory}
+                      </Badge>
+                    )}
+                    {selectedLevel !== "All" && (
+                      <Badge variant="secondary" className="text-xs">
+                        Level: {selectedLevel}
+                      </Badge>
+                    )}
+                    {showFeaturedOnly && (
+                      <Badge variant="secondary" className="text-xs">
+                        Featured only
+                      </Badge>
+                    )}
+                    {showFreeOnly && (
+                      <Badge variant="secondary" className="text-xs">
+                        Free only
+                      </Badge>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
           </CardContent>
         </Card>
 
         {/* Courses Grid/List */}
-        <div className={viewMode === "grid" 
-          ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" 
-          : "space-y-4"
-        }>
-          {filteredCourses.map((course) => (
+        {isLoading ? (
+          <div className="flex justify-center items-center py-16">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+            <span className="ml-3 text-slate-600">Loading courses...</span>
+          </div>
+        ) : (
+          <div className={viewMode === "grid" 
+            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" 
+            : "space-y-4"
+          }>
+            {filteredCourses.map((course) => (
             <Card key={course.id} className={`bg-white border-slate-200 shadow-lg hover:shadow-xl transition-all duration-300 group ${
               viewMode === "list" ? "flex flex-col sm:flex-row" : ""
             }`}>
@@ -737,15 +793,17 @@ const Courses = () => {
               </div>
             </Card>
           ))}
-        </div>
+          </div>
+        )}
 
         {/* No Results */}
-        {filteredCourses.length === 0 && (
+        {!isLoading && filteredCourses.length === 0 && (
           <Card className="bg-white border-slate-200 shadow-lg">
             <CardContent className="p-12 text-center">
               <BookOpen className="h-16 w-16 text-slate-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-slate-900 mb-2">No courses found</h3>
               <p className="text-slate-600 mb-4">
+                {searchTerm ? `No courses found matching "${searchTerm}". ` : ""}
                 Try adjusting your search criteria or browse our featured courses.
               </p>
               <Button 
