@@ -227,7 +227,7 @@ const Mentorship = () => {
                     <p className="text-slate-500 text-xs">{mentor.company}</p>
                   </div>
                   <div className="flex items-center gap-1">
-                    <Star className="h-4 w-4 text-yellow-500 fill-current" />
+                    <Star className="h-4 w-4 text-amber-500 fill-current" />
                     <span className="text-slate-600 text-sm">{mentor.rating}</span>
                   </div>
                 </div>

@@ -75,7 +75,7 @@ const MentorshipCard = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4 text-sm text-slate-600">
                 <div className="flex items-center gap-1">
-                  <Star className="h-4 w-4 text-yellow-500 fill-current" />
+                  <Star className="h-4 w-4 text-amber-500 fill-current" />
                   <span>{session.rating}</span>
                 </div>
                 <div className="flex items-center gap-1">

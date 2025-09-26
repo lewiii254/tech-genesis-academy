@@ -114,3 +114,16 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Temporary fix for yellow background issue */
+.bg-card {
+  background-color: white !important;
+}
+
+.bg-background {
+  background-color: #fafbfc !important;
+}
+
+.bg-muted\/30 {
+  background-color: rgba(241, 245, 249, 0.3) !important;
+}

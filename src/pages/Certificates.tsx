@@ -143,7 +143,7 @@ const getRarityColor = (rarity: string) => {
     case "Common": return "bg-gray-500";
     case "Rare": return "bg-blue-500";
     case "Epic": return "bg-purple-500";
-    case "Legendary": return "bg-yellow-500";
+    case "Legendary": return "bg-amber-500";
     default: return "bg-gray-500";
   }
 };
@@ -261,7 +261,7 @@ const Certificates = () => {
         {/* Header */}
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center space-x-3">
-            <div className="p-3 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-full">
+            <div className="p-3 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full">
               <Award className="h-8 w-8 text-white" />
             </div>
             <h1 className="text-4xl font-bold text-white">Certificates & Badges</h1>
@@ -273,7 +273,7 @@ const Certificates = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
             <CardContent className="p-6 text-center">
-              <Award className="h-8 w-8 mx-auto mb-2 text-yellow-400" />
+              <Award className="h-8 w-8 mx-auto mb-2 text-amber-400" />
               <p className="text-2xl font-bold">{certificates.length}</p>
               <p className="text-slate-300">Certificates</p>
             </CardContent>
@@ -304,18 +304,18 @@ const Certificates = () => {
         {/* Enhanced Certificates Section */}
         <div className="space-y-6">
           <h2 className="text-3xl font-bold text-white flex items-center gap-3">
-            <FileText className="h-8 w-8 text-yellow-400" />
+            <FileText className="h-8 w-8 text-amber-400" />
             Professional Certificates
           </h2>
           <div className="space-y-6">
             {certificates.map((cert) => (
               <Card key={cert.id} className="bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/15 transition-all duration-300 overflow-hidden">
-                <div className="bg-gradient-to-r from-yellow-500/20 via-orange-500/20 to-red-500/20 border-b border-white/20">
+                <div className="bg-gradient-to-r from-amber-500/20 via-orange-500/20 to-red-500/20 border-b border-white/20">
                   <CardHeader>
                     <div className="flex items-start justify-between">
                       <div className="flex items-center space-x-4">
                         <div className="relative">
-                          <div className="p-4 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-lg shadow-lg">
+                          <div className="p-4 bg-gradient-to-r from-amber-500 to-orange-600 rounded-lg shadow-lg">
                             <Award className="h-8 w-8 text-white" />
                           </div>
                           <div className="absolute -top-1 -right-1 bg-green-500 rounded-full p-1">
@@ -437,7 +437,7 @@ const Certificates = () => {
         <Card className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 border-white/20 overflow-hidden relative">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10" />
           <CardContent className="p-8 text-center relative z-10">
-            <Award className="h-16 w-16 mx-auto mb-4 text-yellow-400" />
+            <Award className="h-16 w-16 mx-auto mb-4 text-amber-400" />
             <h3 className="text-2xl font-bold text-white mb-4">Continue Your Learning Journey!</h3>
             <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
               Complete more courses to earn additional certificates and unlock exclusive badges. 

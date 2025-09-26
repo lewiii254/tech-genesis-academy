@@ -200,7 +200,7 @@ const Pricing = () => {
               <span>10,000+ Kenyan Students</span>
             </div>
             <div className="flex items-center gap-2">
-              <Award className="h-5 w-5 text-yellow-400" />
+              <Award className="h-5 w-5 text-amber-400" />
               <span>Industry Recognized</span>
             </div>
           </div>

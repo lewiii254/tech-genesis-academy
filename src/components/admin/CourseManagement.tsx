@@ -120,7 +120,7 @@ const CourseManagement = () => {
   const getDifficultyColor = (difficulty: string) => {
     const colors = {
       "Beginner": "bg-green-100 text-green-800",
-      "Intermediate": "bg-yellow-100 text-yellow-800",
+      "Intermediate": "bg-amber-100 text-amber-800",
       "Advanced": "bg-red-100 text-red-800"
     };
     return colors[difficulty as keyof typeof colors] || "bg-gray-100 text-gray-800";
@@ -271,7 +271,7 @@ const CourseManagement = () => {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <Star className="h-8 w-8 text-yellow-600" />
+              <Star className="h-8 w-8 text-amber-600" />
               <div>
                 <p className="text-sm text-gray-600">Avg Rating</p>
                 <p className="text-2xl font-bold">4.7</p>
@@ -343,7 +343,7 @@ const CourseManagement = () => {
                     </td>
                     <td className="p-4">
                       <div className="flex items-center gap-1">
-                        <Star className="h-4 w-4 text-yellow-500 fill-current" />
+                        <Star className="h-4 w-4 text-amber-500 fill-current" />
                         <span className="font-medium">{course.rating}</span>
                       </div>
                     </td>

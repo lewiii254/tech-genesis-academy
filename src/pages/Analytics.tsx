@@ -109,8 +109,8 @@ const Analytics = () => {
                   <p className="text-slate-800 text-2xl font-bold">{avgDailyHours.toFixed(1)}h</p>
                   <p className="text-blue-600 text-xs">+0.5h from last week</p>
                 </div>
-                <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
-                  <TrendingUp className="h-6 w-6 text-yellow-600" />
+                <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                  <TrendingUp className="h-6 w-6 text-orange-600" />
                 </div>
               </div>
             </CardContent>
@@ -262,13 +262,13 @@ const Analytics = () => {
               {recentAchievements.map((achievement, index) => (
                 <div key={index} className="bg-slate-50 rounded-lg p-4 space-y-2">
                   <div className="flex items-center gap-2">
-                    <Award className="h-5 w-5 text-yellow-500" />
+                    <Award className="h-5 w-5 text-amber-600" />
                     <span className="font-medium text-slate-800">{achievement.title}</span>
                   </div>
                   <p className="text-sm text-slate-600">{achievement.description}</p>
                   <div className="flex justify-between items-center text-xs">
                     <span className="text-slate-500">{achievement.date}</span>
-                    <Badge className="bg-yellow-100 text-yellow-700">+{achievement.points} pts</Badge>
+                    <Badge className="bg-amber-100 text-amber-800">+{achievement.points} pts</Badge>
                   </div>
                 </div>
               ))}

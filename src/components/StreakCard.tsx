@@ -30,7 +30,7 @@ const StreakCard = () => {
       <CardContent className="space-y-4">
         <div className="flex justify-between items-center text-sm">
           <div className="flex items-center gap-1">
-            <Trophy className="h-4 w-4 text-yellow-400" />
+            <Trophy className="h-4 w-4 text-amber-400" />
             <span className="text-slate-300">Best: {gameState.longestStreak} days</span>
           </div>
           <div className="flex items-center gap-1">
