@@ -5,83 +5,103 @@
 
 @layer base {
   :root {
-    --background: 251 253 255;
-    --foreground: 30 41 59;
+    /* Main backgrounds - Clean and professional */
+    --background: 250 251 252;        /* #FAFBFC - Clean light background */
+    --foreground: 30 41 59;           /* #1E293B - High contrast text */
 
-    --card: 255 255 255;
-    --card-foreground: 30 41 59;
+    /* Card surfaces */
+    --card: 255 255 255;              /* #FFFFFF - Pure white cards */
+    --card-foreground: 30 41 59;      /* #1E293B - High contrast text */
 
-    --popover: 255 255 255;
-    --popover-foreground: 30 41 59;
+    /* Popover surfaces */
+    --popover: 255 255 255;           /* #FFFFFF - Pure white popover */
+    --popover-foreground: 30 41 59;   /* #1E293B - High contrast text */
 
-    --primary: 8 145 178;
-    --primary-foreground: 255 255 255;
+    /* Primary brand colors - Professional blue */
+    --primary: 30 64 175;             /* #1E40AF - Professional primary blue */ 
+    --primary-foreground: 255 255 255; /* #FFFFFF - White text on primary */
 
-    --secondary: 248 250 252;
-    --secondary-foreground: 71 85 105;
+    /* Secondary surfaces - Subtle contrast */
+    --secondary: 241 245 249;         /* #F1F5F9 - Muted background */
+    --secondary-foreground: 71 85 105; /* #475569 - Medium contrast text */
 
-    --muted: 248 250 252;
-    --muted-foreground: 100 116 139;
+    /* Muted surfaces and text */
+    --muted: 241 245 249;             /* #F1F5F9 - Muted background */
+    --muted-foreground: 100 116 139;  /* #64748B - Light contrast text */
 
-    --accent: 5 150 105;
-    --accent-foreground: 255 255 255;
+    /* Accent color - Purple for special highlights */
+    --accent: 124 58 237;             /* #7C3AED - Purple accent */
+    --accent-foreground: 255 255 255; /* #FFFFFF - White text on accent */
 
-    --destructive: 220 38 38;
-    --destructive-foreground: 255 255 255;
+    /* Destructive/Error states */
+    --destructive: 220 38 38;         /* #DC2626 - Error red */
+    --destructive-foreground: 255 255 255; /* #FFFFFF - White text on error */
 
-    --border: 226 232 240;
-    --input: 226 232 240;
-    --ring: 8 145 178;
+    /* Borders and inputs - Subtle boundaries */
+    --border: 226 232 240;            /* #E2E8F0 - Subtle border */
+    --input: 226 232 240;             /* #E2E8F0 - Input border */
+    --ring: 30 64 175;                /* #1E40AF - Focus ring (primary) */
 
     --radius: 0.5rem;
 
-    --sidebar-background: 255 255 255;
-    --sidebar-foreground: 30 41 59;
-    --sidebar-primary: 8 145 178;
-    --sidebar-primary-foreground: 255 255 255;
-    --sidebar-accent: 248 250 252;
-    --sidebar-accent-foreground: 71 85 105;
-    --sidebar-border: 226 232 240;
-    --sidebar-ring: 8 145 178;
+    /* Sidebar - Clean professional look */
+    --sidebar-background: 255 255 255; /* #FFFFFF - White sidebar */
+    --sidebar-foreground: 30 41 59;    /* #1E293B - Dark text */
+    --sidebar-primary: 30 64 175;      /* #1E40AF - Primary blue */
+    --sidebar-primary-foreground: 255 255 255; /* #FFFFFF - White text */
+    --sidebar-accent: 241 245 249;     /* #F1F5F9 - Muted accent */
+    --sidebar-accent-foreground: 71 85 105; /* #475569 - Medium text */
+    --sidebar-border: 226 232 240;     /* #E2E8F0 - Subtle border */
+    --sidebar-ring: 30 64 175;         /* #1E40AF - Focus ring */
   }
 
   .dark {
-    --background: 15 23 42;
-    --foreground: 248 250 252;
+    /* Dark backgrounds - Professional dark theme */
+    --background: 15 23 42;           /* #0F172A - Dark slate background */
+    --foreground: 248 250 252;        /* #F8FAFC - Light text */
 
-    --card: 30 41 59;
-    --card-foreground: 248 250 252;
+    /* Dark card surfaces */
+    --card: 30 41 59;                 /* #1E293B - Dark card background */
+    --card-foreground: 248 250 252;   /* #F8FAFC - Light text on dark cards */
 
-    --popover: 30 41 59;
-    --popover-foreground: 248 250 252;
+    /* Dark popover surfaces */
+    --popover: 30 41 59;              /* #1E293B - Dark popover background */
+    --popover-foreground: 248 250 252; /* #F8FAFC - Light text */
 
-    --primary: 34 197 94;
-    --primary-foreground: 15 23 42;
+    /* Primary colors for dark mode - Brighter blue for better contrast */
+    --primary: 59 130 246;            /* #3B82F6 - Brighter blue for dark mode */
+    --primary-foreground: 15 23 42;   /* #0F172A - Dark text on primary */
 
-    --secondary: 51 65 85;
-    --secondary-foreground: 226 232 240;
+    /* Secondary surfaces - Dark with good contrast */
+    --secondary: 51 65 85;            /* #334155 - Medium dark surface */
+    --secondary-foreground: 226 232 240; /* #E2E8F0 - Light text */
 
-    --muted: 51 65 85;
-    --muted-foreground: 148 163 184;
+    /* Muted surfaces and text for dark mode */
+    --muted: 51 65 85;                /* #334155 - Medium dark surface */
+    --muted-foreground: 148 163 184;  /* #94A3B8 - Muted light text */
 
-    --accent: 34 197 94;
-    --accent-foreground: 15 23 42;
+    /* Accent color for dark mode - Success green */
+    --accent: 5 150 105;              /* #059669 - Success green accent */
+    --accent-foreground: 255 255 255; /* #FFFFFF - White text on accent */
 
-    --destructive: 220 38 38;
-    --destructive-foreground: 255 255 255;
+    /* Destructive/Error states - same red works in dark mode */
+    --destructive: 220 38 38;         /* #DC2626 - Error red */
+    --destructive-foreground: 255 255 255; /* #FFFFFF - White text on error */
 
-    --border: 51 65 85;
-    --input: 51 65 85;
-    --ring: 34 197 94;
+    /* Dark mode borders and inputs */
+    --border: 51 65 85;               /* #334155 - Dark border */
+    --input: 51 65 85;                /* #334155 - Dark input border */
+    --ring: 59 130 246;               /* #3B82F6 - Bright blue focus ring */
 
-    --sidebar-background: 30 41 59;
-    --sidebar-foreground: 248 250 252;
-    --sidebar-primary: 34 197 94;
-    --sidebar-primary-foreground: 15 23 42;
-    --sidebar-accent: 51 65 85;
-    --sidebar-accent-foreground: 226 232 240;
-    --sidebar-border: 51 65 85;
-    --sidebar-ring: 34 197 94;
+    /* Dark sidebar - Consistent with main dark theme */
+    --sidebar-background: 30 41 59;   /* #1E293B - Dark sidebar */
+    --sidebar-foreground: 248 250 252; /* #F8FAFC - Light text */
+    --sidebar-primary: 59 130 246;    /* #3B82F6 - Bright blue */
+    --sidebar-primary-foreground: 15 23 42; /* #0F172A - Dark text */
+    --sidebar-accent: 51 65 85;       /* #334155 - Medium dark accent */
+    --sidebar-accent-foreground: 226 232 240; /* #E2E8F0 - Light text */
+    --sidebar-border: 51 65 85;       /* #334155 - Dark border */
+    --sidebar-ring: 59 130 246;       /* #3B82F6 - Bright blue focus ring */
   }
 }
 

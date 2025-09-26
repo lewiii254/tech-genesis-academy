@@ -33,11 +33,11 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-cyan-50 to-primary/10 flex items-center justify-center p-6">
+    <div className="min-h-screen bg-gradient-to-br from-background to-secondary flex items-center justify-center p-6">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 bg-gradient-to-r from-primary to-cyan-700 rounded-lg flex items-center justify-center shadow-lg">
+            <div className="w-16 h-16 bg-gradient-to-r from-primary to-primary/80 rounded-lg flex items-center justify-center shadow-lg">
               <BookOpen className="h-8 w-8 text-white" />
             </div>
           </div>
