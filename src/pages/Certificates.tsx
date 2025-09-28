@@ -1,8 +1,22 @@
-
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Award, Download, Share, Calendar, Star, FileText, Shield, Verified } from "lucide-react";
+import {
+  Award,
+  Download,
+  Share,
+  Calendar,
+  Star,
+  FileText,
+  Shield,
+  Verified,
+} from "lucide-react";
 
 const certificates = [
   {
@@ -17,7 +31,7 @@ const certificates = [
     certificateNumber: "MERN-2024-001234",
     verified: true,
     institution: "TechLearn Academy",
-    credentialUrl: "https://techlearn.edu/verify/MERN-2024-001234"
+    credentialUrl: "https://techlearn.edu/verify/MERN-2024-001234",
   },
   {
     id: 2,
@@ -31,7 +45,7 @@ const certificates = [
     certificateNumber: "UXUI-2024-005678",
     verified: true,
     institution: "TechLearn Academy",
-    credentialUrl: "https://techlearn.edu/verify/UXUI-2024-005678"
+    credentialUrl: "https://techlearn.edu/verify/UXUI-2024-005678",
   },
   {
     id: 3,
@@ -45,7 +59,7 @@ const certificates = [
     certificateNumber: "PYDS-2024-009876",
     verified: true,
     institution: "TechLearn Academy",
-    credentialUrl: "https://techlearn.edu/verify/PYDS-2024-009876"
+    credentialUrl: "https://techlearn.edu/verify/PYDS-2024-009876",
   },
   {
     id: 4,
@@ -59,8 +73,8 @@ const certificates = [
     certificateNumber: "DB-2024-112233",
     verified: true,
     institution: "TechLearn Academy",
-    credentialUrl: "https://techlearn.edu/verify/DB-2024-112233"
-  }
+    credentialUrl: "https://techlearn.edu/verify/DB-2024-112233",
+  },
 ];
 
 const badges = [
@@ -71,7 +85,7 @@ const badges = [
     icon: "🏆",
     earnedDate: "December 15, 2024",
     rarity: "Epic",
-    category: "Programming"
+    category: "Programming",
   },
   {
     id: 2,
@@ -80,7 +94,7 @@ const badges = [
     icon: "🎨",
     earnedDate: "November 28, 2024",
     rarity: "Rare",
-    category: "Design"
+    category: "Design",
   },
   {
     id: 3,
@@ -89,7 +103,7 @@ const badges = [
     icon: "🤝",
     earnedDate: "December 1, 2024",
     rarity: "Common",
-    category: "Community"
+    category: "Community",
   },
   {
     id: 4,
@@ -98,7 +112,7 @@ const badges = [
     icon: "🔥",
     earnedDate: "December 10, 2024",
     rarity: "Rare",
-    category: "Achievement"
+    category: "Achievement",
   },
   {
     id: 5,
@@ -107,7 +121,7 @@ const badges = [
     icon: "⚡",
     earnedDate: "November 25, 2024",
     rarity: "Epic",
-    category: "Achievement"
+    category: "Achievement",
   },
   {
     id: 6,
@@ -116,7 +130,7 @@ const badges = [
     icon: "⭐",
     earnedDate: "December 10, 2024",
     rarity: "Legendary",
-    category: "Academic"
+    category: "Academic",
   },
   {
     id: 7,
@@ -125,7 +139,7 @@ const badges = [
     icon: "📊",
     earnedDate: "December 20, 2024",
     rarity: "Epic",
-    category: "Programming"
+    category: "Programming",
   },
   {
     id: 8,
@@ -134,23 +148,28 @@ const badges = [
     icon: "🗄️",
     earnedDate: "November 15, 2024",
     rarity: "Rare",
-    category: "Database"
-  }
+    category: "Database",
+  },
 ];
 
 const getRarityColor = (rarity: string) => {
   switch (rarity) {
-    case "Common": return "bg-gray-500";
-    case "Rare": return "bg-blue-500";
-    case "Epic": return "bg-purple-500";
-    case "Legendary": return "bg-amber-500";
-    default: return "bg-gray-500";
+    case "Common":
+      return "bg-gray-500";
+    case "Rare":
+      return "bg-blue-500";
+    case "Epic":
+      return "bg-purple-500";
+    case "Legendary":
+      return "bg-amber-500";
+    default:
+      return "bg-gray-500";
   }
 };
 
 const handleDownloadCertificate = (certificateId: number) => {
   // Create a more realistic certificate content
-  const cert = certificates.find(c => c.id === certificateId);
+  const cert = certificates.find((c) => c.id === certificateId);
   if (!cert) return;
 
   const certificateHTML = `
@@ -217,16 +236,24 @@ const handleDownloadCertificate = (certificateId: number) => {
             <div class="course">${cert.title}</div>
             
             <div class="details">
-                <p><strong>Course Duration:</strong> ${cert.courseHours} hours</p>
+                <p><strong>Course Duration:</strong> ${
+                  cert.courseHours
+                } hours</p>
                 <p><strong>Grade Achieved:</strong> ${cert.grade}</p>
                 <p><strong>Completion Date:</strong> ${cert.completionDate}</p>
-                <p><strong>Certificate Number:</strong> ${cert.certificateNumber}</p>
-                <p><strong>Skills Acquired:</strong> ${cert.skills.join(', ')}</p>
+                <p><strong>Certificate Number:</strong> ${
+                  cert.certificateNumber
+                }</p>
+                <p><strong>Skills Acquired:</strong> ${cert.skills.join(
+                  ", "
+                )}</p>
             </div>
             
             <div class="signature">
                 <div class="sig-line">
-                    <p style="margin: 0; font-size: 14px;">${cert.instructor}</p>
+                    <p style="margin: 0; font-size: 14px;">${
+                      cert.instructor
+                    }</p>
                     <p style="margin: 0; font-size: 12px;">Course Instructor</p>
                 </div>
                 <div class="sig-line">
@@ -243,11 +270,11 @@ const handleDownloadCertificate = (certificateId: number) => {
     </html>
   `;
 
-  const blob = new Blob([certificateHTML], { type: 'text/html' });
+  const blob = new Blob([certificateHTML], { type: "text/html" });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  const a = document.createElement("a");
   a.href = url;
-  a.download = `${cert.title.replace(/\s+/g, '_')}_Certificate.html`;
+  a.download = `${cert.title.replace(/\s+/g, "_")}_Certificate.html`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -256,66 +283,77 @@ const handleDownloadCertificate = (certificateId: number) => {
 
 const Certificates = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center space-x-3">
-            <div className="p-3 bg-gradient-to-r from-amber-500 to-orange-600 rounded-full">
+            <div className="p-3 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full">
               <Award className="h-8 w-8 text-white" />
             </div>
-            <h1 className="text-4xl font-bold text-white">Certificates & Badges</h1>
+            <h1 className="text-4xl font-bold text-slate-900">
+              Certificates & Badges
+            </h1>
           </div>
-          <p className="text-xl text-slate-300">Your verified achievements and accomplishments</p>
+          <p className="text-xl text-slate-600">
+            Your verified achievements and accomplishments
+          </p>
         </div>
 
         {/* Enhanced Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+          <Card className="bg-white border-slate-200 shadow-sm hover:shadow-md transition-all duration-200">
             <CardContent className="p-6 text-center">
-              <Award className="h-8 w-8 mx-auto mb-2 text-amber-400" />
-              <p className="text-2xl font-bold">{certificates.length}</p>
-              <p className="text-slate-300">Certificates</p>
+              <Award className="h-8 w-8 mx-auto mb-2 text-blue-600" />
+              <p className="text-2xl font-bold text-slate-900">
+                {certificates.length}
+              </p>
+              <p className="text-slate-600">Certificates</p>
             </CardContent>
           </Card>
-          <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+          <Card className="bg-white border-slate-200 shadow-sm hover:shadow-md transition-all duration-200">
             <CardContent className="p-6 text-center">
-              <Star className="h-8 w-8 mx-auto mb-2 text-purple-400" />
-              <p className="text-2xl font-bold">{badges.length}</p>
-              <p className="text-slate-300">Badges Earned</p>
+              <Star className="h-8 w-8 mx-auto mb-2 text-blue-600" />
+              <p className="text-2xl font-bold text-slate-900">
+                {badges.length}
+              </p>
+              <p className="text-slate-600">Badges Earned</p>
             </CardContent>
           </Card>
-          <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+          <Card className="bg-white border-slate-200 shadow-sm hover:shadow-md transition-all duration-200">
             <CardContent className="p-6 text-center">
-              <Calendar className="h-8 w-8 mx-auto mb-2 text-green-400" />
-              <p className="text-2xl font-bold">300</p>
-              <p className="text-slate-300">Study Hours</p>
+              <Calendar className="h-8 w-8 mx-auto mb-2 text-blue-600" />
+              <p className="text-2xl font-bold text-slate-900">300</p>
+              <p className="text-slate-600">Study Hours</p>
             </CardContent>
           </Card>
-          <Card className="bg-white/10 backdrop-blur-md border-white/20 text-white">
+          <Card className="bg-white border-slate-200 shadow-sm hover:shadow-md transition-all duration-200">
             <CardContent className="p-6 text-center">
-              <Shield className="h-8 w-8 mx-auto mb-2 text-blue-400" />
-              <p className="text-2xl font-bold">100%</p>
-              <p className="text-slate-300">Verified</p>
+              <Shield className="h-8 w-8 mx-auto mb-2 text-blue-600" />
+              <p className="text-2xl font-bold text-slate-900">100%</p>
+              <p className="text-slate-600">Verified</p>
             </CardContent>
           </Card>
         </div>
 
         {/* Enhanced Certificates Section */}
         <div className="space-y-6">
-          <h2 className="text-3xl font-bold text-white flex items-center gap-3">
-            <FileText className="h-8 w-8 text-amber-400" />
+          <h2 className="text-3xl font-bold text-slate-900 flex items-center gap-3">
+            <FileText className="h-8 w-8 text-blue-600" />
             Professional Certificates
           </h2>
           <div className="space-y-6">
             {certificates.map((cert) => (
-              <Card key={cert.id} className="bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/15 transition-all duration-300 overflow-hidden">
-                <div className="bg-gradient-to-r from-amber-500/20 via-orange-500/20 to-red-500/20 border-b border-white/20">
+              <Card
+                key={cert.id}
+                className="bg-white border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 overflow-hidden"
+              >
+                <div className="bg-gradient-to-r from-blue-50 to-blue-100 border-b border-slate-200">
                   <CardHeader>
                     <div className="flex items-start justify-between">
                       <div className="flex items-center space-x-4">
                         <div className="relative">
-                          <div className="p-4 bg-gradient-to-r from-amber-500 to-orange-600 rounded-lg shadow-lg">
+                          <div className="p-4 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg shadow-sm">
                             <Award className="h-8 w-8 text-white" />
                           </div>
                           <div className="absolute -top-1 -right-1 bg-green-500 rounded-full p-1">
@@ -323,72 +361,113 @@ const Certificates = () => {
                           </div>
                         </div>
                         <div>
-                          <CardTitle className="text-2xl text-white">{cert.title}</CardTitle>
-                          <CardDescription className="text-slate-300 text-lg">
+                          <CardTitle className="text-2xl text-slate-900">
+                            {cert.title}
+                          </CardTitle>
+                          <CardDescription className="text-slate-600 text-lg">
                             {cert.institution} • Certificate of Completion
                           </CardDescription>
                           <div className="flex items-center gap-2 mt-2">
-                            <Badge className="bg-green-500 text-white">Verified</Badge>
-                            <Badge className="bg-blue-500 text-white">Blockchain Secured</Badge>
+                            <Badge className="bg-green-100 text-green-700 border-green-200">
+                              Verified
+                            </Badge>
+                            <Badge className="bg-blue-100 text-blue-700 border-blue-200">
+                              Blockchain Secured
+                            </Badge>
                           </div>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-3xl font-bold text-white mb-1">{cert.grade}</div>
-                        <p className="text-slate-300 text-sm">Final Grade</p>
+                        <div className="text-3xl font-bold text-slate-900 mb-1">
+                          {cert.grade}
+                        </div>
+                        <p className="text-slate-600 text-sm">Final Grade</p>
                       </div>
                     </div>
                   </CardHeader>
                 </div>
-                
+
                 <CardContent className="p-6 space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
-                      <h4 className="font-semibold text-white mb-3 flex items-center gap-2">
+                      <h4 className="font-semibold text-slate-900 mb-3 flex items-center gap-2">
                         <Calendar className="h-4 w-4" />
                         Course Details
                       </h4>
-                      <div className="space-y-2 text-slate-300">
-                        <p><span className="font-medium">Instructor:</span> {cert.instructor}</p>
-                        <p><span className="font-medium">Duration:</span> {cert.courseHours} hours</p>
-                        <p><span className="font-medium">Completed:</span> {cert.completionDate}</p>
-                        <p><span className="font-medium">Issued:</span> {cert.issueDate}</p>
+                      <div className="space-y-2 text-slate-600">
+                        <p>
+                          <span className="font-medium">Instructor:</span>{" "}
+                          {cert.instructor}
+                        </p>
+                        <p>
+                          <span className="font-medium">Duration:</span>{" "}
+                          {cert.courseHours} hours
+                        </p>
+                        <p>
+                          <span className="font-medium">Completed:</span>{" "}
+                          {cert.completionDate}
+                        </p>
+                        <p>
+                          <span className="font-medium">Issued:</span>{" "}
+                          {cert.issueDate}
+                        </p>
                       </div>
                     </div>
-                    
+
                     <div>
-                      <h4 className="font-semibold text-white mb-3">Skills Mastered</h4>
+                      <h4 className="font-semibold text-slate-900 mb-3">
+                        Skills Mastered
+                      </h4>
                       <div className="flex flex-wrap gap-2">
                         {cert.skills.map((skill, index) => (
-                          <Badge key={index} variant="outline" className="border-white/20 text-slate-300 bg-white/5">
+                          <Badge
+                            key={index}
+                            variant="outline"
+                            className="border-slate-300 text-slate-700 bg-slate-50"
+                          >
                             {skill}
                           </Badge>
                         ))}
                       </div>
                     </div>
-                    
+
                     <div>
-                      <h4 className="font-semibold text-white mb-3">Verification</h4>
-                      <div className="space-y-2 text-slate-300">
-                        <p className="font-mono text-sm break-all">{cert.certificateNumber}</p>
-                        <p className="text-xs">Verify at: <span className="text-blue-400">{cert.credentialUrl}</span></p>
+                      <h4 className="font-semibold text-slate-900 mb-3">
+                        Verification
+                      </h4>
+                      <div className="space-y-2 text-slate-600">
+                        <p className="font-mono text-sm break-all">
+                          {cert.certificateNumber}
+                        </p>
+                        <p className="text-xs">
+                          Verify at:{" "}
+                          <span className="text-blue-600">
+                            {cert.credentialUrl}
+                          </span>
+                        </p>
                       </div>
                     </div>
                   </div>
-                  
-                  <div className="flex gap-4 pt-4 border-t border-white/20">
-                    <Button 
+
+                  <div className="flex gap-4 pt-4 border-t border-slate-200">
+                    <Button
                       onClick={() => handleDownloadCertificate(cert.id)}
-                      className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                      className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
                     >
                       <Download className="h-4 w-4 mr-2" />
                       Download Certificate
                     </Button>
-                    <Button variant="outline" className="border-white/20 text-slate-300 hover:bg-white/10">
+                    <Button
+                      variant="outline"
+                      className="border-slate-300 text-slate-700 hover:bg-slate-50"
+                    >
                       <Share className="h-4 w-4 mr-2" />
                       Share on LinkedIn
                     </Button>
-                    <Button variant="outline" className="border-white/20 text-slate-300 hover:bg-white/10">
+                    <Button
+                      variant="outline"
+                      className="border-slate-300 text-slate-700 hover:bg-slate-50"
+                    >
                       <Shield className="h-4 w-4 mr-2" />
                       Verify
                     </Button>
@@ -401,31 +480,47 @@ const Certificates = () => {
 
         {/* Enhanced Badges Section */}
         <div className="space-y-6">
-          <h2 className="text-3xl font-bold text-white flex items-center gap-3">
-            <Star className="h-8 w-8 text-purple-400" />
+          <h2 className="text-3xl font-bold text-slate-900 flex items-center gap-3">
+            <Star className="h-8 w-8 text-blue-600" />
             Achievement Badges
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {badges.map((badge) => (
-              <Card key={badge.id} className="bg-white/10 backdrop-blur-md border-white/20 hover:bg-white/15 transition-all duration-300 group relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <Card
+                key={badge.id}
+                className="bg-white border-slate-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 group relative overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-blue-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <CardContent className="p-6 text-center space-y-4 relative z-10">
                   <div className="relative">
                     <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300 filter drop-shadow-lg">
                       {badge.icon}
                     </div>
-                    <Badge className={`${getRarityColor(badge.rarity)} text-white absolute -top-2 -right-2 shadow-lg`}>
+                    <Badge
+                      className={`${getRarityColor(
+                        badge.rarity
+                      )} text-white absolute -top-2 -right-2 shadow-lg`}
+                    >
                       {badge.rarity}
                     </Badge>
                   </div>
-                  
+
                   <div>
-                    <h3 className="text-xl font-bold text-white mb-2">{badge.name}</h3>
-                    <Badge variant="outline" className="border-white/20 text-slate-400 mb-3 text-xs">
+                    <h3 className="text-xl font-bold text-slate-900 mb-2">
+                      {badge.name}
+                    </h3>
+                    <Badge
+                      variant="outline"
+                      className="border-slate-300 text-slate-600 mb-3 text-xs"
+                    >
                       {badge.category}
                     </Badge>
-                    <p className="text-slate-300 text-sm mb-3">{badge.description}</p>
-                    <p className="text-slate-400 text-xs">Earned • {badge.earnedDate}</p>
+                    <p className="text-slate-600 text-sm mb-3">
+                      {badge.description}
+                    </p>
+                    <p className="text-slate-500 text-xs">
+                      Earned • {badge.earnedDate}
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -434,20 +529,26 @@ const Certificates = () => {
         </div>
 
         {/* Call to Action */}
-        <Card className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 border-white/20 overflow-hidden relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10" />
+        <Card className="bg-gradient-to-r from-blue-50 to-blue-100 border-slate-200 overflow-hidden relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-blue-100/50" />
           <CardContent className="p-8 text-center relative z-10">
-            <Award className="h-16 w-16 mx-auto mb-4 text-amber-400" />
-            <h3 className="text-2xl font-bold text-white mb-4">Continue Your Learning Journey!</h3>
-            <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
-              Complete more courses to earn additional certificates and unlock exclusive badges. 
-              Build your professional portfolio with industry-recognized credentials.
+            <Award className="h-16 w-16 mx-auto mb-4 text-blue-600" />
+            <h3 className="text-2xl font-bold text-slate-900 mb-4">
+              Continue Your Learning Journey!
+            </h3>
+            <p className="text-slate-600 mb-6 max-w-2xl mx-auto">
+              Complete more courses to earn additional certificates and unlock
+              exclusive badges. Build your professional portfolio with
+              industry-recognized credentials.
             </p>
             <div className="flex gap-4 justify-center">
-              <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+              <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800">
                 Browse Courses
               </Button>
-              <Button variant="outline" className="border-white/20 text-slate-300 hover:bg-white/10">
+              <Button
+                variant="outline"
+                className="border-slate-300 text-slate-700 hover:bg-slate-50"
+              >
                 View Leaderboard
               </Button>
             </div>

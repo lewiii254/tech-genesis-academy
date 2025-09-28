@@ -1,12 +1,25 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Users, Calendar, Clock, MapPin, Plus, Search, BookOpen } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  Users,
+  Calendar,
+  Clock,
+  MapPin,
+  Plus,
+  Search,
+  BookOpen,
+} from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface StudyGroup {
@@ -28,7 +41,8 @@ const studyGroups: StudyGroup[] = [
   {
     id: "1",
     name: "React Masters",
-    description: "Deep dive into React hooks, state management, and advanced patterns",
+    description:
+      "Deep dive into React hooks, state management, and advanced patterns",
     subject: "Frontend Development",
     members: 12,
     maxMembers: 15,
@@ -37,7 +51,7 @@ const studyGroups: StudyGroup[] = [
     difficulty: "Intermediate",
     tags: ["React", "JavaScript", "Frontend"],
     organizer: "Sarah Mwangi",
-    nextMeeting: "Jan 13, 2024"
+    nextMeeting: "Jan 13, 2024",
   },
   {
     id: "2",
@@ -51,7 +65,7 @@ const studyGroups: StudyGroup[] = [
     difficulty: "Beginner",
     tags: ["Python", "Data Science", "ML"],
     organizer: "David Kiprotich",
-    nextMeeting: "Jan 10, 2024"
+    nextMeeting: "Jan 10, 2024",
   },
   {
     id: "3",
@@ -65,12 +79,13 @@ const studyGroups: StudyGroup[] = [
     difficulty: "Intermediate",
     tags: ["Flutter", "React Native", "Mobile"],
     organizer: "Grace Wanjiku",
-    nextMeeting: "Jan 14, 2024"
+    nextMeeting: "Jan 14, 2024",
   },
   {
     id: "4",
     name: "Cybersecurity Fundamentals",
-    description: "Network security, ethical hacking, and security best practices",
+    description:
+      "Network security, ethical hacking, and security best practices",
     subject: "Cybersecurity",
     members: 6,
     maxMembers: 10,
@@ -79,8 +94,8 @@ const studyGroups: StudyGroup[] = [
     difficulty: "Advanced",
     tags: ["Security", "Networking", "Ethical Hacking"],
     organizer: "John Otieno",
-    nextMeeting: "Jan 12, 2024"
-  }
+    nextMeeting: "Jan 12, 2024",
+  },
 ];
 
 const StudyGroups = () => {
@@ -96,15 +111,19 @@ const StudyGroups = () => {
     meetingTime: "",
     location: "",
     difficulty: "Beginner",
-    tags: ""
+    tags: "",
   });
   const { toast } = useToast();
 
-  const filteredGroups = studyGroups.filter(group => {
-    const matchesSearch = group.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         group.subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         group.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-    const matchesDifficulty = selectedDifficulty === "All" || group.difficulty === selectedDifficulty;
+  const filteredGroups = studyGroups.filter((group) => {
+    const matchesSearch =
+      group.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      group.subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      group.tags.some((tag) =>
+        tag.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    const matchesDifficulty =
+      selectedDifficulty === "All" || group.difficulty === selectedDifficulty;
     return matchesSearch && matchesDifficulty;
   });
 
@@ -113,7 +132,7 @@ const StudyGroups = () => {
       toast({
         title: "Already Joined",
         description: `You're already a member of ${groupName}`,
-        variant: "destructive"
+        variant: "destructive",
       });
       return;
     }
@@ -145,10 +164,15 @@ const StudyGroups = () => {
       maxMembers: parseInt(newGroup.maxMembers) || 10,
       meetingTime: newGroup.meetingTime || "TBD",
       location: newGroup.location || "Online",
-      difficulty: newGroup.difficulty as "Beginner" | "Intermediate" | "Advanced",
-      tags: newGroup.tags ? newGroup.tags.split(",").map(tag => tag.trim()) : [],
+      difficulty: newGroup.difficulty as
+        | "Beginner"
+        | "Intermediate"
+        | "Advanced",
+      tags: newGroup.tags
+        ? newGroup.tags.split(",").map((tag) => tag.trim())
+        : [],
       organizer: "You",
-      nextMeeting: "TBD"
+      nextMeeting: "TBD",
     };
 
     toast({
@@ -165,27 +189,33 @@ const StudyGroups = () => {
       meetingTime: "",
       location: "",
       difficulty: "Beginner",
-      tags: ""
+      tags: "",
     });
     setIsDialogOpen(false);
   };
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case "Beginner": return "bg-green-100 text-green-800 border-green-200";
-      case "Intermediate": return "bg-amber-100 text-amber-800 border-amber-200";
-      case "Advanced": return "bg-red-100 text-red-800 border-red-200";
-      default: return "bg-slate-100 text-slate-800 border-slate-200";
+      case "Beginner":
+        return "bg-green-100 text-green-800 border-green-200";
+      case "Intermediate":
+        return "bg-amber-100 text-amber-800 border-amber-200";
+      case "Advanced":
+        return "bg-red-100 text-red-800 border-red-200";
+      default:
+        return "bg-slate-100 text-slate-800 border-slate-200";
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary p-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">
           <h1 className="text-4xl font-bold text-slate-900">Study Groups</h1>
-          <p className="text-xl text-slate-700">Join collaborative learning groups and accelerate your tech journey</p>
+          <p className="text-xl text-slate-700">
+            Join collaborative learning groups and accelerate your tech journey
+          </p>
         </div>
 
         {/* Search and Filters */}
@@ -199,7 +229,7 @@ const StudyGroups = () => {
               className="pl-10 bg-white border-slate-300 text-slate-900 placeholder:text-slate-500"
             />
           </div>
-          
+
           <div className="flex gap-4 items-center">
             <select
               value={selectedDifficulty}
@@ -221,33 +251,43 @@ const StudyGroups = () => {
               </DialogTrigger>
               <DialogContent className="max-w-2xl bg-white">
                 <DialogHeader>
-                  <DialogTitle className="text-slate-900">Create New Study Group</DialogTitle>
+                  <DialogTitle className="text-slate-900">
+                    Create New Study Group
+                  </DialogTitle>
                 </DialogHeader>
-                
+
                 <div className="space-y-4">
                   <div className="grid md:grid-cols-2 gap-4">
                     <Input
                       placeholder="Group Name *"
                       value={newGroup.name}
-                      onChange={(e) => setNewGroup({...newGroup, name: e.target.value})}
+                      onChange={(e) =>
+                        setNewGroup({ ...newGroup, name: e.target.value })
+                      }
                       className="bg-slate-50 border-slate-300 text-slate-900 placeholder:text-slate-600"
                     />
                     <Input
                       placeholder="Subject/Topic *"
                       value={newGroup.subject}
-                      onChange={(e) => setNewGroup({...newGroup, subject: e.target.value})}
+                      onChange={(e) =>
+                        setNewGroup({ ...newGroup, subject: e.target.value })
+                      }
                       className="bg-slate-50 border-slate-300 text-slate-900 placeholder:text-slate-600"
                     />
                     <Input
                       placeholder="Max Members"
                       type="number"
                       value={newGroup.maxMembers}
-                      onChange={(e) => setNewGroup({...newGroup, maxMembers: e.target.value})}
+                      onChange={(e) =>
+                        setNewGroup({ ...newGroup, maxMembers: e.target.value })
+                      }
                       className="bg-slate-50 border-slate-300 text-slate-900 placeholder:text-slate-600"
                     />
                     <select
                       value={newGroup.difficulty}
-                      onChange={(e) => setNewGroup({...newGroup, difficulty: e.target.value})}
+                      onChange={(e) =>
+                        setNewGroup({ ...newGroup, difficulty: e.target.value })
+                      }
                       className="bg-slate-50 border border-slate-300 rounded-md px-3 py-2 text-slate-900"
                     >
                       <option value="Beginner">Beginner</option>
@@ -257,33 +297,47 @@ const StudyGroups = () => {
                     <Input
                       placeholder="Meeting Time"
                       value={newGroup.meetingTime}
-                      onChange={(e) => setNewGroup({...newGroup, meetingTime: e.target.value})}
+                      onChange={(e) =>
+                        setNewGroup({
+                          ...newGroup,
+                          meetingTime: e.target.value,
+                        })
+                      }
                       className="bg-slate-50 border-slate-300 text-slate-900 placeholder:text-slate-600"
                     />
                     <Input
                       placeholder="Location/Online"
                       value={newGroup.location}
-                      onChange={(e) => setNewGroup({...newGroup, location: e.target.value})}
+                      onChange={(e) =>
+                        setNewGroup({ ...newGroup, location: e.target.value })
+                      }
                       className="bg-slate-50 border-slate-300 text-slate-900 placeholder:text-slate-600"
                     />
                   </div>
-                  
+
                   <Textarea
                     placeholder="Group Description *"
                     value={newGroup.description}
-                    onChange={(e) => setNewGroup({...newGroup, description: e.target.value})}
+                    onChange={(e) =>
+                      setNewGroup({ ...newGroup, description: e.target.value })
+                    }
                     className="bg-slate-50 border-slate-300 text-slate-900 placeholder:text-slate-600"
                     rows={3}
                   />
-                  
+
                   <Input
                     placeholder="Tags (comma separated)"
                     value={newGroup.tags}
-                    onChange={(e) => setNewGroup({...newGroup, tags: e.target.value})}
+                    onChange={(e) =>
+                      setNewGroup({ ...newGroup, tags: e.target.value })
+                    }
                     className="bg-slate-50 border-slate-300 text-slate-900 placeholder:text-slate-600"
                   />
-                  
-                  <Button onClick={handleCreateGroup} className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+
+                  <Button
+                    onClick={handleCreateGroup}
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                  >
                     Create Study Group
                   </Button>
                 </div>
@@ -295,11 +349,16 @@ const StudyGroups = () => {
         {/* Study Groups Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredGroups.map((group) => (
-            <Card key={group.id} className="bg-white border-slate-300 hover:shadow-lg transition-shadow">
+            <Card
+              key={group.id}
+              className="bg-white border-slate-300 hover:shadow-lg transition-shadow"
+            >
               <CardHeader>
                 <div className="flex justify-between items-start">
                   <div>
-                    <CardTitle className="text-slate-900">{group.name}</CardTitle>
+                    <CardTitle className="text-slate-900">
+                      {group.name}
+                    </CardTitle>
                     <p className="text-blue-700 font-medium">{group.subject}</p>
                   </div>
                   <Badge className={getDifficultyColor(group.difficulty)}>
@@ -307,14 +366,16 @@ const StudyGroups = () => {
                   </Badge>
                 </div>
               </CardHeader>
-              
+
               <CardContent className="space-y-4">
                 <p className="text-slate-700 text-sm">{group.description}</p>
-                
+
                 <div className="space-y-2 text-sm text-slate-700">
                   <div className="flex items-center gap-2">
                     <Users className="h-4 w-4 text-slate-600" />
-                    <span className="text-slate-800">{group.members}/{group.maxMembers} members</span>
+                    <span className="text-slate-800">
+                      {group.members}/{group.maxMembers} members
+                    </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock className="h-4 w-4 text-slate-600" />
@@ -326,36 +387,46 @@ const StudyGroups = () => {
                   </div>
                   <div className="flex items-center gap-2">
                     <Calendar className="h-4 w-4 text-slate-600" />
-                    <span className="text-slate-800">Next: {group.nextMeeting}</span>
+                    <span className="text-slate-800">
+                      Next: {group.nextMeeting}
+                    </span>
                   </div>
                 </div>
-                
+
                 <div className="flex flex-wrap gap-1">
                   {group.tags.map((tag, index) => (
-                    <Badge key={index} variant="outline" className="text-xs border-slate-400 text-slate-800">
+                    <Badge
+                      key={index}
+                      variant="outline"
+                      className="text-xs border-slate-400 text-slate-800"
+                    >
                       {tag}
                     </Badge>
                   ))}
                 </div>
-                
+
                 <div className="flex justify-between items-center pt-2">
-                  <span className="text-sm text-slate-600">by {group.organizer}</span>
-                  <Button 
+                  <span className="text-sm text-slate-600">
+                    by {group.organizer}
+                  </span>
+                  <Button
                     size="sm"
                     onClick={() => handleJoinGroup(group.id, group.name)}
                     className={`${
-                      joinedGroups.includes(group.id) 
-                        ? "bg-green-600 hover:bg-green-700" 
+                      joinedGroups.includes(group.id)
+                        ? "bg-green-600 hover:bg-green-700"
                         : "bg-blue-600 hover:bg-blue-700"
                     } text-white`}
-                    disabled={group.members >= group.maxMembers && !joinedGroups.includes(group.id)}
-                  >
-                    {joinedGroups.includes(group.id) 
-                      ? "Joined" 
-                      : group.members >= group.maxMembers 
-                        ? "Full" 
-                        : "Join Group"
+                    disabled={
+                      group.members >= group.maxMembers &&
+                      !joinedGroups.includes(group.id)
                     }
+                  >
+                    {joinedGroups.includes(group.id)
+                      ? "Joined"
+                      : group.members >= group.maxMembers
+                      ? "Full"
+                      : "Join Group"}
                   </Button>
                 </div>
               </CardContent>
@@ -366,8 +437,12 @@ const StudyGroups = () => {
         {filteredGroups.length === 0 && (
           <div className="text-center py-12">
             <BookOpen className="h-16 w-16 text-slate-500 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-slate-800 mb-2">No study groups found</h3>
-            <p className="text-slate-600">Try adjusting your search or create a new group</p>
+            <h3 className="text-xl font-semibold text-slate-800 mb-2">
+              No study groups found
+            </h3>
+            <p className="text-slate-600">
+              Try adjusting your search or create a new group
+            </p>
           </div>
         )}
       </div>
